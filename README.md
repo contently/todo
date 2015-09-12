@@ -1,48 +1,19 @@
 Todo
 ================
 
-This application was generated with the [rails_apps_composer](https://github.com/RailsApps/rails_apps_composer) gem
-provided by the [RailsApps Project](http://railsapps.github.io/).
+Welcome to the barebones Todo list app. Help us make it better!
 
-Rails Composer is open source and supported by subscribers. Please join RailsApps to support development of Rails Composer.
-
-Problems? Issues?
------------
-
-Need help? Ask on Stack Overflow with the tag 'railsapps.'
-
-Your application contains diagnostics in the README file. Please provide a copy of the README file when reporting any issues.
-
-If the application doesn't work as expected, please [report an issue](https://github.com/RailsApps/rails_apps_composer/issues)
-and include the diagnostics.
-
-Ruby on Rails
--------------
-
-This application requires:
-
-- Ruby 2.0.0
-- Rails 4.2.3
-
-Learn more about [Installing Rails](http://railsapps.github.io/installing-rails.html).
-
-Getting Started
----------------
-
-Documentation and Support
--------------------------
-
-Issues
--------------
-
-Similar Projects
+Getting started
 ----------------
+- Clone the codebase to your machine
+- Create a branch to start implementing your work
 
-Contributing
-------------
 
-Credits
--------
+User stories to implement
+----------------
+- A user should not be able to complete a task when creating it.
+- A user should be able to keep multiple lists
 
-License
--------
+Cleanup tasks
+----------------
+- Consolidate the repeated code between the create and edit feature specs for tasks.
