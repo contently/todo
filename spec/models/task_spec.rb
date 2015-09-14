@@ -1,5 +1,10 @@
 require 'rails_helper'
 
 describe Task, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "should create an audit entry upon create" do
+    @task = Task.new(name: "Whatever", completed: true)
+    @task.save
+    @task.reload
+    expect(@task.audits.length).to eq 2
+  end
 end
