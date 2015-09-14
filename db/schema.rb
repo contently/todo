@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150912170221) do
+ActiveRecord::Schema.define(version: 20150914162133) do
+
+  create_table "audits", force: :cascade do |t|
+    t.integer  "task_id"
+    t.string   "changed_attribute"
+    t.string   "changed_attribute_type"
+    t.string   "changed_from"
+    t.string   "changed_to"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "tasks", force: :cascade do |t|
     t.string   "name"

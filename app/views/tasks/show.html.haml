@@ -10,3 +10,10 @@
 =link_to 'Edit', edit_task_path(@task)
 \|
 =link_to 'Back', tasks_path
+
+%h1
+  History
+
+  =@task.audits.each do |audit|
+    %ul
+      %li ="#{audit.changed_attribute.upcase} changed from #{audit.changed_from} to #{audit.changed_to}"
