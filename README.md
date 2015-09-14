@@ -10,10 +10,12 @@ Getting started
 
 User stories to implement
 ----------------
-- A user should not be able to complete a task when creating it.
+- A user should not be able to complete a task when creating it
 - A user should be able to keep multiple lists
-- A user should have access to only their items
-- A user should be able to see a history of all their tasks and associated actions
+- A user should have access to only their tasks
+- A user visiting the tasks page should see incomplete tasks
+- A user viewing a task should see a history of all its changes
+- A user should be able to see a history of all completed tasks and associated actions
 
 Cleanup tasks
 ----------------
