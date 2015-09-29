@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 feature "Creating a task" do
+  scenario "does not display a completed option" do
+    visit '/tasks'
+    click_on 'Add a task'
+    expect(page).not_to have_content('Completed')
+  end
+
   scenario "redirects to the tasks index page on success" do
     visit "/tasks"
     click_on "Add a task"

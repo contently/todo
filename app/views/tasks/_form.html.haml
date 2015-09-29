@@ -10,7 +10,13 @@
     =f.label :name
     =f.text_field :name
   .field
-    =f.label :completed
-    =f.check_box :completed
+    =f.label :list
+    =f.select :list_id, List.all.map { |l| [l.name, l.id] }, { include_blank: true}
+  -if @task.persisted?
+    .field
+      =f.label :completed
+      =f.check_box :completed
+  -else
+    =f.hidden_field :completed, value: false
   .actions
     =f.submit 'Save'

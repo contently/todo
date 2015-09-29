@@ -1,23 +1,23 @@
-%h1 Tasks
+/%ul
+/  - @list.tasks.each do |t|
+/    %li
+/      = t.name
+%h1=@list.name
 
 %table
   %thead
     %tr
-      %th Completed
       %th Name
-      %th List
+      %th Completed
       %th
       %th
       %th
 
   %tbody
-    - @tasks.each do |task|
+    - @list.tasks.each do |task|
       %tr
-        %td=task.completed
         %td=task.name
-        %td
-          -if task.list
-            =link_to task.list.name, task.list
+        %td=task.completed
         %td=link_to 'Show', task
         %td=link_to 'Edit', edit_task_path(task)
         %td=link_to 'Destroy', task, :method => :delete, :data => { :confirm => 'Are you sure?' }
@@ -25,4 +25,4 @@
 %br
 
 =link_to 'Add a task', new_task_path
-=link_to 'Add a list', new_list_path
+=link_to 'All tasks', tasks_path
