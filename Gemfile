@@ -15,7 +15,6 @@ group :development, :test do
 end
 gem 'haml-rails'
 group :development do
-  gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_20]
   gem 'guard-bundler'
   gem 'guard-rails'
