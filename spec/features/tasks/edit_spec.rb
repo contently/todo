@@ -3,6 +3,12 @@ require 'rails_helper'
 feature "Editing a task" do
   let!(:task) { Task.create(name: "Test my app", completed: false) }
 
+  scenario "displays a completed option" do
+    visit "/tasks"
+    click_on "Edit"
+    expect(page).to have_content('Completed')
+  end
+
   scenario "redirects to the tasks index page on success" do
     visit tasks_path
     click_on "Edit"
