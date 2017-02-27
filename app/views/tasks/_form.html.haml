@@ -5,12 +5,13 @@
       %ul
         -@task.errors.full_messages.each do |msg|
           %li= msg
-
   .field
     =f.label :name
     =f.text_field :name
-  .field
-    =f.label :completed
-    =f.check_box :completed
+  -# Only show completed checkbox if using the 'edit' action, default will be false in controller
+  -if params[:action] === "edit"
+    .field
+      =f.label :completed
+      =f.check_box :completed
   .actions
     =f.submit 'Save'
