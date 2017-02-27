@@ -38,6 +38,7 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.3.8)
     arel (6.0.3)
+    bcrypt (3.1.11)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
@@ -60,6 +61,12 @@ GEM
     coffee-script-source (1.9.1.1)
     database_cleaner (1.5.0)
     debug_inspector (0.0.2)
+    devise (4.2.0)
+      bcrypt (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 4.1.0, < 5.1)
+      responders
+      warden (~> 1.2.3)
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.6.0)
@@ -139,6 +146,10 @@ GEM
     notiffany (0.0.7)
       nenv (~> 0.1)
       shellany (~> 0.0)
+    orm_adapter (0.5.0)
+    paper_trail (6.0.2)
+      activerecord (>= 4.0, < 5.2)
+      request_store (~> 1.1)
     pg (0.18.2)
     pry (0.10.1)
       coderay (~> 1.1.0)
@@ -185,6 +196,9 @@ GEM
     rb-fsevent (0.9.6)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
+    request_store (1.3.2)
+    responders (2.3.0)
+      railties (>= 4.2.0, < 5.1)
     rspec (3.3.0)
       rspec-core (~> 3.3.0)
       rspec-expectations (~> 3.3.0)
@@ -244,6 +258,8 @@ GEM
     uglifier (2.7.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    warden (1.2.7)
+      rack (>= 1.0)
     web-console (2.2.1)
       activemodel (>= 4.0)
       binding_of_caller (>= 0.7.2)
@@ -262,6 +278,7 @@ DEPENDENCIES
   capybara
   coffee-rails (~> 4.1.0)
   database_cleaner
+  devise
   factory_girl_rails
   faker
   guard-bundler
@@ -272,6 +289,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   launchy
+  paper_trail
   pg
   pry-rails
   pry-rescue
@@ -295,4 +313,4 @@ RUBY VERSION
    ruby 2.2.5p319
 
 BUNDLED WITH
-   1.13.7
+   1.14.5

@@ -1,5 +1,7 @@
-%h1 Create a task
+%h1
+  Create a task for
+  =@list.title
 
 =render 'form'
 
-=link_to 'Back', tasks_path
+=link_to 'Back', list_tasks_path(@list)

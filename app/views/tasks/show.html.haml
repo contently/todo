@@ -7,6 +7,14 @@
   %b Completed:
   =@task.completed
 
-=link_to 'Edit', edit_task_path(@task)
+%p
+  %b Actions:
+  %p
+    - @task.versions.each do |version|
+      =version.event
+      =version.created_at
+      %br
+
+=link_to 'Edit', edit_list_task_path(@list, @task)
 \|
-=link_to 'Back', tasks_path
+=link_to 'Back', list_tasks_path(@list)

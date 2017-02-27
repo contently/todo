@@ -1,0 +1,41 @@
+%h1 Lists
+
+- if @lists.any?
+  - @lists.each do |list|
+    .list-table
+      %table
+        %caption
+          = list.title
+        %thead
+          %tr
+            %th Name
+            %th Completed
+            %th
+            %th
+
+        %tbody
+          - if list.tasks.filter_on_completed(params[:filter]).any?
+            - list.tasks.filter_on_completed(params[:filter]).each do |task|
+              %tr
+                %td= task.name
+                %td= task.completed
+                %td= link_to 'Show Task', [list, task]
+                %td= link_to 'Edit Task', edit_list_task_path(list, task)
+                %td= link_to 'Destroy Task', [list, task], :method => :delete, :data => { :confirm => 'Are you sure?' }
+          - else
+            %tr
+              %td
+                No tasks !
+
+      = link_to "Create Task for #{list.title}", new_list_task_path(list)
+      = link_to 'Show List', list_tasks_path(list)
+      = link_to 'Edit List', edit_list_path(list)
+      = link_to 'Destroy List', list, :method => :delete, :data => { :confirm => 'Are you sure?' }
+- else
+  No lists !
+
+%br
+
+= link_to 'New List', new_list_path
+= link_to "Incomplete tasks (#{@lists.reduce(0){|count, list| count + list.tasks.filter_on_completed.size}})", lists_path(@list)
+= link_to "Completed tasks (#{@lists.reduce(0){|count, list| count + list.tasks.filter_on_completed('completed').size}})", lists_path(@list, filter: 'completed')

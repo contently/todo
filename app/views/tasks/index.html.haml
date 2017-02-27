@@ -1,23 +1,31 @@
-%h1 Tasks
+%h1
+  Tasks for
+  = @list.title
 
-%table
-  %thead
-    %tr
-      %th Name
-      %th Completed
-      %th
-      %th
-      %th
-
-  %tbody
-    - @tasks.each do |task|
+- if @tasks.any?
+  %table
+    %thead
       %tr
-        %td=task.name
-        %td=task.completed
-        %td=link_to 'Show', task
-        %td=link_to 'Edit', edit_task_path(task)
-        %td=link_to 'Destroy', task, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %th Name
+        %th Completed
+        %th
+        %th
+        %th
+
+    %tbody
+      - @tasks.each do |task|
+        %tr
+          %td=task.name
+          %td=task.completed
+          %td=link_to 'Show', [@list, task]
+          %td=link_to 'Edit', edit_list_task_path(@list, task)
+          %td=link_to 'Destroy', [@list, task], :method => :delete, :data => { :confirm => 'Are you sure?' }
+- else
+  No tasks !
 
 %br
-
-=link_to 'Add a task', new_task_path
+=link_to 'Add a task', new_list_task_path(@list)
+=link_to "Incomplete tasks (#{@list.tasks.filter_on_completed.size})", list_tasks_path(@list)
+=link_to "Completed tasks (#{@list.tasks.filter_on_completed('completed').size})", list_tasks_path(@list, filter: 'completed')
+%br
+=link_to 'Back', lists_path
