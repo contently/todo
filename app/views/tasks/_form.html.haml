@@ -1,4 +1,4 @@
-=form_for @task do |f|
+=form_for [@list, @task] do |f|
   -if @task.errors.any?
     #error_explanation
       %h2="#{pluralize(@task.errors.count, "error")} prohibited this task from being saved:"
@@ -9,8 +9,9 @@
   .field
     =f.label :name
     =f.text_field :name
-  .field
-    =f.label :completed
-    =f.check_box :completed
+  - unless @task.new_record?
+    .field
+      =f.label :completed
+      =f.check_box :completed
   .actions
     =f.submit 'Save'
