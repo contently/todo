@@ -1,10 +1,38 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  # Login first!
+  before_action :authenticate_user!
+  # Are you the right user to use these methods on specific task?
+  before_action :access, only: [:show, :edit, :update, :destroy]
+
+  def access
+    # Check if the user_id matches the current_user! If not, go away!
+    unless current_user.id == @task.user_id
+      flash[:notice] = "That was not your task!"
+      redirect_to :tasks
+    end
+  end
 
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    # Grab all tasks by the current user where completed is false
+    @user = current_user
+    @tasks = @user.tasks.where(completed: false)
+  end
+
+  def completed
+    # Grab all tasks by the current user where completed is true and render index
+    @user = current_user
+    @tasks = @user.tasks.where(completed: true)
+    render :index
+  end
+
+  def all
+    # Grab all tasks by the current user and render index
+    @user = current_user
+    @tasks = @user.tasks
+    render :index
   end
 
   # GET /tasks/1
@@ -25,6 +53,8 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
     @task = Task.new(task_params)
+    # Set user_id for relationship since it is not included in params
+    @task.user_id = current_user.id if current_user
 
     respond_to do |format|
       if @task.save
