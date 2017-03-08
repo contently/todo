@@ -1,7 +1,8 @@
 %h1 Editing task
 
-=render 'form'
+=form_for @task, url: [@list, @task], html: { method: :put } do |f|
+  =render 'form', f: f
 
-=link_to 'Show', @task
+=link_to 'Show', [@list, @task]
 \|
-=link_to 'Back', tasks_path
+=link_to 'Back', list_tasks_path(@list)

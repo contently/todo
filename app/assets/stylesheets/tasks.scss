@@ -1,3 +1,13 @@
 // Place all the styles related to the tasks controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+// HW2: just some touches to prevent the column widths from jumping when all rows are hidden
+.tasktable{
+  th.name{
+    width: 250px;
+  }
+  th.completed{
+    width: 80px;
+  }
+}

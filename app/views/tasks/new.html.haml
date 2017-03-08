@@ -1,5 +1,8 @@
 %h1 Create a task
+-# HW4: needed to split out the form to specify the url
+=form_for @task, url: list_tasks_path(@list), html: { method: :post } do |f|
+  -# HW4: need to add the list_id hidden field to associate the new task
+  =f.hidden_field :list_id, :value => params[:list_id]
+  =render 'form', f: f
 
-=render 'form'
-
-=link_to 'Back', tasks_path
+=link_to 'Back', list_tasks_path(@list)

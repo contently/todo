@@ -1,23 +1,46 @@
-%h1 Tasks
+-# HW4: added List name to clarify which list we're in
+%h1=@list.name
 
-%table
+-# HW2: clicking these links toggle the rows we want on the frontend. IMHO, no need for round trip to server for this use case
+-# HW3: added the 'show_by_default' data element which sets the initial value
+=link_to "%%TOGGLE%% Incomplete Tasks", "#", class: "tasks_toggle_link", data: {needle: '.tasktable tr.incomplete', show_by_default: true}
+=link_to "%%TOGGLE%% Complete Tasks", "#", class: "tasks_toggle_link", data: {needle: '.tasktable tr.complete', show_by_default: false}
+
+-# HW2: hijack the links as soon as the page loads
+:javascript
+  $(document).ready(function() {
+    hijackToggleLinks();
+  });
+
+%br
+%br
+
+%table.tasktable
   %thead
     %tr
-      %th Name
-      %th Completed
+      %th.name Name
+      %th.completed Completed
       %th
       %th
       %th
 
   %tbody
     - @tasks.each do |task|
-      %tr
+      -# HW2: seeding the row class to make it easier for the filters to find
+      %tr{:class => "#{task.completed ? 'complete' : 'incomplete'}"}
         %td=task.name
-        %td=task.completed
-        %td=link_to 'Show', task
-        %td=link_to 'Edit', edit_task_path(task)
-        %td=link_to 'Destroy', task, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td=(task.completed == true)
+        %td=link_to 'Show', [@list, task]
+        %td=link_to 'Edit', [:edit, @list, task]
+        %td=link_to 'Destroy', [@list, task], :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 
-=link_to 'Add a task', new_task_path
+=link_to 'Add a task', new_list_task_path(@list)
+
+-# HW4: so we can get back to lists
+=link_to 'Back to Lists', lists_path
+
+%br
+
+
