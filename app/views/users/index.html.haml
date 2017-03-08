@@ -1,0 +1,28 @@
+%h1 Listing users
+
+%p#notice= notice
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th Password
+      %th
+      %th
+      %th
+      %th
+
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td= user.name
+        %td= user.password
+        %td= link_to 'Login', "login/#{user.id}", :method => :post
+        %td= link_to 'Show', user
+        %td= link_to 'Edit', edit_user_path(user)
+        %td= link_to 'Destroy', user, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New User', new_user_path
+= link_to 'Logout', 'logout', :method => :post
