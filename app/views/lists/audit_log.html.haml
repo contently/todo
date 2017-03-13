@@ -1,0 +1,21 @@
+%h1 Audit Log
+
+%table
+  %thead
+    %tr
+      %th Task
+      %th List
+      %th Action
+      %th Time
+
+  %tbody
+    - @task_changes.each do |task_change|
+      %tr
+        %td=task_change.task.name
+        %td=task_change.task.list.name
+        %td=task_change.action
+        %td=task_change.created_at.strftime("%-m/%d/%Y at %l:%M:%S %p UTC")
+
+%br
+
+=link_to 'Back', lists_path

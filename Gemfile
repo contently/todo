@@ -9,6 +9,7 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
+gem 'devise'
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
@@ -36,8 +37,9 @@ group :development, :test do
   gem 'rspec-rails'
 end
 group :test do
-  gem 'capybara'
+  gem 'capybara', '~> 2.12.1'
   gem 'database_cleaner'
   gem 'launchy'
-  gem 'selenium-webdriver'
+  gem 'selenium-webdriver', '~> 3.3.0'
+  gem 'shoulda-matchers'
 end

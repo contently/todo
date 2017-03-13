@@ -1,0 +1,40 @@
+%h1
+  %b=@list.name
+
+-if @list.tasks.any?
+
+  = form_tag list_path, method: "get", id: "tasks_filter" do
+    = select "tasks", "all", options_for_select([ ["All", "All"], ["Completed", "Completed"], ["Incomplete", "Incomplete"] ], selected: @filter), {prompt: nil}, onchange: "$('#tasks_filter').submit();", name: "filter"
+
+  %br
+
+
+  %table
+    %thead
+      %tr
+        %th Name
+        %th Completed
+        %th.actions
+        %th.actions
+
+    %tbody
+      - @tasks.each do |task|
+        %tr
+          %td=link_to task.name, edit_list_task_path(@list, task.id)
+          %td=task.completed? ? "Yes" : "No"
+          %td=link_to 'Destroy', list_task_path(@list, task.id), :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+  %br
+
+-else
+  %p
+    %b Please add a task!
+
+=link_to 'Add a task', new_list_task_path(@list)
+
+%br
+%br
+
+=link_to 'Edit', edit_list_path(@list)
+\|
+=link_to 'Back', lists_path

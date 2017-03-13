@@ -6,4 +6,10 @@
     =javascript_include_tag 'application', 'data-turbolinks-track' => true
     =csrf_meta_tags
   %body
+    -if user_signed_in?
+      =link_to 'Home', lists_path
+      =link_to 'Audit Log', lists_audit_log_path
+      =link_to 'Logout', destroy_user_session_path, :method => :delete
+    %p#notice=notice
+    %p#alert=alert
     =yield

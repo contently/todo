@@ -1,7 +1,21 @@
-%h1 Editing task
-
+%h1= @list.name
 =render 'form'
 
-=link_to 'Show', @task
-\|
-=link_to 'Back', tasks_path
+%br
+
+%p
+  %b Audit Log
+
+%table
+  %thead
+    %tr
+      %th Action
+      %th Time
+
+  %tbody
+    - @task.task_changes.each do |task_change|
+      %tr
+        %td=task_change.action
+        %td=task_change.created_at.strftime("%-m/%d/%Y at %l:%M:%S %p UTC")
+
+%br
