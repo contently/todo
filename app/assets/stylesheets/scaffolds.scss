@@ -6,6 +6,18 @@ body {
   line-height: 18px;
 }
 
+th {
+  padding: 0 25px;
+}
+
+th:not(.actions) {
+  border-bottom: 1px solid black;
+}
+
+td:not(:first-child) {
+  text-align: center;
+}
+
 p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;

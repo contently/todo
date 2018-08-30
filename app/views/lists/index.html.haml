@@ -1,0 +1,27 @@
+%h1 Task Lists
+
+-if @lists.any?
+  %table
+    %thead
+      %tr
+        %th Name
+        %th Complete Tasks
+        %th Incomplete Tasks
+        %th.actions
+        %th.actions
+
+    %tbody
+      - @lists.each do |list|
+        %tr
+          %td=link_to list.name, list
+          %td=list.tasks.where(completed: true).size
+          %td=list.tasks.where(completed: false).size
+          %td=link_to 'Destroy', list, :method => :delete, :data => { :confirm => 'Are you sure? This will destroy all the tasks in this list as well!' }
+
+
+  %br
+-else
+  %p
+    %b Please add a list!
+
+=link_to 'Add a task list', new_list_path
