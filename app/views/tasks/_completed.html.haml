@@ -1,0 +1,7 @@
+- @completed.each do |c|
+  %tr
+    %td{:class => 'text-primary'}=c.name
+    %td{:class => 'text-danger'}=c.completed
+    %td{:class => 'badge badge-light badge-pill text-light'}=link_to 'Show', task
+    %td{:class => 'badge badge-light badge-pill text-light'}=link_to 'Edit', edit_task_path(task)
+    %td{:class => 'badge badge-light badge-pill text-light'}=link_to 'Destroy', task, :method => :delete, :data => { :confirm => 'Are you sure?' }

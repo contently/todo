@@ -12,5 +12,7 @@
   .field
     =f.label :completed
     =f.check_box :completed
+  .field
+    =f.hidden_field :list_id, value: @list.id
   .actions
     =f.submit 'Save'

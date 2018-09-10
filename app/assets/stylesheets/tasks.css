@@ -1,0 +1,29 @@
+/* Home Page TASKS  flter by status*/
+.tasks{
+	margin-top: 5%;
+
+}
+
+.table {
+	width: 370px;
+}
+
+.table-responsive{
+    height: 470px;
+    display: block;
+    position: absolute;
+    margin-left: 7%;
+    margin-top: 10%;
+    width: 27%;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+.all-tasks-table{
+    width: 90%;
+}
+
+.all-tasks{
+    width:90%;
+}

@@ -1,0 +1,20 @@
+%p#notice=notice
+
+%p{class: 'text-light'}
+  %b List Name:
+  =@list.name
+
+/ %button{:class =>'badge badge-light badge-pill text-light'}=link_to 'Add a task', new_task_path
+%h4{class: 'text-light'} Add Task to this Collection
+
+=render 'tasks/form'
+
+
+%button{:class =>'badge badge-light badge-pill text-light'}=link_to 'Edit', edit_list_path(@list)
+\|
+%button{:class =>'badge badge-light badge-pill text-light'}=link_to 'Back', lists_path
+
+
+%h4{class: 'text-light'} Your tasks for #{@list.name} collection
+=render 'tasks/taskstable'
+

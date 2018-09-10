@@ -1,0 +1,7 @@
+-@list.each do |l|
+	.card{:style => "width: 15rem;", :id => "listcard"}
+		.card-body
+			%h5.card-title #{l.name}
+			%p.card-text Some information about the list will go here.
+			%a.card-link{:href => "/lists/#{l.id}"} View List
+			%a.card-link{id: ''}=link_to 'Delete', l, :method => :delete, :data => { :confirm => 'Are you sure?' }

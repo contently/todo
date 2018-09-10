@@ -7,6 +7,6 @@
   %b Completed:
   =@task.completed
 
-=link_to 'Edit', edit_task_path(@task)
+%button{:class =>'badge badge-light badge-pill text-light'}=link_to 'Edit', edit_task_path(@task)
 \|
-=link_to 'Back', tasks_path
+%button{:class =>'badge badge-light badge-pill text-light'}=link_to 'Back', tasks_path
