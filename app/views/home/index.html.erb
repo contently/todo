@@ -1,0 +1,15 @@
+<h1>Welcome to the list website</h1>
+
+<% if current_user %>
+<p>
+    <a href="<%= user_path(current_user) %>">Your Profile Page</a>
+</p>
+<p>
+    <a href="/logout">Logout</a>
+</p>
+
+<% else %>
+    <a href="/login">Log In</a>
+    or
+    <a href="<%= new_user_path %>">Sign up</a>
+<% end %>

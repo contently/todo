@@ -1,0 +1,23 @@
+<h2>
+  <strong>Title:</strong>
+  <%= @user.name %>
+</h2>
+ 
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
+<h3>
+  <A href="<%= user_lists_path(@user)%>">View Your Lists</A>
+</h3>
+
+<div>
+  <p>
+    <a href="<%= new_user_list_path(@user) %>">Add New List</a>
+  </p>
+</div>
+
+<div>
+  <a href="/logout">Logout</a>
+</div>

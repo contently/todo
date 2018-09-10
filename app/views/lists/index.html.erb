@@ -1,0 +1,28 @@
+<h2>
+    Your Current Lists:
+</h2>
+
+<div>
+<h3>Your Current Lists</h3>
+  <% if @user.lists.length > 0 %>
+    <ul>
+      <% @user.lists.each do |list| %>
+        <li>
+          <a href="<%= user_list_path(@user, list)%>"><%= list.title %></a>
+          <%= link_to 'Destroy', user_list_path(@user, list),
+                    method: :delete, data: { confirm: 'Are you sure you want to delete this list?' } %>
+      <% end %>
+    </ul>
+  <% else %>
+    You currently have no created lists.
+  <% end %>
+</div>
+
+<div>
+    <p>
+      <a href="<%= new_user_list_path(@user) %>">Add New List</a>
+    </p>
+    <p>
+        <a href="<%= user_path(@user) %>">Back To Profile Page</a>        
+    </p>
+</div>

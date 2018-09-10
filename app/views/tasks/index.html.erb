@@ -1,0 +1,32 @@
+<h2>
+    <%= @list.title %>
+    (<%= @subtitle %>)
+</h2>
+
+<% if @tasks.length > 0 %>
+    <ul>
+        <% @tasks.each do |task| %>
+            <li>
+                <%= task.name %>
+                <% if task.completed %>
+                    &#10003;
+                <% else %>
+                    <%= link_to 'Mark as Complete', mark_complete_user_list_task_path(@list.user, @list, task) %>
+                <% end %>
+                <%= link_to 'Destroy', user_list_task_path(@list.user, @list, task),
+                    method: :delete, data: { confirm: 'Are you sure you want delete this task?' } %>
+            </li>
+        <% end %>
+    </ul>
+<% else %>
+    <p>You currently have no tasks in this category</p>
+<% end %>
+
+
+<div>
+    <p>
+        <a href="<%= user_list_path(@list.user, @list) %>">Back To List</a>
+        <br>
+        <a href="<%= user_path(@list.user) %>">Back To Profile Page</a>        
+    </p>
+</div>
