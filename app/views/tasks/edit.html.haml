@@ -1,7 +1,25 @@
 %h1 Editing task
 
-=render 'form'
+%div{:class => 'all-tasks-table'}
+	%table{:class => 'table all-tasks'}
+		%thead
+			%tr
+				%th{:scope => 'col'}Name
+				%th{:scope => 'col'}Completed
+				%th{:scope => 'col'}Done
+				%th
 
-=link_to 'Show', @task
+		%tbody
+			%tr
+				%td{:class => 'text-light'}=@task.name
+				%td{:class => 'text-light'}=@task.completed
+				%td
+					%input{:class =>'checkbox', :type => 'checkbox', :name => 'completed', :value => @task.completed}
+				%td{:class => 'badge badge-light badge-pill text-light'}=link_to 'Delete', @task, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+	%br
+
+
+%button{:class =>'badge badge-light badge-pill text-light'}=link_to 'Save', @task, :method => :put
 \|
-=link_to 'Back', tasks_path
+%button{:class =>'badge badge-light badge-pill text-light'}=link_to 'Back', tasks_path

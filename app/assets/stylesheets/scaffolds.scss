@@ -1,9 +1,17 @@
 body {
-  background-color: #fff;
+  background: #5f2c82;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(50deg, rgba(92,0,92,0.65) 0%, rgba(0,128,128,1) 100%); 
+  background: linear-gradient(50deg, rgba(92,0,92,0.65) 0%, rgba(0,128,128,1) 100%);
   color: #333;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
+}
+
+.new_task{
+  display: block;
+  margin-left: 20%;
+  width: 50%;
 }
 
 p, ol, ul, td {

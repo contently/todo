@@ -1,10 +1,17 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!
+  
 
   # GET /tasks
   # GET /tasks.json
+
   def index
     @tasks = Task.all
+    @pending = Task.where('completed = ?', false)
+    @completed =Task.where('completed =?', true)
+    @list =List.all
+    @user = User.find_by(params[:id])
   end
 
   # GET /tasks/1
@@ -14,17 +21,22 @@ class TasksController < ApplicationController
 
   # GET /tasks/new
   def new
+    @tasks =Task.all
+    @user = User.find_by(params[:id])
     @task = Task.new
+    @list = List.new
   end
 
   # GET /tasks/1/edit
   def edit
+    @task = Task.find(params[:id])
   end
 
   # POST /tasks
   # POST /tasks.json
   def create
     @task = Task.new(task_params)
+    @list = List.new(list_params)
 
     respond_to do |format|
       if @task.save
@@ -69,6 +81,10 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:name, :completed)
+      params.require(:task).permit(:name, :completed, :list_id)
+    end
+    # cxreate new lists for tasks !!!!!!!! REVISE
+    def list_params
+      params.permit(:name, :user_id)
     end
 end

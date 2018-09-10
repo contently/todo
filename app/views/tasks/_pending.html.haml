@@ -1,0 +1,22 @@
+%div{:class => 'container table-responsive col-5'}
+	%table{:class => 'table'}
+		%thead
+			%tr
+				%th{:class => 'col col-1'}Name
+				%th{:class => 'col col-1'}Completed
+				%th
+		%tbody
+		- @pending.each do |task|
+			%tr{:scope => 'row'}
+				%td{:class => 'text-light col-2'}=task.name
+				%td{:class => 'text-light col-2'}=task.completed
+				%td{:class => 'badge badge-light badge-pill text-light'}=link_to 'Edit', edit_task_path(task)
+
+		%br
+
+
+
+
+
+
+

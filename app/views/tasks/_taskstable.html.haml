@@ -1,0 +1,17 @@
+%div{:class => 'all-tasks-table'}
+  %table{:class => 'table all-tasks'}
+    %thead
+      %tr
+        %th{:scope => 'col'}Name
+        %th{:scope => 'col'}Completed
+        %th
+
+    %tbody
+      - @list_task.each do |task|
+        %tr
+          %td{:class => 'text-light'}=task.name
+          %td{:class => 'text-light'}=task.completed
+          %td{:class => 'badge badge-light badge-pill text-light'}=link_to 'Edit', edit_task_path(task)
+          %td{:class => 'badge badge-light badge-pill text-light'}=link_to 'Delete', task, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+  %br

@@ -1,23 +1,40 @@
-%h1 Tasks
+-if user_signed_in?
 
-%table
-  %thead
-    %tr
-      %th Name
-      %th Completed
-      %th
-      %th
-      %th
+	%div{:class => 'container lists-box'}
+		.tasks
+			%h1 My Tasks
 
-  %tbody
-    - @tasks.each do |task|
-      %tr
-        %td=task.name
-        %td=task.completed
-        %td=link_to 'Show', task
-        %td=link_to 'Edit', edit_task_path(task)
-        %td=link_to 'Destroy', task, :method => :delete, :data => { :confirm => 'Are you sure?' }
+	=render 'pending'
 
-%br
 
-=link_to 'Add a task', new_task_path
+
+	
+	= form_for :list, :url => {:controller => 'lists', :action => 'create', :method => 'post'} do |f|
+		%div{class: 'modal fade show', id: 'exampleModal', tabindex: '1', role: 'dialog', aria:{hidden: 'true', labelledby:'hidden'}}
+			%div{class: 'modal-dialog modal-dialog-centered', role:'document'}
+				%div{class: 'modal-content'}
+					%div{class: 'modal-header'}
+						%h5{class: 'modal-title', id: 'exampleModalTitle'}New List
+						%button{type: 'button', class:'close', data: {dismiss: 'modal'}, area:{label:'Close'}}
+							%span{area: {hidden:'true'}}
+					%div{class: 'modal-body'}
+						%p Please enter a list name to create a new list.
+						%input{type: 'text', class:'form-control list-name', name: "name"}
+						%input{:type=> "hidden", :name => "user_id", :value => @user.id}
+					%div{class:'modal-footer'}
+						%button{type: 'button', class:'btn btn-danger', data:{dismiss:'modal'}}Cancel
+						%button{type:'submit', class: 'btn btn-primary', name: 'submit'}Create List
+
+	.container.list-card-box
+		=render 'lists/card'
+	%button{ type: 'button', class: 'btn list-button',  id:'modal', data: {toggle: 'modal', target: '#exampleModal'}}+
+
+-else
+
+	=render 'landing'
+
+
+
+
+
+
