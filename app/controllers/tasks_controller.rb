@@ -6,6 +6,25 @@ class TasksController < ApplicationController
   def index
     @tasks = Task.all
   end
+  # def index
+  #   if params[:completed] === "true"
+  #     @tasks = Task.where(:completed => true)
+  #   elsif params[:completed] === "false"
+  #     @tasks = Task.where(:completed => false)
+  #   else
+  #     @tasks = Task.all
+  #   end
+  # end
+
+  def done
+    @tasks = Task.where(:completed => true)
+    render 'index'
+  end
+
+  def incomplete
+    @tasks = Task.where(:completed => false)
+    render 'index'
+  end
 
   # GET /tasks/1
   # GET /tasks/1.json
@@ -69,6 +88,6 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:name, :completed)
+      params.require(:task).permit(:name, :completed, :list_id)
     end
 end
