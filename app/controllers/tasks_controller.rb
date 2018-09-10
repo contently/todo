@@ -1,54 +1,35 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :mark_complete]
 
-  # GET /tasks
-  # GET /tasks.json
   def index
-    @tasks = Task.all
+    user = User.find(params[:user_id])
+    @list = List.find_by(id: params[:list_id], user_id: user.id)
+    if params[:show_all] && params[:show_all] == "true"
+      @tasks = @list.tasks.all
+      @subtitle = "All Tasks"
+    elsif params[:show_complete] && params[:show_complete] == "true"
+      @tasks = @list.completed_tasks
+      @subtitle = "All Completed Tasks"
+    else
+      redirect_to user_list_path(user, @list)
+    end
   end
 
-  # GET /tasks/1
-  # GET /tasks/1.json
-  def show
-  end
-
-  # GET /tasks/new
-  def new
-    @task = Task.new
-  end
-
-  # GET /tasks/1/edit
-  def edit
-  end
-
-  # POST /tasks
-  # POST /tasks.json
   def create
-    @task = Task.new(task_params)
+    @user = User.find(params[:user_id])
+    @list = List.find_by(id: params[:list_id], user_id: @user.id)
+    @task = @list.tasks.new(task_params)
 
-    respond_to do |format|
-      if @task.save
-        format.html { redirect_to tasks_path, notice: 'Task was successfully created.' }
-        format.json { render :show, status: :created, location: @task }
-      else
-        format.html { render :new }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
-      end
-    end
+    @task.save
+    redirect_to user_list_path(@user, @list)
   end
 
-  # PATCH/PUT /tasks/1
-  # PATCH/PUT /tasks/1.json
-  def update
-    respond_to do |format|
-      if @task.update(task_params)
-        format.html { redirect_to tasks_path, notice: 'Task was successfully updated.' }
-        format.json { render :show, status: :ok, location: @task }
-      else
-        format.html { render :edit }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
-      end
-    end
+
+  def mark_complete
+    @task.completed = true
+    @task.save
+
+    redirect_to user_list_path(@user, @list)
   end
 
   # DELETE /tasks/1
@@ -56,7 +37,7 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     respond_to do |format|
-      format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
+      format.html { redirect_to user_list_path(@user, @list) }
       format.json { head :no_content }
     end
   end
@@ -64,11 +45,15 @@ class TasksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_task
-      @task = Task.find(params[:id])
+      # @task = Task.find(params[:id])
+      @user = User.find(params[:user_id])
+      redirect_to root_path unless @user == current_user
+      @list = List.find_by(id: params[:list_id], user_id: @user.id)
+      @task = Task.find_by(id: params[:id], list_id: @list.id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:name, :completed)
+      params.require(:task).permit(:name)
     end
 end

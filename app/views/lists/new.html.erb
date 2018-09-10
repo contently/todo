@@ -1,0 +1,23 @@
+<h1>New List for <%= @user.name %></h1>
+
+
+<%= form_for([@user, @user.lists.build]) do |f| %>
+    
+  <% if @errors %>
+    <div id="error_explanation">
+      <ul>
+      <% @list.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <p>
+      <%= f.label :title %><br>
+      <%= f.text_field :title %>
+    </p>
+   
+    <p>
+      <%= f.submit %>
+    </p>
+  <% end %>

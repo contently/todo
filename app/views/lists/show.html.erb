@@ -1,0 +1,43 @@
+<h2><%= @list.title %></h2>
+
+<h3>Your currently incomplete Tasks:</h3>
+<% if @list.incomplete_tasks.length > 0 %>
+    <ul>
+        <% @list.incomplete_tasks.each do |task| %>
+            <li>
+                <%= task.name %>
+                    <%= link_to 'Mark as Complete', mark_complete_user_list_task_path(@list.user, @list, task) %>
+                <%= link_to 'Destroy', user_list_task_path(@list.user, @list, task),
+                    method: :delete, data: { confirm: 'Are you sure you want to destroy this task?' } %>
+            </li>
+        <% end %>
+    </ul>
+<% else%>
+    <p>
+        You currently have no incomplete tasks for this list. Add some below!
+    </p>
+<% end %>
+
+<a href="<%= user_list_tasks_path(@user, @list, {show_complete: true}) %>">View Completed Tasks</a>
+<br>
+<a href="<%= user_list_tasks_path(@user, @list, {show_all: true}) %>">View All Tasks</a>
+
+<h2>Add a task:</h2>
+
+<%= form_for @task, url: "/users/#{@user.id}/lists/#{@list.id}/tasks" do |f| %>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+
+<div>
+    <p>
+        <a href="<%= user_lists_path(@list.user) %>">Back To Lists</a>
+        <br>
+        <a href="<%= user_path(@list.user) %>">Back To Profile Page</a>        
+    </p>
+</div>
