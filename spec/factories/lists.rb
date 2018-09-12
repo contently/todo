@@ -1,7 +1,6 @@
 FactoryGirl.define do
-  factory :task do
+  factory :list do
     name "MyString"
-    completed false
   end
 
 end
