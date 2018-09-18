@@ -3,5 +3,5 @@ class Task < ActiveRecord::Base
 
   belongs_to :list
   belongs_to :user
-  has_many :versions
+  has_many :versions, dependent: :destroy
 end

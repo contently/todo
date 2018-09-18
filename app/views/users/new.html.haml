@@ -1,8 +1,8 @@
 %h1 Sign Up
 
-%form
-  = label :user, :email, "Email"
-  = text_field :user, :email
+=form_for(User.new) do |f|
+  = label :user, :name, "Name"
+  = text_field :user, :name
   = label :user, :password
   = password_field :user, :password
   %input{:type => "submit", :value => "Sign in"}

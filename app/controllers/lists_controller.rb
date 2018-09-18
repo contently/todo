@@ -1,5 +1,5 @@
 class ListsController < ApplicationController
-  # before_action :require_logged_in
+  before_action :require_logged_in
 
   def show
     @list = List.find(params[:id])
@@ -29,7 +29,7 @@ class ListsController < ApplicationController
 
   def destroy
     @list = List.find(params[:id])
-    
+
     @list.destroy
     respond_to do |format|
       format.html { redirect_to tasks_url, notice: 'List was successfully destroyed.' }

@@ -14,6 +14,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @current_user.save
+        log_in!(@current_user)
         format.html { redirect_to tasks_path }
       else
         format.html { render :new }

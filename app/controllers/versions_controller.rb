@@ -1,5 +1,5 @@
 class VersionsController < ApplicationController
-
+  before_action :require_logged_in
   def new
     @version = Version.new(version_params)
   end

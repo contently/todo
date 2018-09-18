@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  # before_action :require_logged_in
+  before_action :require_logged_in
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   # GET /tasks
@@ -56,7 +56,7 @@ class TasksController < ApplicationController
     Version.create!(description: @task.name, updated_at: @task.updated_at, task_id: @task.id)
 
     respond_to do |format|
-      if @task.update(task_params) && !@task.completed
+      if @task.update(task_params)
         format.html { redirect_to tasks_path, notice: 'Task was successfully updated.' }
         format.json { render :show, status: :ok, location: @task }
       else
