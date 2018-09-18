@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   end
 
   def new
-    @current_user = User.new(user_params)
+    @current_user = User.new
   end
 
   def create
@@ -17,7 +17,7 @@ class UsersController < ApplicationController
         format.html { redirect_to tasks_path }
       else
         format.html { render :new }
-        format.json { render json: @current_user.errors, status: :unprocessable_entity }
+        format.json { render json: "Invalid name/password combination" }
       end
     end
   end

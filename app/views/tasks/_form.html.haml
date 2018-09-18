@@ -18,8 +18,14 @@
     .radio
       %label Lists
       %br
-      -@lists.each do |list|
-        =f.radio_button :list_id, list.id
-        =f.label :list_id, list.name
+      - if @lists.empty?
+        ="Create a list to start a task!"
+      -else
+        -@lists.each do |list|
+          =f.radio_button :list_id, list.id, {:checked => true}
+          =f.label :list_id, list.name
   .actions
-    =f.submit 'Save'
+    -if @form_type =="edit"
+      =f.submit 'Update'
+    -else
+      =f.submit 'Save'

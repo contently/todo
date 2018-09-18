@@ -1,6 +1,6 @@
 class ListsController < ApplicationController
   # before_action :require_logged_in
-  
+
   def show
     @list = List.find(params[:id])
   end
@@ -28,6 +28,13 @@ class ListsController < ApplicationController
   end
 
   def destroy
+    @list = List.find(params[:id])
+    
+    @list.destroy
+    respond_to do |format|
+      format.html { redirect_to tasks_url, notice: 'List was successfully destroyed.' }
+      format.json { head :no_content }
+    end
   end
 
 

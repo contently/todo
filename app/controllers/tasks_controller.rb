@@ -53,12 +53,7 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1.json
   def update
     @lists = List.all || []
-
-    if @task.updated_at
-      Version.create!(description: @task.name, updated_at: @task.updated_at, task_id: @task.id)
-    else
-      Version.create!(description: @task.name, updated_at: @task.created_at, task_id: @task.id)
-    end
+    Version.create!(description: @task.name, updated_at: @task.updated_at, task_id: @task.id)
 
     respond_to do |format|
       if @task.update(task_params) && !@task.completed
@@ -75,6 +70,7 @@ class TasksController < ApplicationController
   # DELETE /tasks/1.json
   def destroy
     @task.destroy
+
     respond_to do |format|
       format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
       format.json { head :no_content }
