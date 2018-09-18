@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   get "/tasks/completed", to: "tasks#completed"
 
   resources :session, only: [:new, :create, :destroy]
-  resources :tasks
+  resources :tasks do
+    resources :versions, only: [:new, :create]
+  end
   resources :users, only: [:new, :create, :show]
   resources :lists
 end

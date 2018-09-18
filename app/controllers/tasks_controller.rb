@@ -18,6 +18,7 @@ class TasksController < ApplicationController
   # GET /tasks/1
   # GET /tasks/1.json
   def show
+    @versions = @task.versions
   end
 
   # GET /tasks/new
@@ -52,6 +53,12 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1
   # PATCH/PUT /tasks/1.json
   def update
+    if @task.updated_at
+      Version.new(description: @task.name, updated_at: @task.updated_at, task_id: @task.id )
+    else
+      Version.new(description: @task.name, updated_at: @task.created_at, task_id: @task.id )
+    end
+
     respond_to do |format|
       if @task.update(task_params)
         format.html { redirect_to tasks_path, notice: 'Task was successfully updated.' }

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180918032644) do
+ActiveRecord::Schema.define(version: 20180918044949) do
 
   create_table "lists", force: :cascade do |t|
     t.string  "name",    null: false
@@ -33,6 +33,12 @@ ActiveRecord::Schema.define(version: 20180918032644) do
     t.string "name",            null: false
     t.string "password_digest", null: false
     t.string "session_token",   null: false
+  end
+
+  create_table "versions", force: :cascade do |t|
+    t.datetime "updated_at"
+    t.string   "description"
+    t.integer  "task_id"
   end
 
 end
