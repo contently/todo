@@ -8,11 +8,10 @@
   =@task.completed
 %p
   %b History:
-  =@task.versions.each do |version|
+  -@task.versions.each do |version|
     %ul
       %li=version.description
-      %br
-      %li=version.updated_at
+      %li=version.updated_at.localtime.strftime("%a %b %d at %I:%M %p")
 
 =link_to 'Edit', edit_task_path(@task)
 \|
