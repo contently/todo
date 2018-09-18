@@ -1,9 +1,11 @@
 class UsersController < ApplicationController
   def show
     @current_user = User.find(params[:id])
+    render json: tasks_path
   end
 
   def new
+    @current_user = User.new
   end
 
   def create
