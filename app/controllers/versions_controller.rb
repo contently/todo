@@ -6,13 +6,6 @@ class VersionsController < ApplicationController
 
   def create
     @version = Version.new(version_params)
-    @version = @task.versions.new(version_params)
-
-    if @version.save
-      render json: @version
-    else
-      render json: @version.errors.full_messages, status: 422
-    end
   end
 
 

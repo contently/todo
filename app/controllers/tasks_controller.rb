@@ -37,7 +37,7 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     @task.completed = false
-    @lists = List.all
+    @lists = List.all || []
 
     respond_to do |format|
       if @task.save
@@ -53,14 +53,17 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1
   # PATCH/PUT /tasks/1.json
   def update
+    @lists = List.all || []
+
     if @task.updated_at
-      Version.new(description: @task.name, updated_at: @task.updated_at, task_id: @task.id )
+      Version.new(description: @task.name, updated_at: @task.updated_at, task_id: @task.id)
     else
-      Version.new(description: @task.name, updated_at: @task.created_at, task_id: @task.id )
+      Version.new(description: @task.name, updated_at: @task.created_at, task_id: @task.id)
     end
 
     respond_to do |format|
-      if @task.update(task_params)
+      debugger
+      if @task.update(task_params) && !@task.completed
         format.html { redirect_to tasks_path, notice: 'Task was successfully updated.' }
         format.json { render :show, status: :ok, location: @task }
       else
