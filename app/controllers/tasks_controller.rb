@@ -1,10 +1,18 @@
 class TasksController < ApplicationController
+  before_action :require_logged_in
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   # GET /tasks
   # GET /tasks.json
   def index
+    # @tasks = @current_user.tasks
+    @tasks = Task.where(completed: false)
+    render "incomplete"
+  end
+
+  def completed
     @tasks = Task.all
+    @tasks = @tasks.where(completed: true)
   end
 
   # GET /tasks/1
@@ -15,16 +23,20 @@ class TasksController < ApplicationController
   # GET /tasks/new
   def new
     @task = Task.new
+    @lists = List.all
   end
 
   # GET /tasks/1/edit
   def edit
+    @lists = List.all
   end
 
   # POST /tasks
   # POST /tasks.json
   def create
     @task = Task.new(task_params)
+    @task.completed = false
+    @lists = List.all || []
 
     respond_to do |format|
       if @task.save
@@ -40,6 +52,9 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1
   # PATCH/PUT /tasks/1.json
   def update
+    @lists = List.all || []
+    Version.create!(description: @task.name, updated_at: @task.updated_at, task_id: @task.id)
+
     respond_to do |format|
       if @task.update(task_params)
         format.html { redirect_to tasks_path, notice: 'Task was successfully updated.' }
@@ -55,6 +70,7 @@ class TasksController < ApplicationController
   # DELETE /tasks/1.json
   def destroy
     @task.destroy
+
     respond_to do |format|
       format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
       format.json { head :no_content }
@@ -69,6 +85,6 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:name, :completed)
+      params.require(:task).permit(:name, :completed, :list_id)
     end
 end

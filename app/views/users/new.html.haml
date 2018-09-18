@@ -1,0 +1,11 @@
+%h1 Sign Up
+
+=form_for(User.new) do |f|
+  = label :user, :name, "Name"
+  = text_field :user, :name
+  = label :user, :password
+  = password_field :user, :password
+  %input{:type => "submit", :value => "Sign in"}
+
+%br
+=link_to "Log In", new_session_path

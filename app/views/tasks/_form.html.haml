@@ -11,6 +11,21 @@
     =f.text_field :name
   .field
     =f.label :completed
-    =f.check_box :completed
+    -if @form_type == "edit"
+      =f.check_box :completed
+    -else
+      =f.check_box :completed, disabled: true
+    .radio
+      %label Lists
+      %br
+      - if @lists.empty?
+        ="Create a list to start a task!"
+      -else
+        -@lists.each do |list|
+          =f.radio_button :list_id, list.id, {:checked => true}
+          =f.label :list_id, list.name
   .actions
-    =f.submit 'Save'
+    -if @form_type =="edit"
+      =f.submit 'Update'
+    -else
+      =f.submit 'Save'
