@@ -11,6 +11,9 @@
     =f.text_field :name
   .field
     =f.label :completed
-    =f.check_box :completed
+    -if @type == "edit"
+      =f.check_box :completed
+    -else
+      =f.check_box :completed, disabled: true
   .actions
     =f.submit 'Save'
