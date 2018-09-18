@@ -1,0 +1,12 @@
+%h1 Lists
+
+%body
+- @lists.each do |list|
+  %tr
+    %li
+      %td=link_to list.name, list_path(list)
+
+%br
+
+=link_to 'Back', tasks_path
+=link_to 'New List', new_list_path
