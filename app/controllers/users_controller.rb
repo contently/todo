@@ -1,11 +1,12 @@
 class UsersController < ApplicationController
+
   def show
     @current_user = User.find(params[:id])
     render json: tasks_path
   end
 
   def new
-    @current_user = User.new
+    @current_user = User.new(user_params)
   end
 
   def create
@@ -13,7 +14,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @current_user.save
-        format.html { redirect_to tasks_path tasks_path}
+        format.html { redirect_to tasks_path }
       else
         format.html { render :new }
         format.json { render json: @current_user.errors, status: :unprocessable_entity }

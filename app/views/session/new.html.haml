@@ -1,0 +1,22 @@
+%h1 Log In
+
+-if @current_user
+  =form_for @current_user do |f|
+    -if @current_user.errors.any?
+      #error_explanation
+        %h2="#{pluralize(@current_user.errors.count, "error")} prohibited this user from being saved:"
+        %ul
+          -@current_user.errors.full_messages.each do |msg|
+            %li= msg
+    .field
+      =f.label :name
+      =f.text_field :name
+    .field
+      =f.label :password
+      =password_field :user, :password
+    .actions
+      =f.submit 'Save'
+
+
+%br
+=link_to "Sign Up", new_user_path

@@ -1,14 +1,21 @@
 class SessionsController < ApplicationController
 
+  def new
+  end
+
   def create
     @current_user = User.find_by_credentials(
       params[:user][:name],
       params[:user][:password])
-    if @current_user
-      log_in!(@current_user)
-      render tasks_path
-    else
-      render json: ['Invalid name/password combination'], status: 401
+
+    respond_to do |format|
+      if @current_user
+        format.html { redirect_to tasks_path }
+        format.json { render tasks_path }
+      else
+        format.html { render :new }
+        render json: ['Invalid name/password combination'], status: 401
+      end
     end
   end
 
@@ -16,5 +23,5 @@ class SessionsController < ApplicationController
     log_out
     render json: {}
   end
-  
+
 end

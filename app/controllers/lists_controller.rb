@@ -1,5 +1,6 @@
 class ListsController < ApplicationController
   # before_action :require_logged_in
+  
   def show
     @list = List.find(params[:id])
   end

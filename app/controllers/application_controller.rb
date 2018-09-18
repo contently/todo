@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
-  helper_method :logged_in?, :current_user, :require_logged_in
+  helper_method :current_user, :require_logged_in
 
   def log_in!(user)
     user.reset_session_token!
@@ -19,13 +19,9 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find_by(session_token: session[:session_token])
   end
 
-  def logged_in?
-    !!current_user
-  end
-
   def require_logged_in
    unless current_user
-     render json: { base: ['Invalid credentials'] }, status: 401
+     render new_session_path
    end
  end
 end

@@ -14,11 +14,11 @@ class User < ActiveRecord::Base
 
   def password=(password)
     @password = password
-    self.password_digest = BCrypt::Password.create(password) #Install bcrypt gem
+    self.password_digest = BCrypt::Password.create(password)
   end
 
   def is_password?(password)
-    BCrypt::Password.new(self.password_digest).is_password?(password) #Intall bcrypt gem
+    BCrypt::Password.new(self.password_digest).is_password?(password)
   end
 
   def ensure_session_token
