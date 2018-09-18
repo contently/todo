@@ -1,4 +1,6 @@
--@list.name
+%h1 #{@list.name}
+%br
+
 -@list.tasks.each do |task|
   %tr
     %td=task.name
@@ -7,5 +9,6 @@
     %td=link_to 'Edit', edit_task_path(task)
     %td=link_to 'Destroy', task, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
+  %br
 =link_to "Add a Task", new_task_path
 =link_to 'Back', tasks_path
