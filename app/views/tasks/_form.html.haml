@@ -11,9 +11,15 @@
     =f.text_field :name
   .field
     =f.label :completed
-    -if @type == "edit"
+    -if @form_type == "edit"
       =f.check_box :completed
     -else
       =f.check_box :completed, disabled: true
+    .radio
+      %label Lists
+      %br
+      -@lists.each do |list|
+        =f.radio_button :list_id, list.id
+        =f.label :list_id, list.name
   .actions
     =f.submit 'Save'
