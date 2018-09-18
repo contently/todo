@@ -6,8 +6,13 @@
 %p
   %b Completed:
   =@task.completed
-
-
+%p
+  %b History:
+  =@task.versions.each do |version|
+    %ul
+      %li=version.description
+      %br
+      %li=version.updated_at
 
 =link_to 'Edit', edit_task_path(@task)
 \|

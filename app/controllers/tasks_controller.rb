@@ -5,8 +5,8 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
-    @tasks = @tasks.where(completed: false)
+    # @tasks = @current_user.tasks
+    @tasks = Task.where(completed: false)
     render "incomplete"
   end
 
@@ -18,7 +18,6 @@ class TasksController < ApplicationController
   # GET /tasks/1
   # GET /tasks/1.json
   def show
-    @versions = @task.versions
   end
 
   # GET /tasks/new
@@ -56,13 +55,12 @@ class TasksController < ApplicationController
     @lists = List.all || []
 
     if @task.updated_at
-      Version.new(description: @task.name, updated_at: @task.updated_at, task_id: @task.id)
+      Version.create!(description: @task.name, updated_at: @task.updated_at, task_id: @task.id)
     else
-      Version.new(description: @task.name, updated_at: @task.created_at, task_id: @task.id)
+      Version.create!(description: @task.name, updated_at: @task.created_at, task_id: @task.id)
     end
 
     respond_to do |format|
-      debugger
       if @task.update(task_params) && !@task.completed
         format.html { redirect_to tasks_path, notice: 'Task was successfully updated.' }
         format.json { render :show, status: :ok, location: @task }
