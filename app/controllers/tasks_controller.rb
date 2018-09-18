@@ -6,6 +6,13 @@ class TasksController < ApplicationController
   # GET /tasks.json
   def index
     @tasks = Task.all
+    @incomplete_tasks = @tasks.where(completed: false)
+    render "incomplete"
+  end
+
+  def completed
+    @tasks = Task.all
+    @complete_tasks = @tasks.where(completed: true)
   end
 
   # GET /tasks/1
