@@ -6,4 +6,21 @@
     =javascript_include_tag 'application', 'data-turbolinks-track' => true
     =csrf_meta_tags
   %body
+    %ul
+    - if user_signed_in?
+      %li{:style => "display: inline-block; margin:1rem "}
+        = link_to "Incomplete Tasks", not_completed_tasks_path
+        %li{:style => "display: inline-block; margin:1rem "}
+          = link_to "Completed Tasks", completed_tasks_path
+          %li{:style => "display: inline-block; margin:1rem"}
+            = link_to "All Tasks", tasks_url
+            %li{:style => "display: inline-block; margin:1rem"}
+              = link_to "Lists", lists_url
+              %li{:style => "display: inline-block; margin:1rem"}
+                = link_to('Logout', destroy_user_session_path, method: :delete)
+    - else
+      %li{:style => "display: inline-block; margin:1rem"}
+        = link_to "Lists", lists_url
+        %li{:style => "display: inline-block; margin:1rem"}
+          = link_to('Login', new_user_session_path)
     =yield

@@ -1,0 +1,19 @@
+%h1 Listing list_items
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @list_items.each do |list_item|
+      %tr
+        %td= link_to 'Show', list_item
+        %td= link_to 'Edit', edit_list_item_path(list_item)
+        %td= link_to 'Destroy', list_item, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New List item', new_list_item_path

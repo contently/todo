@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.2.5'
+ruby '2.3.1'
 gem 'rails', '4.2.3'
 gem 'pg'
 gem "sqlite3"
@@ -9,6 +9,9 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
+gem 'nested_form_fields'
+gem 'devise'
+gem 'audited', '~> 4.5'
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'

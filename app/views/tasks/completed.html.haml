@@ -1,0 +1,26 @@
+%h1 Completed Tasks
+
+%table
+  %thead
+    %tr
+      %th{:style => "text-align:left"} Name
+      %th Completed
+
+  %tbody
+    - @tasks.each do |task|
+      %tr
+        %td
+          %b= task.name
+        %td=task.completed
+        %td=link_to 'Show', task
+        %td=link_to 'Edit', edit_task_path(task)
+        %td=link_to 'Destroy', task, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %tr
+        %td
+          %ul
+            %p
+              %b Task History:
+              - task.audits.each do |audit|
+                %li= audit.audited_changes
+
+%br

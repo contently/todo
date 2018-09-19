@@ -1,11 +1,22 @@
 %p#notice=notice
 
 %p
-  %b Name:
-  =@task.name
+  %h2
+    %b Name:
+    =@task.name
 %p
   %b Completed:
   =@task.completed
+%p
+  %b Task History:
+  -@task.audits.each do |rev|
+    %li
+      %b= "Version #{rev.id}"
+      %p= rev.audited_changes
+
+
+
+
 
 =link_to 'Edit', edit_task_path(@task)
 \|
