@@ -11,7 +11,7 @@ class TasksController < ApplicationController
   # GET /tasks/1
   # GET /tasks/1.json
   def show
-    @list = List.find(params[:id])
+    @list = List.find(params[:list_id])
     @tasks = @list.tasks.all
   end
 
@@ -24,7 +24,7 @@ class TasksController < ApplicationController
   # GET /tasks/1/edit
   def edit
     @list = List.find(params[:list_id])
-    @task = @list.tasks.find(params[:id])
+    @task = @list.tasks.find(params[:task_id])
   end
 
   # POST /tasks
