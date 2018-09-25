@@ -25,7 +25,8 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
-    @task.list_id = params[:list_id]
+    @list = List.find(params[:list_id])
+    @task.list_id = @list.id
 
     respond_to do |format|
       if @task.save
