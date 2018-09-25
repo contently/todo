@@ -1,0 +1,34 @@
+<h1> Lists </h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @lists %>
+      <% @lists.each do |list| %>
+        <tr>
+          <td>
+            <%= link_to list.title, list_path(list.id) %>
+          </td>
+          <td>
+            <%= link_to 'Edit this list', edit_list_path(list.id) %>
+          </td>
+          <td>
+            <%= link_to 'Destroy this list', list_path(list.id), method: :delete %>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td>
+          There are currently no lists for the user <%= current_user.email %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Create new list', new_list_path %>
