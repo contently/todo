@@ -1,0 +1,39 @@
+%h2 Complete Tasks
+%table
+  %thead
+    %tr
+      %th Name
+      %th Completed
+      %th
+      %th
+      %th
+
+  %tbody
+    - @tasks.completed.each do |task|
+      %tr
+        %td=task.name
+        %td=task.completed
+        %td=link_to 'Show', task
+        %td=link_to 'Edit', edit_task_path(task)
+        %td=link_to 'Destroy', task, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+%h2 Incomplete Tasks
+%table
+  %thead
+    %tr
+      %th Name
+      %th Completed
+      %th
+      %th
+      %th
+
+  %tbody
+    -@tasks.not_completed.each do |task|
+      %tr
+        %td=task.name
+        %td=task.completed
+        %td=link_to 'Show', task
+        %td=link_to 'Edit', edit_task_path(task)
+        %td=link_to 'Destroy', task, :method => :delete, :data => { :confirm => 'Are you sure?' }
