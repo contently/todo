@@ -1,0 +1,51 @@
+%p#notice=notice
+
+%p
+  %b Name:
+  =@list.name
+
+-if @list.tasks.any?
+
+  %h2 Complete Tasks
+  %table
+    %thead
+      %tr
+        %th Name
+        %th Completed
+        %th
+        %th
+        %th
+
+    %tbody
+      - @list.tasks.completed.each do |task|
+        %tr
+          %td=task.name
+          %td=task.completed
+          %td=link_to 'Edit', edit_list_task_path(task)
+        -#%td=link_to 'Destroy', @list.tasks, :method => :delete, :data => { :confirm => 'Are you sure?' } //unknown bug 'undefined method `to_model''
+
+
+  %br
+
+  %h2 Incomplete Tasks
+  %table
+    %thead
+      %tr
+        %th Name
+        %th Completed
+        %th
+        %th
+        %th
+
+    %tbody
+      -@list.tasks.not_completed.each do |task|
+        %tr
+          %td=task.name
+          %td=task.completed
+          %td=link_to 'Edit', edit_list_task_path(task)
+          -#%td=link_to 'Destroy', @list.tasks, :method => :delete, :data => { :confirm => 'Are you sure?' } //unknown bug 'undefined method `to_model''
+
+=link_to "Add a task", new_list_task_path(@list)
+=link_to 'Edit', edit_list_path(@list)
+\|
+=link_to 'Back', lists_path
