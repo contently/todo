@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :find_list, only: [:new, :edit, :create, :update]
 
   def index
     if params[:status] == 'incompleted' || params[:status] == nil
@@ -16,16 +17,13 @@ class TasksController < ApplicationController
 
   def new
     @task = Task.new
-    @list = List.find(params[:list_id])
   end
 
   def edit
-    @list = List.find(params[:list_id])
   end
 
   def create
     @task = Task.new(task_params)
-    @list = List.find(params[:list_id])
     @task.list_id = @list.id
 
     respond_to do |format|
@@ -40,6 +38,7 @@ class TasksController < ApplicationController
   end
 
   def update
+    @list = List.find(params[:list_id])
     respond_to do |format|
       if @task.update(task_params)
         format.html { redirect_to list_tasks_path, notice: 'Task was successfully updated.' }
@@ -60,6 +59,10 @@ class TasksController < ApplicationController
   end
 
   private
+
+  def find_list
+    @list = List.find(params[:list_id])
+  end
 
   def set_task
     @task = Task.find(params[:id])
