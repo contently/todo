@@ -4,31 +4,38 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    @list = List.find(params[:list_id])
+    @tasks = @list.tasks.new
   end
 
   # GET /tasks/1
   # GET /tasks/1.json
   def show
+    @list = List.find(params[:list_id])
+    @tasks = @list.tasks.all
   end
 
   # GET /tasks/new
   def new
-    @task = Task.new
+    @list = List.find(params[:list_id])
+    @task = @list.tasks.new
   end
 
   # GET /tasks/1/edit
   def edit
+    @list = List.find(params[:list_id])
+    @task = @list.tasks.find(params[:task_id])
   end
 
   # POST /tasks
   # POST /tasks.json
   def create
-    @task = Task.new(task_params)
+    @list = List.find(params[:list_id])
+    @task = @list.tasks.new(task_params)
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to tasks_path, notice: 'Task was successfully created.' }
+        format.html { redirect_to list_path(@task.list), notice: 'Task was successfully created.' }
         format.json { render :show, status: :created, location: @task }
       else
         format.html { render :new }
@@ -40,9 +47,11 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1
   # PATCH/PUT /tasks/1.json
   def update
+    @list = List.find(params[:list_id])
+    @task = @list.tasks.find(params[:id])
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to tasks_path, notice: 'Task was successfully updated.' }
+        format.html { redirect_to list_path(@task.list), notice: 'Task was successfully updated.' }
         format.json { render :show, status: :ok, location: @task }
       else
         format.html { render :edit }
@@ -54,16 +63,16 @@ class TasksController < ApplicationController
   # DELETE /tasks/1
   # DELETE /tasks/1.json
   def destroy
+    @list = List.find(params[:list_id])
+    @task = @list.tasks.find(params[:id])
     @task.destroy
-    respond_to do |format|
-      format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to list_path(@task.list)
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_task
+      # @list = List.find(params[:list_id])
       @task = Task.find(params[:id])
     end
 
