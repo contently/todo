@@ -1,20 +1,17 @@
 source 'https://rubygems.org'
-ruby '2.2.5'
-gem 'rails', '5.2.1'
-gem 'pg'
-gem "sqlite3"
-gem 'sass-rails'
-gem 'uglifier'
+ruby '2.3.1'
+
 gem 'coffee-rails'
-gem 'jquery-rails'
-gem 'turbolinks'
-gem 'jbuilder'
-group :development, :test do
-  gem 'byebug'
-  gem 'web-console'
-  gem 'spring'
-end
 gem 'haml-rails'
+gem 'jbuilder'
+gem 'jquery-rails'
+gem 'pg'
+gem 'rails', '5.2.1'
+gem 'sass-rails'
+gem "sqlite3"
+gem 'turbolinks'
+gem 'uglifier'
+
 group :development do
   gem 'binding_of_caller', :platforms=>[:mri_20]
   gem 'guard-bundler'
@@ -26,14 +23,19 @@ group :development do
   gem 'rb-fsevent', :require=>false
   gem 'rb-inotify', :require=>false
   gem 'spring-commands-rspec'
+  gem 'web-console'
 end
+
 group :development, :test do
+  gem 'byebug'
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'pry-rails'
   gem 'pry-rescue'
   gem 'rspec-rails'
+  gem 'spring'
 end
+
 group :test do
   gem 'capybara'
   gem 'database_cleaner'
