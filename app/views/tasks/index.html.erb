@@ -28,7 +28,7 @@
     <% else %>
       <tr>
         <td>
-          There are currently no tasks for this list, <%= @task.list.title %>
+          There are currently no tasks for this list.
         </td>
       </tr>
     <% end %>
@@ -36,3 +36,9 @@
 </table>
 
 <%= link_to 'Create new task', new_list_task_path %>
+<br>
+<%= link_to 'Show all tasks', list_tasks_path(status: :all) %>
+<br>
+<%= link_to 'Show only completed tasks', list_tasks_path(status: :completed) %>
+<br>
+<%= link_to 'Show only incompleted tasks', list_tasks_path(status: :incompleted) %>

@@ -2,7 +2,13 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tasks = Task.all
+    if params[:status] == 'incompleted' || params[:status] == nil
+      @tasks = Task.incompleted_tasks
+    elsif params[:status] == 'completed'
+      @tasks = Task.completed_tasks
+    elsif params[:status] == 'all'
+      @tasks = Task.all
+    end
   end
 
   def show
