@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe Task, type: :model do
+  it { should belong_to(:list) }
+
   context "with no name" do
     it "is invalid" do
       task = Task.new

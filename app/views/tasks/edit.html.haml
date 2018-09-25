@@ -1,7 +1,23 @@
 %h1 Editing task
 
-=render 'form'
+=form_for [@list, @task] do |f|
+  -if @task.errors.any?
+    #error_explanation
+      %h2="#{pluralize(@task.errors.count, "error")} prohibited this task from being saved:"
+      %ul
+        -@task.errors.full_messages.each do |msg|
+          %li= msg
 
-=link_to 'Show', @task
+  .field
+    =f.label :name
+    =f.text_field :name
+  .field
+    =f.label :completed
+    =f.check_box :completed, {}, true, false
+
+  .actions
+    =f.submit 'Save'
+
+=link_to 'Show', list_task_path(@task)
 \|
-=link_to 'Back', tasks_path
+=link_to 'Back', list_tasks_path

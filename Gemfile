@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 ruby '2.2.5'
 gem 'rails', '5.2.1'
-gem 'pg'
 gem "sqlite3"
 gem 'sass-rails'
 gem 'uglifier'
@@ -9,12 +8,8 @@ gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder'
-group :development, :test do
-  gem 'byebug'
-  gem 'web-console'
-  gem 'spring'
-end
 gem 'haml-rails'
+gem 'devise'
 group :development do
   gem 'binding_of_caller', :platforms=>[:mri_20]
   gem 'guard-bundler'
@@ -26,13 +21,17 @@ group :development do
   gem 'rb-fsevent', :require=>false
   gem 'rb-inotify', :require=>false
   gem 'spring-commands-rspec'
+  gem 'web-console'
 end
 group :development, :test do
-  gem 'factory_girl_rails'
+  gem 'byebug'
+  gem 'factory_bot_rails', '~> 4.0'
   gem 'faker'
   gem 'pry-rails'
   gem 'pry-rescue'
   gem 'rspec-rails'
+  gem 'shoulda-matchers', '~> 3.1'
+  gem 'spring'
 end
 group :test do
   gem 'capybara'
