@@ -13,7 +13,7 @@
       %th
 
   %tbody
-    - @tasks.each do |task|
+    - @tasks.completed.each do |task|
       %tr
         %td=task.name
         %td=task.completed
