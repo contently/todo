@@ -4,7 +4,13 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    if params[:all]
+      @tasks = Task.all
+      @all = true
+    else
+      @tasks = Task.all.select{ |t| t.completed == false }
+      @all = false
+    end
   end
 
   # GET /tasks/1
@@ -25,6 +31,7 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
     @task = Task.new(task_params)
+    @task.completed = false
 
     respond_to do |format|
       if @task.save

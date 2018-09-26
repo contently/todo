@@ -20,4 +20,8 @@
 
 %br
 
+-if @all
+  =link_to 'Incomplete tasks', tasks_path
+-else
+  =link_to 'View All', tasks_path(all: true)
 =link_to 'Add a task', new_task_path

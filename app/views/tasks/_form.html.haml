@@ -11,7 +11,7 @@
     =f.text_field :name
   .field
     =f.label :completed
-    =f.check_box :completed
+    =f.check_box :completed, disabled: current_page?(action: 'new')
   .actions
     =f.submit 'Save'
 

@@ -20,4 +20,10 @@ feature "Creating a task" do
 
     expect(page).to have_content("Name can't be blank")
   end
+
+  scenario "Completed checkbox is disabeled by default" do
+    visit new_task_path
+
+    expect(page).to have_field('Completed', disabled: true)
+  end
 end
