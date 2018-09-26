@@ -1,9 +1,13 @@
+require 'bcrypt'
+
 class User < ActiveRecord::Base
   validates :username, :session_token, :password_digest, presence: true
 
   after_initialize :ensure_session_token!
 
   attr_reader :password
+
+  has_many :tasks
 
   def self.find_by_credentials(username, password)
     user = User.find_by_username(username)
