@@ -11,6 +11,7 @@ gem 'sass-rails'
 gem "sqlite3"
 gem 'turbolinks'
 gem 'uglifier'
+gem 'bcrypt'
 
 group :development do
   gem 'binding_of_caller', :platforms=>[:mri_20]
