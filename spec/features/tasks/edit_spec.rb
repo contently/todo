@@ -9,7 +9,7 @@ feature "Editing a task" do
     expect(page).to have_content("Editing task")
 
     fill_in "Name", with: "Test my app (updated)"
-    click_button "Update"
+    click_button "Save"
 
     expect(page).to have_content("Tasks")
     expect(page).to have_content("Test my app (updated)")
