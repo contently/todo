@@ -6,7 +6,8 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    is_completed = params[:completed].present?
+    @tasks = Task.where(completed: is_completed)
   end
 
   # GET /tasks/1
