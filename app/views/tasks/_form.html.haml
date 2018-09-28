@@ -6,6 +6,7 @@
         -@task.errors.full_messages.each do |msg|
           %li= msg
 
+  = f.hidden_field :list_id, value: @task.list_id
   .field
     =f.label :name
     =f.text_field :name

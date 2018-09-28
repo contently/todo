@@ -17,7 +17,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/new
   def new
-    @task = Task.new
+    @task = Task.new(list_id: params[:list_id])
   end
 
   # GET /tasks/1/edit
@@ -30,7 +30,7 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to tasks_path, notice: 'Task was successfully created.' }
+        format.html { redirect_to lists_path, notice: 'Task was successfully created.' }
         format.json { render :show, status: :created, location: @task }
 
       else
@@ -73,6 +73,6 @@ class TasksController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def task_params
-    params.require(:task).permit(:name, :completed)
+    params.require(:task).permit(:name, :completed, :list_id)
   end
 end
