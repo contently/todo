@@ -1,3 +1,6 @@
+- if user_signed_in?
+  = link_to "Logout", destroy_user_session_path, method: :delete
+
 %h1 Tasks
 
 =link_to 'Completed tasks', tasks_path(:completed => "true")

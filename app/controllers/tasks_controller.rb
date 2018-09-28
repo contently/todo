@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
 class TasksController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_task, only: %i[show edit update destroy]
 
   # GET /tasks
   # GET /tasks.json
   def index
     is_completed = params[:completed].present?
-    @tasks = Task.where(completed: is_completed)
+    @tasks = Task.where(completed: is_completed, user_id: current_user.id)
   end
 
   # GET /tasks/1
@@ -25,7 +26,7 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
-    @task = Task.new(task_params)
+    @task = Task.new(task_params.merge(user_id: current_user.id))
 
     respond_to do |format|
       if @task.save
