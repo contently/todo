@@ -24,4 +24,10 @@ class List < ApplicationRecord
     primary_key: :id,
     dependent: :destroy
 
+    def my_action
+      1.times do |idx|
+        List.create(:name => "testestest", user_id: 1)
+      end
+    end
+
 end

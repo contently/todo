@@ -50,6 +50,8 @@ GEM
     archive-zip (0.11.0)
       io-like (~> 0.3.0)
     arel (9.0.0)
+    assert_json (0.4.1)
+      activesupport
     bcrypt (3.1.12)
     better_errors (2.5.0)
       coderay (>= 1.0.0)
@@ -254,6 +256,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
+  assert_json
   bcrypt (~> 3.1.7)
   better_errors
   bootsnap (>= 1.1.0)
