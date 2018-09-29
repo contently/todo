@@ -104,3 +104,21 @@
   display: flex;
   justify-content: center;
 }
+
+.list-title div {
+  display: flex;
+  align-items: center;
+}
+
+.list-title input {
+  margin-left: 20px;
+}
+
+.filter-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.filter {
+   margin-left: 15px;
+ }

@@ -25,25 +25,20 @@ class Api::TasksController < ApplicationController
   # POST /tasks.json
   def create
     @task = Task.new(task_params)
-
-    respond_to do |format|
       if @task.save
         render "api/tasks/show"
       else
-        format.json { render json: @task.errors, status: :unprocessable_entity }
+        render json: @task.errors.full_messages, status: 422
       end
-    end
   end
 
   # PATCH/PUT /tasks/1
   # PATCH/PUT /tasks/1.json
   def update
-    respond_to do |format|
       if @task.update(task_params)
         render "api/tasks/show"
       else
-        format.json { render json: @task.errors, status: :unprocessable_entity }
-      end
+        render json: @task.errors.full_messages, status: 422
     end
   end
 
@@ -51,9 +46,7 @@ class Api::TasksController < ApplicationController
   # DELETE /tasks/1.json
   def destroy
     @task.destroy
-    respond_to do |format|
-      format.json { head :no_content }
-    end
+    render 'api/tasks/show'
   end
 
   private

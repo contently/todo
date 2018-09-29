@@ -68,7 +68,7 @@ class Main extends React.Component {
 
             <div className={this.state.createForm ? "hidden" : "list-items-container"}>
               <ul>
-                {lists.map(list => <ListItem currentUser={currentUser} key={list.id} deleteList={deleteList} list={list}/>)}
+                {lists.filter(list => list.user_id === currentUser.id).map(list => <ListItem currentUser={currentUser} key={list.id} deleteList={deleteList} list={list}/>)}
               </ul>
             </div>
 

@@ -17,7 +17,7 @@ class ListItem extends React.Component {
       return(
         <li>
           <div className="list-options">
-            <p>View</p>
+            <Link to={`/list/${this.props.list.id}`}><p>View</p></Link>
             <p onClick={this.deleteList}>Delete</p>
           </div>
 

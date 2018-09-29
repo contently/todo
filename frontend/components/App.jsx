@@ -3,6 +3,7 @@ import LogInFormContainer from './session/login_form_container';
 import SignUpFormContainer from './session/signup_form_container';
 import NavBarContainer from './navbar/nav_bar_container';
 import MainContainer from './main/main_container';
+import ListShowContainer from './main/list_show_container';
 import {
   Route,
   Redirect,
@@ -19,6 +20,7 @@ const App = () => (
      <Switch>
         <AuthRoute exact path="/signin" component={LogInFormContainer} />
         <AuthRoute exact path="/signup" component={SignUpFormContainer} />
+        <ProtectedRoute exact path='/list/:listId' component={ ListShowContainer } />
         <Route path="/" component={MainContainer} />
      </Switch>
   </div>
