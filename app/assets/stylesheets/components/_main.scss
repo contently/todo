@@ -125,3 +125,26 @@
 .filter {
    margin-left: 15px;
  }
+
+ .dropdown {
+   position: absolute;
+   background: white;
+   border: 2px solid grey;
+ }
+
+ .selectedlist {
+   background: grey;
+   color: white;
+ }
+
+ .otherlist {
+   background: white;
+ }
+
+ .otherlist:hover {
+   cursor: pointer;
+ }
+
+ .selectedlist:hover {
+   cursor: pointer;
+ }

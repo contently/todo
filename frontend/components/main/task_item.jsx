@@ -18,7 +18,6 @@ class TaskItem extends React.Component {
   updateComplete() {
     let taskForm = new FormData();
     taskForm.append("task[completed]", !this.props.task.completed);
-
     this.props.updateTask(this.props.task.id, taskForm)
   }
 

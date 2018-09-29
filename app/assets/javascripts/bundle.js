@@ -517,12 +517,17 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ListShow).call(this, props));
     _this.state = {
       createTask: false,
-      title: ""
+      title: "",
+      filter: "incomplete",
+      filterDD: false
     };
     _this.openCreate = _this.openCreate.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.createNewTask = _this.createNewTask.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.closeCreate = _this.closeCreate.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.updateTitle = _this.updateTitle.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.validate = _this.validate.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.toggleFilter = _this.toggleFilter.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.toggleFilterType = _this.toggleFilterType.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -572,14 +577,72 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "validate",
+    value: function validate(task, filter) {
+      if (filter === "all") {
+        return true;
+      } else if (filter === "incomplete") {
+        if (task === true) {
+          return false;
+        } else {
+          return true;
+        }
+      } else if (filter === "complete") {
+        if (task === true) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    }
+  }, {
+    key: "toggleFilter",
+    value: function toggleFilter() {
+      this.setState({
+        filterDD: !this.state.filterDD
+      });
+    }
+  }, {
+    key: "toggleFilterType",
+    value: function toggleFilterType(type) {
+      this.setState({
+        filter: type,
+        filterDD: false
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       var _this$props = this.props,
           list = _this$props.list,
           currentUser = _this$props.currentUser,
           tasks = _this$props.tasks,
           deleteTask = _this$props.deleteTask,
           updateTask = _this$props.updateTask;
+      var dd;
+
+      if (this.state.filterDD) {
+        dd = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+          className: "dropdown"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          className: this.state.filter === "incomplete" ? "selectedlist" : "otherlist",
+          onClick: function onClick() {
+            return _this2.toggleFilterType("incomplete");
+          }
+        }, "Incomplete"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          className: this.state.filter === "complete" ? "selectedlist" : "otherlist",
+          onClick: function onClick() {
+            return _this2.toggleFilterType("complete");
+          }
+        }, "Complete"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          className: this.state.filter === "all" ? "selectedlist" : "otherlist",
+          onClick: function onClick() {
+            return _this2.toggleFilterType("all");
+          }
+        }, "All")));
+      }
 
       if (!list || !currentUser) {
         return null;
@@ -595,12 +658,13 @@ function (_React$Component) {
             className: "filter-container"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
             onClick: this.openCreate
-          }, "New Task"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          }, "New Task"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+            onClick: this.toggleFilter,
             className: "filter"
-          }, "Filter")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          }, "Filter"), dd)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: this.state.createTask ? "hidden" : "list-items-container"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, tasks.filter(function (task) {
-            return task.list_id === list.id;
+            return task.list_id === list.id && _this2.validate(task.completed, _this2.state.filter);
           }).map(function (task) {
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_task_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
               currentUser: currentUser,
