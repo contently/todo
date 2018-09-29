@@ -6,6 +6,11 @@ class ListItem extends React.Component {
     super(props)
     this.state = {
     }
+    this.deleteList = this.deleteList.bind(this);
+  }
+
+  deleteList() {
+    this.props.deleteList(this.props.list.id)
   }
 
   render() {
@@ -13,8 +18,7 @@ class ListItem extends React.Component {
         <li>
           <div className="list-options">
             <p>View</p>
-            <p>Edit</p>
-            <p>Delete</p>
+            <p onClick={this.deleteList}>Delete</p>
           </div>
 
           <div className="list-title">

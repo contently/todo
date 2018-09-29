@@ -19,6 +19,7 @@ class Main extends React.Component {
     this.openCreate = this.openCreate.bind(this)
     this.updateTitle = this.updateTitle.bind(this)
     this.createNewList = this.createNewList.bind(this)
+    this.closeCreate = this.closeCreate.bind(this)
   }
 
   componentDidMount() {
@@ -27,6 +28,10 @@ class Main extends React.Component {
 
   openCreate() {
     this.setState({createForm: true})
+  }
+
+  closeCreate() {
+    this.setState({createForm: false})
   }
 
   updateTitle(e) {
@@ -43,7 +48,7 @@ class Main extends React.Component {
   }
 
   render() {
-    const {  currentUser, lists } = this.props;
+    const {  currentUser, lists, deleteList } = this.props;
     if (!currentUser) {
       return <div className="main-logo">
               <span>
@@ -54,22 +59,31 @@ class Main extends React.Component {
     }
         return(
           <div className="lists-container">
-            <div className="list-header">
+            <div className={this.state.createForm ? "hidden" : "list-header"}>
               <div>
-                <h1>Your Lists</h1>
+                <h1>{currentUser.username}s Lists</h1>
                 <p onClick={this.openCreate}>Create New List</p>
               </div>
             </div>
 
-            <div className="list-items-container">
+            <div className={this.state.createForm ? "hidden" : "list-items-container"}>
               <ul>
-                {lists.map(list => <ListItem currentUser={currentUser} key={list.id} list={list}/>)}
+                {lists.map(list => <ListItem currentUser={currentUser} key={list.id} deleteList={deleteList} list={list}/>)}
               </ul>
             </div>
 
-            <div className = {this.state.createForm ? "create-form" : "hidden"}>
-              <input onChange={this.updateTitle} value={this.state.title} placeholder="Title"></input>
-              <button onClick={this.createNewList}>Create</button>
+            <div className = {this.state.createForm ? "list-header" : "hidden"}>
+              <div>
+                <h1>New List</h1>
+                <p onClick={this.closeCreate}>All Lists</p>
+              </div>
+            </div>
+
+            <div className = {this.state.createForm ? "list-items-container" : "hidden"}>
+              <span>
+                <input onChange={this.updateTitle} value={this.state.title} placeholder="Title"></input>
+                <button onClick={this.createNewList}>Create</button>
+              </span>
             </div>
 
         </div>

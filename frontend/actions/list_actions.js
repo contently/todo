@@ -2,6 +2,7 @@ import * as APIUtil from '../util/list_api_util';
 export const RECEIVE_ALL_LISTS  = 'RECEIVE_ALL_LISTS ';
 export const RECEIVE_SINGLE_LIST  = 'RECEIVE_SINGLE_LIST ';
 export const RECEIVE_ERRORS  = 'RECEIVE_ERRORS ';
+export const DESTROY_LIST  = 'DESTROY_LIST ';
 
 export const receiveAllLists = (lists) => (
   {
@@ -24,6 +25,11 @@ export const receiveErrors = (errs) => (
   }
 );
 
+export const receiveDestroyedList = list => ({
+  type: DESTROY_LIST,
+  list
+});
+
 export const requestAllLists = () => dispatch => (
   APIUtil.fetchAllLists().then(lists => (dispatch(receiveAllLists(lists)))
 ));
@@ -39,4 +45,8 @@ export const createList = list => dispatch => {
     dispatch(receiveErrors(err.responseJSON))
   ))
 )
+};
+
+export const deleteList = (listId) => dispatch => {
+  return APIUtil.deleteList(listId).then(list => dispatch(receiveDestroyedList(list)));
 };

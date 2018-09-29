@@ -34,6 +34,23 @@
   width: 65%;
 }
 
+.list-items-container span {
+  width: 100%;
+  margin-top: 2%;
+  background: #3CB371;
+  height: 75px;
+  flex-direction: column;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.list-items-container span input {
+  border: 1px solid #F5F5F5;
+  padding-left: 4px;
+  color: white;
+}
+
 .list-header {
   display: flex;
   justify-content: flex-end;

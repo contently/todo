@@ -20,11 +20,13 @@ class User < ApplicationRecord
   has_many :lists,
     class_name: :List,
     foreign_key: :user_id,
-    primary_key: :id
+    primary_key: :id,
+    dependent: :destroy
 
   has_many :tasks,
     through: :lists,
-    source: :tasks
+    source: :tasks,
+    dependent: :destroy
 
   def self.find_by_credentials(username, password)
       user = User.find_by(username: username)

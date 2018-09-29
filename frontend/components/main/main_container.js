@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { requestAllLists,createList } from '../../actions/list_actions';
+import { requestAllLists,createList,deleteList } from '../../actions/list_actions';
 import { selectLists } from '../../reducers/selectors';
 
 import Main from './main';
@@ -15,6 +15,7 @@ const mdp = dispatch => {
   return({
     requestAllLists: () => dispatch(requestAllLists()),
     createList: (list) => dispatch(createList(list)),
+    deleteList: (listId) => dispatch(deleteList(listId))
   })
 };
 
