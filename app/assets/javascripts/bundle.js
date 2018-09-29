@@ -90,21 +90,25 @@
 /*!******************************************!*\
   !*** ./frontend/actions/list_actions.js ***!
   \******************************************/
-/*! exports provided: RECEIVE_ALL_LISTS, RECEIVE_SINGLE_LIST, receiveAllLists, receiveSingleList, requestAllLists, requestSingleMonth */
+/*! exports provided: RECEIVE_ALL_LISTS, RECEIVE_SINGLE_LIST, RECEIVE_ERRORS, receiveAllLists, receiveSingleList, receiveErrors, requestAllLists, requestSingleList, createList */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ALL_LISTS", function() { return RECEIVE_ALL_LISTS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_SINGLE_LIST", function() { return RECEIVE_SINGLE_LIST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ERRORS", function() { return RECEIVE_ERRORS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveAllLists", function() { return receiveAllLists; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveSingleList", function() { return receiveSingleList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveErrors", function() { return receiveErrors; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestAllLists", function() { return requestAllLists; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestSingleMonth", function() { return requestSingleMonth; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestSingleList", function() { return requestSingleList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createList", function() { return createList; });
 /* harmony import */ var _util_list_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/list_api_util */ "./frontend/util/list_api_util.js");
 
 var RECEIVE_ALL_LISTS = 'RECEIVE_ALL_LISTS ';
 var RECEIVE_SINGLE_LIST = 'RECEIVE_SINGLE_LIST ';
+var RECEIVE_ERRORS = 'RECEIVE_ERRORS ';
 var receiveAllLists = function receiveAllLists(lists) {
   return {
     type: RECEIVE_ALL_LISTS,
@@ -117,6 +121,12 @@ var receiveSingleList = function receiveSingleList(list) {
     list: list
   };
 };
+var receiveErrors = function receiveErrors(errs) {
+  return {
+    type: RECEIVE_ERRORS,
+    errs: errs
+  };
+};
 var requestAllLists = function requestAllLists() {
   return function (dispatch) {
     return _util_list_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchAllLists"]().then(function (lists) {
@@ -124,10 +134,19 @@ var requestAllLists = function requestAllLists() {
     });
   };
 };
-var requestSingleMonth = function requestSingleMonth(id) {
+var requestSingleList = function requestSingleList(id) {
   return function (dispatch) {
     return _util_list_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchSingleList"](id).then(function (list) {
       return dispatch(receiveSingleList(list));
+    });
+  };
+};
+var createList = function createList(list) {
+  return function (dispatch) {
+    return _util_list_api_util__WEBPACK_IMPORTED_MODULE_0__["createList"](list).then(function (list) {
+      return dispatch(receiveSingleList(list));
+    }, function (err) {
+      return dispatch(receiveErrors(err.responseJSON));
     });
   };
 };
@@ -256,10 +275,10 @@ var App = function App() {
 
 /***/ }),
 
-/***/ "./frontend/components/main/main.jsx":
-/*!*******************************************!*\
-  !*** ./frontend/components/main/main.jsx ***!
-  \*******************************************/
+/***/ "./frontend/components/main/list_item.jsx":
+/*!************************************************!*\
+  !*** ./frontend/components/main/list_item.jsx ***!
+  \************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -289,6 +308,74 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+var ListItem =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(ListItem, _React$Component);
+
+  function ListItem(props) {
+    var _this;
+
+    _classCallCheck(this, ListItem);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ListItem).call(this, props));
+    _this.state = {};
+    return _this;
+  }
+
+  _createClass(ListItem, [{
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "list-options"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "View"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Edit"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Delete")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "list-title"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, this.props.list.name)));
+    }
+  }]);
+
+  return ListItem;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (ListItem);
+
+/***/ }),
+
+/***/ "./frontend/components/main/main.jsx":
+/*!*******************************************!*\
+  !*** ./frontend/components/main/main.jsx ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _list_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./list_item */ "./frontend/components/main/list_item.jsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+
+
+
+
 var Main =
 /*#__PURE__*/
 function (_React$Component) {
@@ -300,7 +387,13 @@ function (_React$Component) {
     _classCallCheck(this, Main);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Main).call(this, props));
-    _this.state = {};
+    _this.state = {
+      createForm: false,
+      title: ""
+    };
+    _this.openCreate = _this.openCreate.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.updateTitle = _this.updateTitle.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.createNewList = _this.createNewList.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -308,6 +401,30 @@ function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.requestAllLists();
+    }
+  }, {
+    key: "openCreate",
+    value: function openCreate() {
+      this.setState({
+        createForm: true
+      });
+    }
+  }, {
+    key: "updateTitle",
+    value: function updateTitle(e) {
+      this.setState({
+        title: e.currentTarget.value
+      });
+    }
+  }, {
+    key: "createNewList",
+    value: function createNewList() {
+      var listForm = new FormData();
+      listForm.append("list[name]", this.state.title);
+      this.props.createList(listForm).then(this.setState({
+        title: "",
+        createForm: false
+      }));
     }
   }, {
     key: "render",
@@ -328,7 +445,25 @@ function (_React$Component) {
         className: "lists-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "list-header"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Your Lists"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Create New List")));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Your Lists"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        onClick: this.openCreate
+      }, "Create New List"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "list-items-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, lists.map(function (list) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_list_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          currentUser: currentUser,
+          key: list.id,
+          list: list
+        });
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: this.state.createForm ? "create-form" : "hidden"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        onChange: this.updateTitle,
+        value: this.state.title,
+        placeholder: "Title"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.createNewList
+      }, "Create")));
     }
   }]);
 
@@ -350,7 +485,9 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_list_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/list_actions */ "./frontend/actions/list_actions.js");
-/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./main */ "./frontend/components/main/main.jsx");
+/* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../reducers/selectors */ "./frontend/reducers/selectors.js");
+/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./main */ "./frontend/components/main/main.jsx");
+
 
 
 
@@ -358,7 +495,7 @@ __webpack_require__.r(__webpack_exports__);
 var msp = function msp(state) {
   return {
     currentUser: state.entities.users[state.session.id],
-    lists: state.entities.lists
+    lists: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_4__["selectLists"])(state)
   };
 };
 
@@ -366,11 +503,14 @@ var mdp = function mdp(dispatch) {
   return {
     requestAllLists: function requestAllLists() {
       return dispatch(Object(_actions_list_actions__WEBPACK_IMPORTED_MODULE_1__["requestAllLists"])());
+    },
+    createList: function createList(list) {
+      return dispatch(Object(_actions_list_actions__WEBPACK_IMPORTED_MODULE_1__["createList"])(list));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(msp, mdp)(_main__WEBPACK_IMPORTED_MODULE_2__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(msp, mdp)(_main__WEBPACK_IMPORTED_MODULE_3__["default"]));
 
 /***/ }),
 
@@ -833,9 +973,7 @@ document.addEventListener('DOMContentLoaded', function () {
   if (window.currentUser) {
     var preloadedState = {
       session: {
-        id: window.currentUser.id,
-        night_mode: window.currentUser.night_mode,
-        autoplay: window.currentUser.autoplay
+        id: window.currentUser.id
       },
       entities: {
         users: _defineProperty({}, window.currentUser.id, window.currentUser)
@@ -891,11 +1029,41 @@ var entitiesReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _session_errors_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./session_errors_reducer */ "./frontend/reducers/session_errors_reducer.js");
+/* harmony import */ var _list_errors_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./list_errors_reducer */ "./frontend/reducers/list_errors_reducer.js");
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  session: _session_errors_reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
+  session: _session_errors_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  list: _list_errors_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
 }));
+
+/***/ }),
+
+/***/ "./frontend/reducers/list_errors_reducer.js":
+/*!**************************************************!*\
+  !*** ./frontend/reducers/list_errors_reducer.js ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_list_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/list_actions */ "./frontend/actions/list_actions.js");
+
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_list_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ERRORS"]:
+      return action.errors;
+
+    default:
+      return state;
+  }
+});
 
 /***/ }),
 
@@ -926,7 +1094,7 @@ var listsReducer = function listsReducer() {
       return lodash_merge__WEBPACK_IMPORTED_MODULE_0___default()({}, state, action.lists);
 
     case _actions_list_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_SINGLE_LIST"]:
-      return lodash_merge__WEBPACK_IMPORTED_MODULE_0___default()({}, state, _defineProperty({}, action.currentUser.id, action.currentUser));
+      return lodash_merge__WEBPACK_IMPORTED_MODULE_0___default()({}, state, _defineProperty({}, action.list.id, action.list));
 
     default:
       return state;
@@ -960,6 +1128,25 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
   errors: _errors_reducer__WEBPACK_IMPORTED_MODULE_3__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (rootReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/selectors.js":
+/*!****************************************!*\
+  !*** ./frontend/reducers/selectors.js ***!
+  \****************************************/
+/*! exports provided: selectLists */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectLists", function() { return selectLists; });
+/* harmony import */ var lodash_values__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash/values */ "./node_modules/lodash/values.js");
+/* harmony import */ var lodash_values__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash_values__WEBPACK_IMPORTED_MODULE_0__);
+
+var selectLists = function selectLists(state) {
+  return lodash_values__WEBPACK_IMPORTED_MODULE_0___default()(state.entities.lists);
+};
 
 /***/ }),
 
@@ -3333,6 +3520,38 @@ module.exports = arrayLikeKeys;
 
 /***/ }),
 
+/***/ "./node_modules/lodash/_arrayMap.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_arrayMap.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * A specialized version of `_.map` for arrays without support for iteratee
+ * shorthands.
+ *
+ * @private
+ * @param {Array} [array] The array to iterate over.
+ * @param {Function} iteratee The function invoked per iteration.
+ * @returns {Array} Returns the new mapped array.
+ */
+function arrayMap(array, iteratee) {
+  var index = -1,
+      length = array == null ? 0 : array.length,
+      result = Array(length);
+
+  while (++index < length) {
+    result[index] = iteratee(array[index], index, array);
+  }
+  return result;
+}
+
+module.exports = arrayMap;
+
+
+/***/ }),
+
 /***/ "./node_modules/lodash/_assignMergeValue.js":
 /*!**************************************************!*\
   !*** ./node_modules/lodash/_assignMergeValue.js ***!
@@ -3736,6 +3955,47 @@ module.exports = baseIsTypedArray;
 
 /***/ }),
 
+/***/ "./node_modules/lodash/_baseKeys.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_baseKeys.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isPrototype = __webpack_require__(/*! ./_isPrototype */ "./node_modules/lodash/_isPrototype.js"),
+    nativeKeys = __webpack_require__(/*! ./_nativeKeys */ "./node_modules/lodash/_nativeKeys.js");
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * The base implementation of `_.keys` which doesn't treat sparse arrays as dense.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property names.
+ */
+function baseKeys(object) {
+  if (!isPrototype(object)) {
+    return nativeKeys(object);
+  }
+  var result = [];
+  for (var key in Object(object)) {
+    if (hasOwnProperty.call(object, key) && key != 'constructor') {
+      result.push(key);
+    }
+  }
+  return result;
+}
+
+module.exports = baseKeys;
+
+
+/***/ }),
+
 /***/ "./node_modules/lodash/_baseKeysIn.js":
 /*!********************************************!*\
   !*** ./node_modules/lodash/_baseKeysIn.js ***!
@@ -4051,6 +4311,36 @@ function baseUnary(func) {
 }
 
 module.exports = baseUnary;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseValues.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_baseValues.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayMap = __webpack_require__(/*! ./_arrayMap */ "./node_modules/lodash/_arrayMap.js");
+
+/**
+ * The base implementation of `_.values` and `_.valuesIn` which creates an
+ * array of `object` property values corresponding to the property names
+ * of `props`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @param {Array} props The property names to get values for.
+ * @returns {Object} Returns the array of property values.
+ */
+function baseValues(object, props) {
+  return arrayMap(props, function(key) {
+    return object[key];
+  });
+}
+
+module.exports = baseValues;
 
 
 /***/ }),
@@ -5216,6 +5506,23 @@ module.exports = nativeCreate;
 
 /***/ }),
 
+/***/ "./node_modules/lodash/_nativeKeys.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_nativeKeys.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var overArg = __webpack_require__(/*! ./_overArg */ "./node_modules/lodash/_overArg.js");
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeKeys = overArg(Object.keys, Object);
+
+module.exports = nativeKeys;
+
+
+/***/ }),
+
 /***/ "./node_modules/lodash/_nativeKeysIn.js":
 /*!**********************************************!*\
   !*** ./node_modules/lodash/_nativeKeysIn.js ***!
@@ -6329,6 +6636,54 @@ module.exports = isTypedArray;
 
 /***/ }),
 
+/***/ "./node_modules/lodash/keys.js":
+/*!*************************************!*\
+  !*** ./node_modules/lodash/keys.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayLikeKeys = __webpack_require__(/*! ./_arrayLikeKeys */ "./node_modules/lodash/_arrayLikeKeys.js"),
+    baseKeys = __webpack_require__(/*! ./_baseKeys */ "./node_modules/lodash/_baseKeys.js"),
+    isArrayLike = __webpack_require__(/*! ./isArrayLike */ "./node_modules/lodash/isArrayLike.js");
+
+/**
+ * Creates an array of the own enumerable property names of `object`.
+ *
+ * **Note:** Non-object values are coerced to objects. See the
+ * [ES spec](http://ecma-international.org/ecma-262/7.0/#sec-object.keys)
+ * for more details.
+ *
+ * @static
+ * @since 0.1.0
+ * @memberOf _
+ * @category Object
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property names.
+ * @example
+ *
+ * function Foo() {
+ *   this.a = 1;
+ *   this.b = 2;
+ * }
+ *
+ * Foo.prototype.c = 3;
+ *
+ * _.keys(new Foo);
+ * // => ['a', 'b'] (iteration order is not guaranteed)
+ *
+ * _.keys('hi');
+ * // => ['0', '1']
+ */
+function keys(object) {
+  return isArrayLike(object) ? arrayLikeKeys(object) : baseKeys(object);
+}
+
+module.exports = keys;
+
+
+/***/ }),
+
 /***/ "./node_modules/lodash/keysIn.js":
 /*!***************************************!*\
   !*** ./node_modules/lodash/keysIn.js ***!
@@ -6490,6 +6845,51 @@ function toPlainObject(value) {
 }
 
 module.exports = toPlainObject;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/values.js":
+/*!***************************************!*\
+  !*** ./node_modules/lodash/values.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseValues = __webpack_require__(/*! ./_baseValues */ "./node_modules/lodash/_baseValues.js"),
+    keys = __webpack_require__(/*! ./keys */ "./node_modules/lodash/keys.js");
+
+/**
+ * Creates an array of the own enumerable string keyed property values of `object`.
+ *
+ * **Note:** Non-object values are coerced to objects.
+ *
+ * @static
+ * @since 0.1.0
+ * @memberOf _
+ * @category Object
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property values.
+ * @example
+ *
+ * function Foo() {
+ *   this.a = 1;
+ *   this.b = 2;
+ * }
+ *
+ * Foo.prototype.c = 3;
+ *
+ * _.values(new Foo);
+ * // => [1, 2] (iteration order is not guaranteed)
+ *
+ * _.values('hi');
+ * // => ['h', 'i']
+ */
+function values(object) {
+  return object == null ? [] : baseValues(object, keys(object));
+}
+
+module.exports = values;
 
 
 /***/ }),

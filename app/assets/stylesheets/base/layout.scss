@@ -1,12 +1,12 @@
 html {
 	height: 100%;
 	background: #fafafa;
+	font-family: 'Roboto', sans-serif;
 }
 
 body {
 	width: 100%;
 	margin: 0 auto;
-	font-family: serif;
 	font-size: 12px;
 	height: 100%;
 }
@@ -26,4 +26,5 @@ header {
 
 #app {
 	height: 100%;
+	overflow: scroll;
 }

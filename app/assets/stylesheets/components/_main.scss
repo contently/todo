@@ -10,3 +10,80 @@
   font-size: 250px;
   color: #3CB371;
 }
+
+.hidden {
+  display: none;
+}
+
+.create-form {
+  display: flex;
+}
+
+.lists-container {
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.list-items-container {
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  justify-content: center;
+  width: 65%;
+}
+
+.list-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2%;
+  border-bottom: 2px solid grey;
+  width: 65%;
+  align-items: center;
+  font-size: 15px;
+  color: grey;
+  font-weight: bold;
+}
+
+.list-header div {
+  width: 54%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.list-header div p {
+  cursor: pointer;
+}
+
+
+.list-items-container ul {
+  width: 100%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+.list-items-container ul li{
+  margin-top: 10px;
+  box-shadow: 0.02em 0.1em 0.3em 0.015em #999999;
+  background: #3CB371;
+  color: white;
+}
+
+.list-options {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.list-options p {
+  margin-right: 10px;
+}
+
+.list-options p:hover {
+  cursor: pointer;
+}
+
+.list-title {
+  display: flex;
+  justify-content: center;
+}
