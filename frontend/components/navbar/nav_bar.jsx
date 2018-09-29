@@ -48,13 +48,12 @@ class NavBar extends React.Component {
             <ul>
               <li>
                 <Link to="/"><p>Todo App</p></Link>
-                <span><i class="fas fa-clipboard-check"></i>
+                <span><i className="fas fa-clipboard-check"></i>
                 </span>
                 <nav className="hometext">Todo Home</nav>
               </li>
             </ul>
             {loggedin}
-
           </nav>
         </header>
       )

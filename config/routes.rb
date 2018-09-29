@@ -6,5 +6,6 @@ Rails.application.routes.draw do
     resources :tasks
     resource :session, only: [:create, :destroy]
     resources :users, only: [:create, :update, :show]
+    resources :lists, only: [:index, :update, :show, :destroy, :create]
   end
 end

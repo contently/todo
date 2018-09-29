@@ -1,4 +1,4 @@
-import * as APIUtil from '../util/calendar_api_util';
+import * as APIUtil from '../util/list_api_util';
 export const RECEIVE_ALL_LISTS  = 'RECEIVE_ALL_LISTS ';
 export const RECEIVE_SINGLE_LIST  = 'RECEIVE_SINGLE_LIST ';
 

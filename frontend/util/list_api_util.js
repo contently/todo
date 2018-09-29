@@ -34,7 +34,7 @@ export const updateList = (listId, data) => {
   });
 };
 
-export const deleteVideo = (id) => {
+export const deleteList = (id) => {
   return $.ajax({
       method: 'delete',
       url: `/api/lists/${id}`
