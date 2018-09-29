@@ -922,9 +922,15 @@ function (_React$Component) {
     _classCallCheck(this, TaskItem);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(TaskItem).call(this, props));
-    _this.state = {};
+    _this.state = {
+      editForm: false,
+      title: ""
+    };
     _this.updateComplete = _this.updateComplete.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.deleteTask = _this.deleteTask.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.updateTask = _this.updateTask.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.newTitle = _this.newTitle.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.saveTask = _this.saveTask.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -941,17 +947,52 @@ function (_React$Component) {
       this.props.deleteTask(this.props.task.id);
     }
   }, {
+    key: "updateTask",
+    value: function updateTask() {
+      this.setState({
+        editForm: true
+      });
+    }
+  }, {
+    key: "newTitle",
+    value: function newTitle(e) {
+      this.setState({
+        title: e.currentTarget.value
+      });
+    }
+  }, {
+    key: "saveTask",
+    value: function saveTask() {
+      var taskForm = new FormData();
+      taskForm.append("task[name]", this.state.title);
+      this.props.updateTask(this.props.task.id, taskForm).then(this.setState({
+        editForm: false,
+        title: ""
+      }));
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "list-options"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        onClick: this.updateList
+        className: this.state.editForm ? "hidden" : "",
+        onClick: this.updateTask
       }, "Edit"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: this.state.editForm ? "" : "hidden",
+        onClick: this.saveTask
+      }, "Save"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         onClick: this.deleteTask
       }, "Delete")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "list-title"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, this.props.task.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+        className: this.state.editForm ? "hidden" : "title"
+      }, this.props.task.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        onChange: this.newTitle,
+        placeholder: this.props.task.name,
+        className: this.state.editForm ? "editform" : "hidden",
+        value: this.state.title
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         onChange: this.updateComplete,
         type: "checkbox",
         checked: this.props.task.completed,
