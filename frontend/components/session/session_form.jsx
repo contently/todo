@@ -71,7 +71,7 @@ class SessionForm extends React.Component {
     } else if ((errors_hash["Username has already been taken"])) {
       username_errors = "Username has already been taken";
     }
-
+    
 
     return(
       <div className="session-container">
