@@ -1,0 +1,64 @@
+.session-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.session {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  padding: 20px;
+  box-shadow:0.02em 0.1em 0.3em 0.015em #999999;
+  font-family: 'Roboto', sans-serif;
+}
+
+.session input {
+  padding: 5px;
+}
+
+.session button {
+  background: #3CB371;
+  border-radius: 10px;
+  color: white;
+  margin-top: 30px;
+  width: 75px;
+  display: flex;
+  justify-content: center;
+}
+
+.session button div {
+  margin: 5px;
+}
+
+.session a {
+  color: grey;
+  font-size: 13px;
+  margin: 10px;
+}
+
+.sessionForm-input {
+  margin: 15px 0px;
+}
+
+.sessionForm-input input {
+  border: 1px solid grey;
+}
+
+.sessionForm-input-errors {
+  margin: 15px 0px;
+}
+
+.sessionForm-input-errors input{
+  border: 1px solid red;
+}
+
+.error-messages {
+  color: #d50000;
+  position: absolute;
+  font-size: 12px;
+}

@@ -1,0 +1,150 @@
+.main-logo {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  align-items: top;
+  margin-top: 40px;
+}
+
+.main-logo svg {
+  font-size: 250px;
+  color: #3CB371;
+}
+
+.hidden {
+  display: none;
+}
+
+.create-form {
+  display: flex;
+}
+
+.lists-container {
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.list-items-container {
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  justify-content: center;
+  width: 65%;
+}
+
+.list-items-container span {
+  width: 100%;
+  margin-top: 2%;
+  background: #3CB371;
+  height: 75px;
+  flex-direction: column;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.list-items-container span input {
+  border: 1px solid #F5F5F5;
+  padding-left: 4px;
+  color: white;
+}
+
+.list-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2%;
+  border-bottom: 2px solid grey;
+  width: 65%;
+  align-items: center;
+  font-size: 15px;
+  color: grey;
+  font-weight: bold;
+}
+
+.list-header div {
+  width: 54%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.list-header div p {
+  cursor: pointer;
+}
+
+
+.list-items-container ul {
+  width: 100%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+.list-items-container ul li{
+  margin-top: 10px;
+  box-shadow: 0.02em 0.1em 0.3em 0.015em #999999;
+  background: #3CB371;
+  color: white;
+}
+
+.list-options {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.list-options p {
+  margin-right: 10px;
+}
+
+.list-options p:hover {
+  cursor: pointer;
+}
+
+.list-title {
+  display: flex;
+  justify-content: center;
+}
+
+.list-title div {
+  display: flex;
+  align-items: center;
+}
+
+.list-title input {
+  margin-left: 20px;
+  margin-top: 1.33em;
+  margin-bottom: 1.33em;
+  border: 1px solid #F5F5F5;
+}
+
+.filter-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.filter {
+   margin-left: 15px;
+ }
+
+ .dropdown {
+   position: absolute;
+   background: white;
+   border: 2px solid grey;
+ }
+
+ .selectedlist {
+   background: grey;
+   color: white;
+ }
+
+ .otherlist {
+   background: white;
+ }
+
+ .otherlist:hover {
+   cursor: pointer;
+ }
+
+ .selectedlist:hover {
+   cursor: pointer;
+ }

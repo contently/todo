@@ -1,0 +1,198 @@
+.main-nav {
+  display: flex;
+  padding: 10px 0px;
+  font-family: 'Roboto', sans-serif;
+  justify-content: center;
+  box-shadow:0.02em 0.1em 0.3em 0.015em #999999;
+  background: rgba(219,219,219,1);
+  background: -moz-linear-gradient(top, rgba(219,219,219,1) 0%, rgba(219,219,219,1) 50%, rgba(209,209,209,1) 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(219,219,219,1)), color-stop(50%, rgba(219,219,219,1)), color-stop(100%, rgba(209,209,209,1)));
+  background: -webkit-linear-gradient(top, rgba(219,219,219,1) 0%, rgba(219,219,219,1) 50%, rgba(209,209,209,1) 100%);
+  background: -o-linear-gradient(top, rgba(219,219,219,1) 0%, rgba(219,219,219,1) 50%, rgba(209,209,209,1) 100%);
+  background: -ms-linear-gradient(top, rgba(219,219,219,1) 0%, rgba(219,219,219,1) 50%, rgba(209,209,209,1) 100%);
+  background: linear-gradient(to bottom, rgba(219,219,219,1) 0%, rgba(219,219,219,1) 50%, rgba(209,209,209,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dbdbdb', endColorstr='#d1d1d1', GradientType=0 );
+}
+
+.main-nav span {
+  font-size: 18px;
+  color: #989898;
+}
+
+.main-nav li .tooltiptext {
+  visibility: hidden;
+  background-color: #696969;
+  color: #fff;
+  text-align: center;
+  padding: 9px 7px;
+  border-radius: 4px;
+  position: absolute;
+  margin-top: 30px;
+  z-index: 1;
+  font-size: 12px;
+  font-weight: 100;
+  opacity: 0;
+  transition: visibility 0s .5s, opacity .5s linear;
+}
+
+.main-nav li:hover .tooltiptext {
+  transition-delay: 1s;
+  background-color: #696969;
+  visibility: visible;
+  opacity: 1;
+}
+
+
+.main-nav li .hometext {
+  visibility: hidden;
+  background-color: #f8f8f8;
+  color: black;
+  text-align: center;
+  padding: 2px 4px;
+  position: absolute;
+  margin-top: 30px;
+  z-index: 1;
+  font-size: 10px;
+  font-weight: 300;
+  opacity: 0;
+  transition: visibility 0s .5s, opacity .5s linear;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.main-nav li:hover .hometext {
+  transition-delay: 1s;
+  background-color: #f8f8f8;
+  color: black;
+  visibility: visible;
+  opacity: 1;
+}
+
+.main-nav button .searchtiptext {
+  visibility: hidden;
+  background-color: #696969;
+  color: #fff;
+  text-align: center;
+  padding: 9px 7px;
+  border-radius: 4px;
+  position: absolute;
+  margin-top: 33px;
+  z-index: 1;
+  font-size: 12px;
+  font-weight: 100;
+  opacity: 0;
+  transition: visibility 0s .5s, opacity .5s linear;
+}
+
+.main-nav button:hover .searchtiptext {
+  transition-delay: 1s;
+  background-color: #696969;
+  visibility: visible;
+  opacity: 1;
+}
+
+.left-nav {
+  display: flex;
+  align-items: center;
+}
+
+.left-nav > ul {
+  display: flex;
+  align-items: center;
+  width: 55%;
+  justify-content: flex-end;
+}
+
+.left-nav {
+  width: 100%;
+}
+
+.left-nav > ul > li {
+	cursor: pointer;
+	font-family: sans-serif;
+	font-weight: bold;
+	font-size: 11px;
+	padding: 7px 9px;
+	transition: background-color 0.3s;
+}
+
+.left-nav li {
+  display: flex;
+  align-items: center;
+}
+
+.left-nav img {
+  margin-right: 5px;
+}
+
+.left-nav p {
+  font-size: 15px;
+  margin-right: 10px;
+}
+
+.left-nav svg {
+  color:#3CB371	;
+}
+
+.options {
+  display: flex;
+  width: 45%;
+  justify-content: flex-end;
+}
+
+.options button {
+  margin: 0px 20px;
+}
+
+.options a, button {
+  color: grey;
+  background: white;
+  padding: 5px;
+  border-radius: 6px;
+  box-shadow:0.02em 0.1em 0.3em 0.015em #999999;
+  font-size: 12px;
+}
+
+.options button:hover {
+  background-color: #F5F5F5	;
+}
+
+.options a:hover {
+  background-color: #F5F5F5	;
+}
+
+.user-profile-div {
+  display: flex;
+  width: 45%;
+  justify-content: flex-end;
+}
+
+.user-profile-div span{
+  background: #3CB371;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  color: white;
+  padding: 5px 5px;
+  font-size: 12px;
+}
+
+.user-profile-div button {
+  margin: 0px 20px;
+  font-size: 12px;
+}
+
+.user-profile-div button:hover {
+  background-color: #F5F5F5	;
+}
+
+#nav-button:active {
+  background: #ccc;
+  border-radius: 20px;
+}
+
+#nav-button {
+  width: 18px;
+  display: flex;
+  justify-content: center;
+}
