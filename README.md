@@ -21,3 +21,8 @@ Cleanup tasks
 ----------------
 - Consolidate the repeated code between the create and edit feature specs for tasks.
 
+Completed Tasks
+----------------
+- A user should not be able to complete a task when creating it.
+- A user should have access to only their tasks. (may require devise or a creative, lightweight auth system)
+- A user's default view is filtered to show only incomplete tasks.

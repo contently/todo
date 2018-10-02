@@ -28,6 +28,7 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       @task.user_id = current_user.id
+      @task.completed = false
       if @task.save
         format.html { redirect_to tasks_path, notice: 'Task was successfully created.' }
         format.json { render :show, status: :created, location: @task }
