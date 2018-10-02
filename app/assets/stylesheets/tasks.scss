@@ -1,3 +1,18 @@
 // Place all the styles related to the tasks controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+td  {
+  padding: 10px;
+  background: lightgrey;
+}
+
+tr {
+  padding: 10px;
+  background: lightgrey;
+}
+
+input {
+  border-radius: 5px;
+  box-shadow: 1px solid grey
+}
