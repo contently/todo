@@ -11,7 +11,6 @@ gem 'turbolinks'
 gem 'jbuilder'
 group :development, :test do
   gem 'byebug'
-  gem 'web-console'
   gem 'spring'
 end
 gem 'haml-rails'
@@ -28,7 +27,8 @@ group :development do
   gem 'spring-commands-rspec'
 end
 group :development, :test do
-  gem 'factory_girl_rails'
+  gem 'web-console'
+  gem 'factory_bot'
   gem 'faker'
   gem 'pry-rails'
   gem 'pry-rescue'
