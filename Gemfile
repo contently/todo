@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+gem 'bcrypt', '~> 3.1.7'
 ruby '2.2.5'
 gem 'rails', '5.2.1'
 gem 'pg'
@@ -25,6 +26,10 @@ group :development do
   gem 'rb-fsevent', :require=>false
   gem 'rb-inotify', :require=>false
   gem 'spring-commands-rspec'
+  gem 'better'
+  gem 'pry-rails'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 group :development, :test do
   gem 'web-console'

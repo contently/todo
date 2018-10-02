@@ -23,9 +23,9 @@ class User < ApplicationRecord
   has_many :tasks
 
 
-  def find_by_credentials(username, password)
+  def self.find_by_credentials(username, password)
     user = User.find_by(username: username)
-    user && user.is_password(password) ? user : nil
+    user && user.is_password?(password) ? user : nil
   end
 
   def is_password?(password)

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root to: "tasks#index"
   resources :tasks
-  resources :users, only: [:create]
-  resource :session, only: [:create, :destroy, :show]
+  resources :users, only: [:new, :create]
+  resource :session, only: [:new, :create, :destroy]
 end
