@@ -16,7 +16,7 @@ feature 'Creating a task' do
   end
 
   scenario 'displays an error when no name is provided' do
-    visit new_task_path
+    visit new_list_task_path
     fill_in 'Name', with: ''
     click_button 'Save'
 

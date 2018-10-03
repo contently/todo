@@ -1,13 +1,11 @@
-%p#notice=notice
-
-%p
-  %b Name:
-  =@list.name
+- if user_signed_in?
+  = link_to "Logout", destroy_user_session_path, method: :delete
 
 %h1 Tasks
 
 =link_to 'Completed tasks', completed_list_tasks_path(:list_id => @list.id)
 =link_to 'Incompleted tasks', list_tasks_path(:list_id => @list.id)
+=link_to 'Lists', lists_path
 
 %table
   %thead
@@ -29,8 +27,4 @@
 
 %br
 
-=link_to 'Add a task', new_list_task_path(:list_id => @list.id)
-
-=link_to 'Edit', edit_list_path(@list)
-\|
-=link_to 'Back', lists_path
+=link_to 'Add a task', new_list_task_path
