@@ -22,4 +22,22 @@ feature 'Creating a task' do
 
     expect(page).to have_content("Name can't be blank")
   end
+
+  scenario 'displays an error when task is marked as completed when creating it' do
+    visit new_task_path
+    fill_in 'Name', with: 'Task1'
+    check 'Completed'
+    click_button 'Save'
+
+    expect(page).to have_content("Task cannot be marked as completed when created")
+  end
+
+  scenario 'displays successful message when task is not marked as completed when creating it' do
+    visit new_task_path
+    fill_in 'Name', with: 'Task1'
+    uncheck 'Completed'
+    click_button 'Save'
+
+    expect(page).to have_content("Task was successfully created")
+  end
 end

@@ -2,7 +2,7 @@
 
 
 ### User stories to implement
- - [ ] A user should not be able to complete a task when creating it.
+ - [X] A user should not be able to complete a task when creating it.
  - [ ] A user can filter their view by complete or incomplete tasks.
  - [ ] A user's default view is filtered to show only incomplete tasks.
  - [ ] A user should be able to keep multiple lists.
