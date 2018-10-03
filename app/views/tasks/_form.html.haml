@@ -10,8 +10,9 @@
   .field
     =f.label :name
     =f.text_field :name
-  .field{:class => ("hidden" if @task.new_record?)}
-    =f.label :completed
-    =f.check_box :completed
+  -if !@task.new_record?
+    .field
+      =f.label :completed
+      =f.check_box :completed
   .actions
     =f.submit 'Save'

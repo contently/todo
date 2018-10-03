@@ -39,7 +39,7 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
-    @task = Task.new(task_params.merge(user_id: current_user.id))
+    @task = Task.new(task_params.merge(user_id: current_user.id, completed: false))
 
     respond_to do |format|
       if @task.save
