@@ -7,6 +7,21 @@
   %b Completed:
   =@task.completed
 
+-if @task.versions.length > 1
+  %h3 Change history:
+  %table
+    %thead
+      %th Name
+      %th Completed
+    %tbody
+      -@task.versions.drop(1).reverse.each do |task|
+        - task = task.reify
+        %tr
+          %td
+            =task.name
+          %td
+            =task.completed
+
 =link_to 'Edit', edit_task_path(@task)
 \|
 =link_to 'Back', tasks_path
