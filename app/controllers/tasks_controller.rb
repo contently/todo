@@ -6,13 +6,7 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    if task_completed_params == "completed"
-      @tasks = Task.where(completed: true)
-    elsif task_completed_params == "incompleted"
-      @tasks = Task.where(completed: false)
-    elsif task_completed_params == "all"
-      @tasks = Task.all
-    end
+    @tasks = Task.get_list(params[:completed])
   end
 
   # GET /tasks/1
@@ -80,7 +74,4 @@ class TasksController < ApplicationController
     params.require(:task).permit(:name, :completed)
   end
 
-  def task_completed_params
-    params[:completed]
-  end
 end
