@@ -10,17 +10,14 @@ feature 'Editing a task' do
     click_on 'Edit'
     expect(page).to have_content('Editing task')
 
-    fill_in 'Name', with: 'Test my app (updated)'
-    click_button 'Save'
-
+    fill_name_and_save('Test my app (updated)')
     expect(page).to have_content('Tasks')
     expect(page).to have_content('Test my app (updated)')
   end
 
   scenario 'displays an error when no name is provided' do
     visit edit_task_path(task)
-    fill_in 'Name', with: ''
-    click_button 'Save'
+    fill_name_and_save("")
 
     expect(page).to have_content("Name can't be blank")
   end

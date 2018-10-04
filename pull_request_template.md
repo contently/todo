@@ -11,4 +11,4 @@
  - [ ] A user should be able to see a history of all completed tasks and associated actions. (app audit trail)
 
 ### Cleanup tasks
-- [ ] Consolidate the repeated code between the create and edit feature specs for tasks.
+- [x] Consolidate the repeated code between the create and edit feature specs for tasks.
