@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 gem 'bcrypt', '~> 3.1.7'
-ruby '2.2.5'
+ruby '2.4.2'
 gem 'rails', '5.2.1'
 gem 'pg'
 gem "sqlite3"
@@ -29,10 +29,9 @@ group :development do
   gem 'better'
   gem 'pry-rails'
   gem 'better_errors'
-  gem 'binding_of_caller'
+  gem 'web-console'
 end
 group :development, :test do
-  gem 'web-console'
   gem 'factory_bot'
   gem 'faker'
   gem 'pry-rails'
