@@ -5,7 +5,15 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks=Task.where(completed: false)
+    puts params['complete']
+    if params['completed']=='true'
+      @tasks=Task.where(completed: true)
+      @type='Completed Tasks'
+    else
+      @tasks=Task.where(completed: false)
+      @type='Incomplete Tasks'
+    end
+
   end
 
 
