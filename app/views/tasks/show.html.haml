@@ -8,7 +8,7 @@
   =@task.completed
 %p
   %b History Changes:
-  - histories=@task.histories
+  - histories=@task.histories.order(:created_at).reverse_order
   - for history in histories do
     %p= "Task Name: "+ history.name+", Completed Status: "+history.completed.to_s
 

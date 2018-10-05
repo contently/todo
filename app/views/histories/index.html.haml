@@ -13,7 +13,7 @@
 
         %td="Task Name: "+ task.name
 
-        - past=task.histories.order(:created_at)
+        - past=task.histories.order(:created_at).reverse_order
         - for history in past do
           %tr
           %td= "Previous Name: "+ history.name

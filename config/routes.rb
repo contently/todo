@@ -3,6 +3,6 @@
 Rails.application.routes.draw do
   resources :lists
   resources :histories
-  root to: 'tasks#index'
+  root to: 'lists#index'
   resources :tasks
 end
