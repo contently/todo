@@ -9,8 +9,9 @@
   .field
     =f.label :name
     =f.text_field :name
-  .field
-    =f.label :completed
-    =f.check_box :completed
+  -if !is_created
+    .field
+      =f.label :completed
+      =f.check_box :completed
   .actions
     =f.submit 'Save'

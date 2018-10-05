@@ -1,5 +1,10 @@
-%h1 Tasks
-
+%h1=@task_type + " Tasks"
+%h2
+  -if @has_completed_tasks
+    =link_to "Completed", tasks_index_path(completed: "completed")
+  -if @has_incompleted_tasks
+    =link_to "Incompleted", tasks_index_path(completed: "incompleted")
+  =link_to "All", tasks_index_path(completed: "all")
 %table
   %thead
     %tr

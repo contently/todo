@@ -6,7 +6,10 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    @tasks = Task.get_tasks(params[:completed])
+    @task_type = params[:completed].capitalize
+    @has_completed_tasks = !Task.completed.blank?
+    @has_incompleted_tasks = !Task.incompleted.blank?
   end
 
   # GET /tasks/1
@@ -73,4 +76,5 @@ class TasksController < ApplicationController
   def task_params
     params.require(:task).permit(:name, :completed)
   end
+
 end
