@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 feature 'Editing a task' do
-  let!(:task) { Task.create(name: 'Test my app', completed: false) }
+  let!(:task) { create(:task, name: 'Test my app') }
 
   scenario 'redirects to the tasks index page on success' do
     visit tasks_path
@@ -29,5 +29,10 @@ feature 'Editing a task' do
 
     visit task_path(task)
     expect(page).to have_content('true')
+  end
+
+  scenario 'displays completed checkbox' do
+    visit edit_task_path(task)
+    expect(page).to have_selector("#task_completed")
   end
 end

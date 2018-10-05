@@ -1,7 +1,9 @@
-%h1 Tasks
+%h1=@task_type + " Tasks"
 %h2
-  =link_to "Completed", tasks_index_path(completed: "completed")
-  =link_to "Incompleted", tasks_index_path(completed: "incompleted")
+  -if @has_completed_tasks
+    =link_to "Completed", tasks_index_path(completed: "completed")
+  -if @has_incompleted_tasks
+    =link_to "Incompleted", tasks_index_path(completed: "incompleted")
   =link_to "All", tasks_index_path(completed: "all")
 %table
   %thead
@@ -16,7 +18,7 @@
     - @tasks.each do |task|
       %tr
         %td=task.name
-        %td{class: "complete"}=task.completed
+        %td=task.completed
         %td=link_to 'Show', task
         %td=link_to 'Edit', edit_task_path(task)
         %td=link_to 'Destroy', task, :method => :delete, :data => { :confirm => 'Are you sure?' }

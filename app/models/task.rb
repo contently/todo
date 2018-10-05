@@ -4,15 +4,17 @@ class Task < ActiveRecord::Base
   validates :name, presence: true
   validates :completed, on: :create, acceptance: { accept: false, message: 'Task cannot be marked as completed when created.' }
 
-  def self.get_list(completed_param)
-    tasks = []
-    if completed_param == "completed"
-      tasks = self.where(completed: true)
-    elsif completed_param == "incompleted"
-      tasks = self.where(completed: false)
-    elsif completed_param == "all"
-      tasks = self.all
+  scope :completed, -> { where(completed: true) }
+  scope :incompleted, -> { where(completed: false) }
+
+  def self.get_tasks(task_type)
+    if task_type == "completed"
+      return self.completed
+    elsif task_type == "incompleted"
+      return self.incompleted
+    elsif task_type == "all"
+      return self.all
     end
-    tasks
+    []  #In case task_type is none of above.
   end
 end
