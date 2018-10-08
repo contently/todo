@@ -1,12 +1,24 @@
 # frozen_string_literal: true
 
+include Warden::Test::Helpers
 require 'rails_helper'
 
 feature 'Editing a task' do
-  let!(:task) { Task.create(name: 'Test my app', completed: false) }
+  before :each do
+    @user = create(:user)
+    Warden.test_mode!
+    login_as(@user, scope: :user)
+
+    @list = FactoryBot.create(:list, user: @user)
+    @task = FactoryBot.create(:task, list: @list, user: @user)
+  end
+
+  after :each do
+    Warden.test_reset!
+  end
 
   scenario 'redirects to the tasks index page on success' do
-    visit tasks_path
+    visit list_task_path(:list_id => @list.id, :id => @task.id)
     click_on 'Edit'
     expect(page).to have_content('Editing task')
 
@@ -18,7 +30,7 @@ feature 'Editing a task' do
   end
 
   scenario 'displays an error when no name is provided' do
-    visit edit_task_path(task)
+    visit edit_list_task_path(:list_id => @list.id, :id => @task.id)
     fill_in 'Name', with: ''
     click_button 'Save'
 
@@ -26,11 +38,11 @@ feature 'Editing a task' do
   end
 
   scenario 'lets the user complete a task' do
-    visit edit_task_path(task)
+    visit edit_list_task_path(:list_id => @list.id, :id => @task.id)
     check 'Completed'
     click_button 'Save'
 
-    visit task_path(task)
+    visit list_task_path(:list_id => @list.id, :id => @task.id)
     expect(page).to have_content('true')
   end
 end

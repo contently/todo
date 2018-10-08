@@ -1,0 +1,36 @@
+%p#notice=notice
+
+%p
+  %b Name:
+  =@list.name
+
+%h1 Tasks
+
+=link_to 'Completed tasks', completed_list_tasks_path(:list_id => @list.id)
+=link_to 'Incompleted tasks', list_tasks_path(:list_id => @list.id)
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th Completed
+      %th
+      %th
+      %th
+
+  %tbody
+    - @tasks.each do |task|
+      %tr
+        %td=task.name
+        %td=task.completed
+        %td=link_to 'Show', list_task_path(:list_id => @list.id, :id => task)
+        %td=link_to 'Edit', edit_list_task_path(:list_id => @list.id, :id => task)
+        %td=link_to 'Destroy', list_task_path(:list_id => @list.id, :id => task), :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+=link_to 'Add a task', new_list_task_path(:list_id => @list.id)
+
+=link_to 'Edit', edit_list_path(@list)
+\|
+=link_to 'Back', lists_path
