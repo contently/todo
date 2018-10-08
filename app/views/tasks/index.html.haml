@@ -21,3 +21,9 @@
 %br
 
 =link_to 'Add a task', new_task_path
+
+%br
+%br
+
+=link_to 'Completed tasks', tasks_path(filter: "completed")
+=link_to 'Incomplete tasks', tasks_path(filter: "incomplete")
