@@ -113,8 +113,8 @@ def sign_in_as_jack_bruce
   sign_in('jack_bruce')
 end
 
-def make_todo_list(name = "My First List", description = "My First List Description")
-  visit new_todo_list_path
+def make_list(name = "My First List", description = "My First List Description")
+  visit new_list_path
   fill_in 'Name', with: name
   fill_in 'Description', with: description
   click_button "Create New Todo List"
@@ -125,9 +125,9 @@ def add_task
   click_button 'Add Task'
 end
 
-def create_jill_with_todo_list
+def create_jill_with_list
   let(:jill) { User.create!(nickname: 'jill_bruce', password: 'abcdef') }
-  let(:jill_todo_list) do
-    jill.todo_lists.create!(name: 'Jill List', description: 'Some chores to do')
+  let(:jill_list) do
+    jill.lists.create!(name: 'Jill List', description: 'Some chores to do')
   end
 end

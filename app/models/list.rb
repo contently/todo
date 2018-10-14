@@ -11,4 +11,8 @@
 #
 
 class List < ApplicationRecord
+  validates :name, :user, presence: true
+
+  belongs_to :user
+  has_many :tasks
 end
