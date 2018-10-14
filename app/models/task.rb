@@ -2,4 +2,7 @@
 
 class Task < ActiveRecord::Base
   validates :name, presence: true
-  end
+
+  belongs_to :user
+
+end
