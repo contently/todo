@@ -5,4 +5,12 @@ class Task < ActiveRecord::Base
 
   belongs_to :user
 
+  def self.select_by_completed(completed)
+    where(completed: completed)
+  end
+
+  def self.completeds
+    self.all.collect { |instance| instance.completed }.uniq
+  end
+
 end

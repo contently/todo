@@ -1,1 +1,20 @@
-<%# add navigation links to this file %>
+
+
+<nav class="">
+
+    <ul>
+        <% if signed_in? %>
+          <li>Signed in as <%= current_user.name %></li>
+        <% end %>
+
+        <% if !signed_in? %>
+          <li><%= link_to "Sign in", new_user_session_path %></li>
+        <% end %>
+
+        <li><%= link_to("Sign up", new_user_registration_path) %></li>
+        <li><%= link_to("Sign out", destroy_user_session_path, :method => 'delete') %></li>
+
+
+    </ul>
+
+</nav>
