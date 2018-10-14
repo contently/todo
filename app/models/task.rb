@@ -15,6 +15,12 @@
 
 class Task < ActiveRecord::Base
   validates :name, presence: true
+  validate :ensure_default_false, :on => :create
 
   belongs_to :list
+
+  def ensure_default_false
+    errors.add(:completed, "can't be true when created") if
+    completed == true
+  end
 end

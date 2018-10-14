@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root to: 'tasks#index'
-  resources :tasks
+  root to: 'lists#index'
   resources :users
-  resources :lists
+  resources :lists do
+    resources :tasks, except: [:index]
+  end
   resource :session, only: [:new, :create, :destroy]
 end

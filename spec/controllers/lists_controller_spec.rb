@@ -1,6 +1,5 @@
 require 'rails_helper'
 
-# So specs will run and not throw scary errors before ListsController is implemented
 begin
   ListsController
 rescue

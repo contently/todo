@@ -6,7 +6,8 @@ class ListsController < ApplicationController
   end
 
   def show
-    @list = List.find(params[:id])
+    @list = List.includes(:tasks).find(params[:id])
+    @tasks = @list.tasks
     if !check_owner(@list)
       redirect_to root_path
     end
