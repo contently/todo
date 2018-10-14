@@ -8,7 +8,7 @@ rescue
 end
 
 RSpec.describe ListsController, :type => :controller do
-  let(:jack) { User.create!(nickname: 'jack_bruce', password: 'abcdef') }
+  let(:jack) { User.create!(username: 'jack_bruce', password: 'abcdef') }
 
   before(:each) do
     allow_message_expectations_on_nil
@@ -48,7 +48,7 @@ RSpec.describe ListsController, :type => :controller do
 
       context "with invalid params" do
         it "validates the presence of title and description" do
-          post :create, list: {description: "this is an invalid list"}
+          post :create, params: {list: { description: "this is an invalid list"} }
           expect(response).to render_template("new")
           expect(flash[:errors]).to be_present
         end
@@ -56,8 +56,8 @@ RSpec.describe ListsController, :type => :controller do
 
       context "with valid params" do
         it "redirects to the  list's show page" do
-          post :create, list: {name: "Things to Do", description: "do it"}
-          expect(response).to redirect_to(list_url(TodoList.last))
+          post :create, params: {list: { name: "Things to Do", description: "do it"} }
+          expect(response).to redirect_to(list_url(List.last))
         end
       end
     end
@@ -68,7 +68,7 @@ RSpec.describe ListsController, :type => :controller do
       end
 
       it "redirects to the login page" do
-        post :create, list: {name: "Things to Do", description: "do it"}
+        post :create, params: { list: {name: "Things to Do", description: "do it"} }
         expect(response).to redirect_to(new_session_url)
       end
     end
@@ -109,7 +109,7 @@ RSpec.describe ListsController, :type => :controller do
       end
 
       it "renders the show page" do
-        get :show, id: jill_list.id
+        get :show, params: {id: jill_list.id}
         expect(response).to render_template(:show)
       end
     end
@@ -121,7 +121,7 @@ RSpec.describe ListsController, :type => :controller do
 
       it "does not render the show page" do
         begin
-          get :show, id: jill_list.id
+          get :show, params: {id: jill_list.id}
         rescue ActiveRecord::RecordNotFound
         end
 
@@ -140,7 +140,7 @@ RSpec.describe ListsController, :type => :controller do
       end
 
       it "renders the edit page" do
-        get :edit, id: jill_list.id
+        get :edit, params: {id: jill_list.id}
         expect(response).to render_template("edit")
       end
     end
@@ -152,7 +152,7 @@ RSpec.describe ListsController, :type => :controller do
 
       it "does not render the edit page" do
         begin
-          get :edit, id: jill_list.id
+          get :edit, params: {id: jill_list.id}
         rescue ActiveRecord::RecordNotFound
         end
 
@@ -172,9 +172,9 @@ RSpec.describe ListsController, :type => :controller do
       end
 
       it "allows users to update their  lists" do
-        patch :update, id: jill_list.id, list: {name: "Jill Todo"}
+        patch :update, params: {id: jill_list.id, list: {name: "Jill Todo"}}
 
-        updated_list = TodoList.find(jill_list.id)
+        updated_list = List.find(jill_list.id)
         expect(updated_list.name).to eq("Jill Todo")
       end
     end
@@ -187,11 +187,11 @@ RSpec.describe ListsController, :type => :controller do
 
       it "does not allow users to update another user's  lists" do
         begin
-          patch :update, id: jill_list.id, list: {name: "Jack Hax"}
+          patch :update, params: {id: jill_list.id, list: {name: "Jack Hax"}}
         rescue ActiveRecord::RecordNotFound
         end
 
-        updated_list = TodoList.find(jill_list.id)
+        updated_list = List.find(jill_list.id)
         expect(updated_list.name).to eq("Jill List")
       end
     end

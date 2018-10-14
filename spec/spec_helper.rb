@@ -126,7 +126,7 @@ def add_task
 end
 
 def create_jill_with_list
-  let(:jill) { User.create!(nickname: 'jill_bruce', password: 'abcdef') }
+  let(:jill) { User.create!(username: 'jill_bruce', password: 'abcdef') }
   let(:jill_list) do
     jill.lists.create!(name: 'Jill List', description: 'Some chores to do')
   end
