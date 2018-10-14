@@ -120,9 +120,9 @@ def make_todo_list(name = "My First List", description = "My First List Descript
   click_button "Create New Todo List"
 end
 
-def add_todo_item
-  fill_in 'Todo', with: 'Do dishes'
-  click_button 'Add Todo Item'
+def add_task
+  fill_in 'Task', with: 'Do dishes'
+  click_button 'Add Task'
 end
 
 def create_jill_with_todo_list
