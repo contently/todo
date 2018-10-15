@@ -2,6 +2,8 @@
 %br
 =link_to 'Edit list', edit_list_path(@list)
 %br
+=link_to "Show completed tasks only", :controller => "tasks", :completed => "true"
+=link_to "Show uncompleted tasks only", :controller => "tasks", :completed => "false"
 
 %table
   %thead

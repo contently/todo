@@ -140,6 +140,8 @@ def create_full_test_case
   let!(:list) { List.create!( name: "list", user_id: owner.id, description: "list desc" ) }
 
   let!(:task) { Task.create( name: 'Test my app', completed: false, list_id: list.id) }
+  let!(:task2) { Task.create( name: "completed", completed: false, list_id: list.id) }
+
 end
 
 def sign_in_and_visit(user, path)

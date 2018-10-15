@@ -9,8 +9,9 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
+    comp_status = params[:completed] == "true" ? true : false
     @list = List.find(params[:list_id])
-    @tasks = Task.where(list_id: params[:list_id])
+    @tasks = Task.where(list_id: params[:list_id]).where(completed: comp_status)
   end
 
   # GET /tasks/1

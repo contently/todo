@@ -32,7 +32,7 @@ feature 'Editing a task' do
     check 'Completed'
     click_button 'Save'
 
-    path = "/lists/#{list.id}/tasks/#{task.id}"
+    visit "/lists/#{list.id}/tasks/#{task.id}"
     expect(page).to have_content('true')
   end
 end

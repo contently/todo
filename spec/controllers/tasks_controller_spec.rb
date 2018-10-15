@@ -1,14 +1,36 @@
 require 'rails_helper'
 
 RSpec.describe TasksController, :type => :controller do
-  let(:owner) { User.create!( username: "owner", password: "password") }
-
-  let(:other_user) { User.create!( username: "other", password: "password" ) }
-
-  let(:list) {List.create!( name: "list", user_id: owner.id, description: "this is a list" )}
+  create_full_test_case
 
   before(:each) do
     allow_message_expectations_on_nil
+  end
+
+  describe "Get #index" do
+    context "when logged in as task's list owner" do
+      before do
+        task2.update_attributes(completed: true)
+        allow(controller).to receive(:current_user) {owner}
+      end
+      it "renders all the tasks belonging to the list" do
+        get :index, params: {list_id: list.id, id: task.id}
+        expect(response).to render_template(:index)
+      end
+
+      it "only renders uncompleted tasks by default" do
+        get :index, params: {list_id: list.id, id: task.id}
+        expect(assigns(:tasks)).to_not include(task2)
+        expect(assigns(:tasks)).to include(task)
+      end
+
+      it "only renders completed tasks if given params[:completed] = 'true'" do
+        get :index, params: {list_id: list.id, id: task.id, completed: "true"}
+        expect(assigns(:tasks)).to include(task2)
+        expect(assigns(:tasks)).to_not include(task)
+      end
+    end
+
   end
 
   describe "Get #show" do
@@ -35,7 +57,7 @@ RSpec.describe TasksController, :type => :controller do
 
       context "when not the owner" do
         before do
-          allow(controller).to receive(:current_user) { other_user }
+          allow(controller).to receive(:current_user) { not_owner }
         end
 
         it "does not render the show page" do
@@ -63,7 +85,7 @@ RSpec.describe TasksController, :type => :controller do
 
     context "when not logged in as task's list owner" do
       before do
-        allow(controller).to receive(:current_user) {other_user}
+        allow(controller).to receive(:current_user) {not_owner}
       end
 
       it "does not render new tasks page" do
