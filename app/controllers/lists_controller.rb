@@ -4,13 +4,8 @@ class ListsController < ApplicationController
   # GET /lists
   # GET /lists.json
   def index
-    @lists = List.all
-    for list in @lists
-      puts list.inspect
-      puts list.tasks
-    end
+    @lists = List.all  
     @tasks=Task.all
-    puts @tasks.inspect
   end
 
   # GET /lists/1
