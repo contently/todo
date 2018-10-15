@@ -27,7 +27,14 @@
 %br
 - if params["completed"]=="true" && Task.where(completed: false).size()>0
   = link_to 'Incomplete Tasks', tasks_path(completed: false)
-- if params["completed"]=="false" && Task.where(completed: true).size()>0
+- elsif params["completed"]=="true"
+  %p No Imcomplete Tasks
+
+- if (params["completed"]=="false" || params["completed"]==nil)  && Task.where(completed: true).size()>0
   = link_to 'Completed Tasks',  tasks_path(completed: true)
+- elsif (params["completed"]=="false" ||params["completed"]==nil)
+  %p No Completed Tasks
+
+- p params["completed"]
 %br
 = link_to 'History of Completed Tasks',  histories_path
