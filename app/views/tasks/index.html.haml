@@ -1,9 +1,10 @@
 %h1 Tasks
 %br
-=link_to 'Edit list', edit_list_path(@list)
-%br
-=link_to "Show completed tasks only", :controller => "tasks", :completed => "true"
-=link_to "Show uncompleted tasks only", :controller => "tasks", :completed => "false"
+#index_toppers{:class=>"flex spread_evenly"}
+  =link_to 'Edit list', edit_list_path(@list)
+  #filters
+    =link_to "Show completed tasks only", :controller => "tasks", :completed => "true"
+    =link_to "Show uncompleted tasks only", :controller => "tasks", :completed => "false"
 
 %table
   %thead
@@ -25,7 +26,6 @@
 
 %br
 
-
-=link_to 'List index', root_path
-%br
-=link_to 'Add a task', new_list_task_path
+%div{:class=>"flex column left fit_content"}
+  =link_to 'List index', root_path
+  =link_to 'Add a task', new_list_task_path
