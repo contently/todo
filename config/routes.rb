@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root to: 'lists#index'
   resources :users
   resources :lists do
-    resources :tasks, except: [:index]
+    resources :tasks
   end
   resource :session, only: [:new, :create, :destroy]
 end

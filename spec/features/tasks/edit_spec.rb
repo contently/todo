@@ -9,10 +9,11 @@ feature 'Editing a task' do
 
   let!(:list) { List.create!( name: "list", user_id: owner.id, description: "list desc" ) }
 
-  let!(:task) { Task.create( name: 'Test my app', completed: false) }
+  let!(:task) { Task.create( name: 'Test my app', completed: false, list_id: list.id) }
 
   scenario 'redirects to the tasks index page on success' do
-    visit tasks_path
+    sign_in(owner)
+    visit '/lists/' + list.id.to_s + '/tasks'
     click_on 'Edit'
     expect(page).to have_content('Editing task')
 
@@ -24,7 +25,8 @@ feature 'Editing a task' do
   end
 
   scenario 'displays an error when no name is provided' do
-    visit edit_task_path(task)
+    sign_in(owner)
+    visit '/lists/' + list.id.to_s + '/tasks/' + task.id.to_s + '/edit'
     fill_in 'Name', with: ''
     click_button 'Save'
 
@@ -32,11 +34,12 @@ feature 'Editing a task' do
   end
 
   scenario 'lets the user complete a task' do
-    visit edit_task_path(task)
+    sign_in(owner)
+    visit '/lists/' + list.id.to_s + '/tasks/' + task.id.to_s + '/edit'
     check 'Completed'
     click_button 'Save'
 
-    visit task_path(task)
+    visit '/lists/' + list.id.to_s + '/tasks/' + task.id.to_s
     expect(page).to have_content('true')
   end
 end

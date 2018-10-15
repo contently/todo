@@ -11,6 +11,7 @@ class ListsController < ApplicationController
     if !check_owner(@list)
       redirect_to root_path
     end
+    render 'tasks/index'
   end
 
   def new

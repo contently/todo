@@ -98,7 +98,7 @@ RSpec.describe ListsController, :type => :controller do
     end
   end
 
-  describe "GET #show" do
+  xdescribe "GET #show" do
     create_jill_with_list
 
     context "when logged in as the  list's owner" do

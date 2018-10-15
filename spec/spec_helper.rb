@@ -102,10 +102,10 @@ def register_as_jack_bruce
   register("jack_bruce")
 end
 
-def sign_in(username)
+def sign_in(user)
   visit new_session_path
-  fill_in "Username", with: username
-  fill_in "Password", with: 'abcdef'
+  fill_in "Username", with: user.username
+  fill_in "Password", with: user.password
   click_button 'Log In'
 end
 

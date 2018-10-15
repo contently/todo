@@ -12,7 +12,7 @@ RSpec.describe TasksController, :type => :controller do
   end
 
   describe "Get #show" do
-    let(:task) { Task.create!(name: "task", list_id: list.id, completed: false)}
+    let(:task) { Task.create!(completed: false, name: "task", list_id: list.id)}
 
     context "when logged in as the owner" do
       before do
@@ -35,7 +35,7 @@ RSpec.describe TasksController, :type => :controller do
 
       context "when not the owner" do
         before do
-          allow(controller).to receive(:current_user) { not_owner }
+          allow(controller).to receive(:current_user) { other_user }
         end
 
         it "does not render the show page" do
@@ -57,13 +57,13 @@ RSpec.describe TasksController, :type => :controller do
 
       it "renders the new tasks page" do
         get :new, params: {list_id: list.id}
-        expect(response).to redirect_to(new_list_task_url)
+        expect(response).to render_template(:new)
       end
     end
 
     context "when not logged in as task's list owner" do
       before do
-        allow(controller).to receive(:current_user) {not_owner}
+        allow(controller).to receive(:current_user) {other_user}
       end
 
       it "does not render new tasks page" do
@@ -80,6 +80,21 @@ RSpec.describe TasksController, :type => :controller do
       it "does not render the new tasks page" do
         get :new, params: {list_id: list.id}
         expect(response).to_not redirect_to(new_list_task_url)
+      end
+    end
+  end
+
+  describe "POST #create" do
+    before do
+      allow(controller).to receive(:current_user) {owner}
+    end
+
+    context "when logged in" do
+      context "with invalid params" do
+        it "validates the presence of name and completed status" do
+          post :create, params: {list_id: list.id, task: {completed: false }}
+          expect(response).to render_template(:new)
+        end
       end
     end
   end

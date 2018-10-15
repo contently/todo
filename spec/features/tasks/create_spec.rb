@@ -3,8 +3,18 @@
 require 'rails_helper'
 
 feature 'Creating a task' do
+
+  let!(:owner) { User.create!( username: "owner", password: "password" ) }
+
+  let!(:not_owner) { User.create!( username: "not_owner", password: "password" ) }
+
+  let!(:list) { List.create!( name: "list", user_id: owner.id, description: "list desc" ) }
+
+  let!(:task) { Task.create( name: 'Test my app', completed: false) }
+
   scenario 'redirects to the tasks index page on success' do
-    visit tasks_path
+    sign_in(owner)
+    visit '/lists/' + list.id.to_s + '/tasks'
     click_on 'Add a task'
     expect(page).to have_content('Create a task')
 
@@ -16,7 +26,11 @@ feature 'Creating a task' do
   end
 
   scenario 'displays an error when no name is provided' do
-    visit new_task_path
+    sign_in(owner)
+    visit '/lists/' + list.id.to_s + '/tasks'
+    click_on 'Add a task'
+    expect(page).to have_content('Create a task')
+
     fill_in 'Name', with: ''
     click_button 'Save'
 
