@@ -1,0 +1,25 @@
+%h1 History of Completed Tasks
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @tasks.each do |task|
+      %tr
+
+        %td="Task Name: "+ task.name
+
+        - past=task.histories.order(:created_at).reverse_order
+        - for history in past do
+          %tr
+          %td= "Previous Name: "+ history.name
+          %td= ", State: "+history.completed.to_s
+
+
+%br
+
+= link_to 'New History', new_history_path

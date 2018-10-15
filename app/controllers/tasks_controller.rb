@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 
 class TasksController < ApplicationController
   before_action :set_task, only: %i[show edit update destroy]
@@ -6,8 +5,15 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    if params['completed']=='true'
+      @tasks=Task.where(completed: true)
+    else
+      @tasks=Task.where(completed: false)
+    end
   end
+
+
+
 
   # GET /tasks/1
   # GET /tasks/1.json
@@ -24,13 +30,21 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
+    puts task_params
     @task = Task.new(task_params)
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to tasks_path, notice: 'Task was successfully created.' }
-        format.json { render :show, status: :created, location: @task }
+        history_params= {task_id: @task.id, name: @task.name, completed: @task.completed}
+        history=History.new(history_params)
 
+        if history.save
+          format.html { redirect_to tasks_path, notice: 'Task was successfully created.' }
+          format.json { render :show, status: :created, location: @task }
+        else
+          format.html { render :new }
+          format.json { render json: @task.errors, status: :unprocessable_entity }
+        end
       else
         format.html { render :new }
         format.json { render json: @task.errors, status: :unprocessable_entity }
@@ -43,8 +57,16 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to tasks_path, notice: 'Task was successfully updated.' }
-        format.json { render :show, status: :ok, location: @task }
+        history_params= {task_id: @task.id, name: @task.name, completed: @task.completed}
+        history=History.new(history_params)
+        if history.save
+          format.html { redirect_to tasks_path, notice: 'Task was successfully updated.' }
+          format.json { render :show, status: :ok, location: @task }
+        else
+          puts history.errors
+          format.html { render :edit }
+          format.json { render json: @task.errors, status: :unprocessable_entity }
+        end
       else
         format.html { render :edit }
         format.json { render json: @task.errors, status: :unprocessable_entity }
@@ -62,6 +84,7 @@ class TasksController < ApplicationController
     end
   end
 
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -71,6 +94,6 @@ class TasksController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def task_params
-    params.require(:task).permit(:name, :completed)
+    params.require(:task).permit(:list_id, :name, :completed)
   end
 end

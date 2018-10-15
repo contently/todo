@@ -1,4 +1,7 @@
-%h1 Tasks
+- if params["completed"]=="true"
+  %h1 Completed Tasks
+- else
+  %h1 Incomplete Tasks
 
 %table
   %thead
@@ -19,5 +22,19 @@
         %td=link_to 'Destroy', task, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
-
+%br
 =link_to 'Add a task', new_task_path
+%br
+- if params["completed"]=="true" && Task.where(completed: false).size()>0
+  = link_to 'Incomplete Tasks', tasks_path(completed: false)
+- elsif params["completed"]=="true"
+  %p No Imcomplete Tasks
+
+- if (params["completed"]=="false" || params["completed"]==nil)  && Task.where(completed: true).size()>0
+  = link_to 'Completed Tasks',  tasks_path(completed: true)
+- elsif (params["completed"]=="false" ||params["completed"]==nil)
+  %p No Completed Tasks
+
+- p params["completed"]
+%br
+= link_to 'History of Completed Tasks',  histories_path

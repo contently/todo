@@ -17,7 +17,20 @@ User stories to implement
  - A user viewing a task should see a history of all its changes. (task audit trail)
  - A user should be able to see a history of all completed tasks and associated actions. (app audit trail)
 
+Completed
+ ----------------
+  - A user should not be able to complete a task when creating it.
+  - A user can filter their view by complete or incomplete tasks.
+  - A user's default view is filtered to show only incomplete tasks.
+  - A user should be able to keep multiple lists.
+  - A user should be able to see a history of all completed tasks and associated actions. (app audit trail)
+
+  Todo
+  ----------------
+  - A user should have access to only their tasks. (may require devise or a creative, lightweight auth system)
+
+
+
 Cleanup tasks
 ----------------
 - Consolidate the repeated code between the create and edit feature specs for tasks.
-

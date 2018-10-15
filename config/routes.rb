@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root to: 'tasks#index'
+  resources :lists
+  resources :histories
+  root to: 'lists#index'
   resources :tasks
 end

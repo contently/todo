@@ -1,0 +1,15 @@
+%p#notice=notice
+
+%p
+  %b Name:
+  =@list.name
+%p
+  %b Tasks:
+  - tasks=@list.tasks
+  - for task in tasks do
+    %p= "Task Name: "+ task.name+", Completed Status: "+task.completed.to_s
+    %p=link_to 'Edit Task', edit_task_path(task)
+
+=link_to 'Edit', edit_list_path(@list)
+\|
+=link_to 'Back', lists_path
