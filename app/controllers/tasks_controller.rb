@@ -6,7 +6,7 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @completeds = Task.completeds 
+    @completion = Task.completion 
     if params.include?('completed')
       @tasks = Task.select_by_completed(params[:completed])
     else
@@ -17,7 +17,7 @@ class TasksController < ApplicationController
   # GET /tasks/1
   # GET /tasks/1.json
   def show
-    # @history = @task.history
+    @history = @task.record
   end
 
   # GET /tasks/new
