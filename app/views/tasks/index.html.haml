@@ -1,0 +1,31 @@
+%h1 Tasks
+%br
+#index_toppers{:class=>"flex spread_evenly"}
+  =link_to 'Edit list', edit_list_path(@list)
+  #filters
+    =link_to "Show completed tasks only", :controller => "tasks", :completed => "true"
+    =link_to "Show uncompleted tasks only", :controller => "tasks", :completed => "false"
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th Completed
+      %th
+      %th
+      %th
+
+  %tbody
+    - @tasks.each do |task|
+      %tr
+        %td=task.name
+        %td=task.completed
+        %td=link_to 'Show', list_task_path(@list, task)
+        %td=link_to 'Edit', edit_list_task_path(@list, task)
+        %td=link_to 'Destroy', list_task_path(@list, task), :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+%div{:class=>"flex column left fit_content"}
+  =link_to 'List index', root_path
+  =link_to 'Add a task', new_list_task_path

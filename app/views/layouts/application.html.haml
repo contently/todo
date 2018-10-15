@@ -1,0 +1,21 @@
+%html
+  %head
+    %title Todo
+    =stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    =javascript_include_tag 'application', 'data-turbolinks-track' => true
+    =csrf_meta_tags
+  %body
+    -if signed_in?
+      =current_user.username
+      =form_tag(session_url, method: :post) do
+        =hidden_field_tag :authenticity_token, form_authenticity_token 
+        %input{:type=>"hidden", :value=>"delete", :name=>"_method"}
+        %input{:type=>"submit", :value=>"Sign Out"}
+    -else
+      =link_to 'Sign up', new_user_url
+      %br
+    #flash-display
+    - flash.each do |type, msg|
+      %div
+        = msg
+    =yield
