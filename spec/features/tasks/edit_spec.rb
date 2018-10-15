@@ -10,8 +10,7 @@ feature 'Editing a task' do
     sign_in_and_visit(owner, path)
     expect(page).to have_content('Editing task')
 
-    fill_in 'Name', with: 'Test my app (updated)'
-    click_button 'Save'
+    submit_field_with('Name', 'Test my app (updated)')
 
     expect(page).to have_content('Tasks')
     expect(page).to have_content('Test my app (updated)')
@@ -20,8 +19,7 @@ feature 'Editing a task' do
   scenario 'displays an error when no name is provided' do
     path = "/lists/#{list.id}/tasks/#{task.id}/edit"
     sign_in_and_visit(owner, path)
-    fill_in 'Name', with: ''
-    click_button 'Save'
+    submit_field_with("Name", "")
 
     expect(page).to have_content("Name can't be blank")
   end

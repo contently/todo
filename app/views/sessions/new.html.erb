@@ -4,10 +4,10 @@
 <form action="<%= session_url %>" method="post">
     <input type='hidden' name= 'authenticity_token' value= <%= form_authenticity_token %>>
 
-  <label for="user_username">
-    Username</label>
-    <input type="text" name="user[username]" value="" id="user_username">
-
+  <label>
+    Username
+    <input type="text" name="user[username]" value="">
+  </label>
 
   <label>
     Password

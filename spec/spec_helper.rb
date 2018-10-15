@@ -148,3 +148,8 @@ def sign_in_and_visit(user, path)
   sign_in(user)
   visit "#{path}"
 end
+
+def submit_field_with(field, string)
+  fill_in field, with: string
+  click_button 'Save'
+end

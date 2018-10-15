@@ -10,8 +10,7 @@ feature 'Creating a task' do
 
     expect(page).to have_content('Create a task')
 
-    fill_in 'Name', with: 'Test my app'
-    click_button 'Save'
+    submit_field_with('Name', 'Test my app')
 
     expect(page).to have_content('Tasks')
     expect(page).to have_content('Test my app')
@@ -23,8 +22,7 @@ feature 'Creating a task' do
 
     expect(page).to have_content('Create a task')
 
-    fill_in 'Name', with: ''
-    click_button 'Save'
+    submit_field_with('Name', '')
 
     expect(page).to have_content("Name can't be blank")
   end
