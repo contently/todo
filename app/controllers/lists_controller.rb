@@ -7,11 +7,10 @@ class ListsController < ApplicationController
 
   def show
     @list = List.includes(:tasks).find(params[:id])
-    @tasks = @list.tasks
     if !check_owner(@list)
       redirect_to root_path
     end
-    render 'tasks/index'
+    redirect_to list_tasks_url(@list)
   end
 
   def new
