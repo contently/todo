@@ -131,3 +131,18 @@ def create_jill_with_list
     jill.lists.create!(name: 'Jill List', description: 'Some chores to do')
   end
 end
+
+def create_full_test_case
+  let!(:owner) { User.create!( username: "owner", password: "password" ) }
+
+  let!(:not_owner) { User.create!( username: "not_owner", password: "password" ) }
+
+  let!(:list) { List.create!( name: "list", user_id: owner.id, description: "list desc" ) }
+
+  let!(:task) { Task.create( name: 'Test my app', completed: false, list_id: list.id) }
+end
+
+def sign_in_and_visit(user, path)
+  sign_in(user)
+  visit "#{path}"
+end

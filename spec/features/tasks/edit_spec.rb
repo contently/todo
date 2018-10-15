@@ -3,18 +3,11 @@
 require 'rails_helper'
 
 feature 'Editing a task' do
-  let!(:owner) { User.create!( username: "owner", password: "password" ) }
-
-  let!(:not_owner) { User.create!( username: "not_owner", password: "password" ) }
-
-  let!(:list) { List.create!( name: "list", user_id: owner.id, description: "list desc" ) }
-
-  let!(:task) { Task.create( name: 'Test my app', completed: false, list_id: list.id) }
+  create_full_test_case
 
   scenario 'redirects to the tasks index page on success' do
-    sign_in(owner)
-    visit '/lists/' + list.id.to_s + '/tasks'
-    click_on 'Edit'
+    path = "/lists/#{list.id}/tasks/#{task.id}/edit"
+    sign_in_and_visit(owner, path)
     expect(page).to have_content('Editing task')
 
     fill_in 'Name', with: 'Test my app (updated)'
@@ -25,8 +18,8 @@ feature 'Editing a task' do
   end
 
   scenario 'displays an error when no name is provided' do
-    sign_in(owner)
-    visit '/lists/' + list.id.to_s + '/tasks/' + task.id.to_s + '/edit'
+    path = "/lists/#{list.id}/tasks/#{task.id}/edit"
+    sign_in_and_visit(owner, path)
     fill_in 'Name', with: ''
     click_button 'Save'
 
@@ -34,12 +27,12 @@ feature 'Editing a task' do
   end
 
   scenario 'lets the user complete a task' do
-    sign_in(owner)
-    visit '/lists/' + list.id.to_s + '/tasks/' + task.id.to_s + '/edit'
+    path = "/lists/#{list.id}/tasks/#{task.id}/edit"
+    sign_in_and_visit(owner, path)
     check 'Completed'
     click_button 'Save'
 
-    visit '/lists/' + list.id.to_s + '/tasks/' + task.id.to_s
+    path = "/lists/#{list.id}/tasks/#{task.id}"
     expect(page).to have_content('true')
   end
 end
