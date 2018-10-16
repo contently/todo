@@ -133,11 +133,6 @@ GEM
     multi_json (1.13.1)
     nio4r (2.3.1)
     nokogiri (1.8.5)
-<<<<<<< HEAD
-      mini_portile2 (~> 2.3.0)
-    nokogiri (1.8.5-x64-mingw32)
-=======
->>>>>>> 9babc9cbbe70ac7ff1f3dab6c1cd073aee15bf7e
       mini_portile2 (~> 2.3.0)
     orm_adapter (0.5.0)
     public_suffix (3.0.3)
