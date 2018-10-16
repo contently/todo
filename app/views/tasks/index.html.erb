@@ -51,7 +51,7 @@
 <h3>Please select completed or uncompleted tasks:</h3>
 
 <%= form_tag 'tasks', method: "GET" do %>
-<%= select_tag "completed", options_for_select(@completeds), include_blank: true %><br><br>
+<%= select_tag "completed", options_for_select(@completion), include_blank: true %><br><br>
 <%= submit_tag "Select tasks" %>
 <% end %>
 <br><br> 

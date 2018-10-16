@@ -11,7 +11,7 @@ class Task < ActiveRecord::Base
     where(completed: completed)
   end
 
-  def self.completeds
+  def self.completion
     self.all.collect { |instance| instance.completed }.uniq
   end
 
