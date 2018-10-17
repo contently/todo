@@ -6,12 +6,19 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    @completion = Task.completion 
+    if params.include?('completed')
+      @tasks = Task.select_by_completed(params[:completed])
+    else
+      @tasks = Task.select_by_completed(false)
+    end
   end
 
   # GET /tasks/1
   # GET /tasks/1.json
-  def show; end
+  def show
+    @history = @task.record
+  end
 
   # GET /tasks/new
   def new
@@ -25,6 +32,8 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
     @task = Task.new(task_params)
+    @task.user_id = current_user.id
+    @task.completed = false 
 
     respond_to do |format|
       if @task.save
@@ -71,6 +80,6 @@ class TasksController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def task_params
-    params.require(:task).permit(:name, :completed)
+    params.require(:task).permit(:name, :completed, :user_id)
   end
 end

@@ -1,0 +1,61 @@
+<% if !current_user %>
+  <h3>Please sign up, or sign in to view your tasks!</h3>
+<% end %>
+
+<% if current_user %>
+  <h3>Welcome, <%= current_user.name %>!</h3>
+<% end %>
+
+<h1>Tasks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Completed</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each do |task| %>
+      <% if current_user && task.user_id == current_user.id %>
+      <tr>
+        <td>
+          <%= task.name %>
+        </td>
+        <td>
+          <%= task.completed %>
+        </td>
+        <td>
+          <%= link_to 'Show', task %>
+        </td>
+        <td>
+          <%= link_to 'Edit', edit_task_path(task) %>
+        </td>
+        <td>
+          <%= link_to 'Destroy', task, :method => :delete, :data => { :confirm => 'Are you sure?' } %>
+        </td>
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+<br/>
+
+<% if current_user %>
+<%= link_to 'Add a task', new_task_path %>
+<% end %>
+
+<h3>Please select completed or uncompleted tasks:</h3>
+
+<%= form_tag 'tasks', method: "GET" do %>
+<%= select_tag "completed", options_for_select(@completion), include_blank: true %><br><br>
+<%= submit_tag "Select tasks" %>
+<% end %>
+<br><br> 
+
+<% if params.include?('completed') %>
+  <%= link_to "Back", tasks_path %>
+<% end %>
