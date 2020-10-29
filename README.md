@@ -45,17 +45,15 @@ work.
 - Commit your work with appropriate and informative git commit messages.
 - Push your work up to your duplicated git repository (on Github).
 - If your repository is private, give the following users access:
-    - [ ] [@akhinchey](https://github.com/akhinchey)
     - [ ] [@briandangerflynn](https://github.com/briandangerflynn)
     - [ ] [@jamesconant](https://github.com/jamesconant/)
     - [ ] [@nethanelkohen](https://github.com/nethanelkohen)
-    - [ ] [@skipteel](https://github.com/skipteel)
 - Create a pull request in your repository:
-    - [ ] Must request that [@jamesconant](https://github.com/jamesconant/) and
-        [@skipteel](https://github.com/skipteel) review your PR.
     - [ ] Must target your master branch from your feature branch.
     - [ ] Must list the problems (from above) that you are addressing in your 
         PR. 
+- Email Contently staff to let them know your Pull Request is ready for review:
+    - [ ] Email [engineers@contently.com](engineers@contently.com)
 - Contently staff will review your code, possibly asking questions or providing
     suggestions. We will attempt to review your assessment in a timely manner
     and simply ask that you attempt to respond in a timely manner as well.
