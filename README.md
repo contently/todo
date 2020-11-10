@@ -53,7 +53,7 @@ work.
     - [ ] Must list the problems (from above) that you are addressing in your 
         PR. 
 - Email Contently staff to let them know your Pull Request is ready for review:
-    - [ ] Email [engineers@contently.com](engineers@contently.com)
+    - [ ] Email [jconant@contently.com](jconant@contently.com)
 - Contently staff will review your code, possibly asking questions or providing
     suggestions. We will attempt to review your assessment in a timely manner
     and simply ask that you attempt to respond in a timely manner as well.
