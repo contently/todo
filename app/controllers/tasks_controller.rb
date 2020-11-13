@@ -77,6 +77,6 @@ class TasksController < ApplicationController
   end
 
   def redirect_user_without_list
-    redirect_to new_list_path if current_user.lists
+    redirect_to new_list_path if current_user.lists.blank?
   end
 end
