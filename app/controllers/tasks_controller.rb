@@ -16,8 +16,6 @@ class TasksController < ApplicationController
     @task = @list.tasks.build
   end
 
-  def edit; end
-
   def create
     @list = List.find params[:list_id]
     @task = @list.tasks.build(task_params)
@@ -49,16 +47,6 @@ class TasksController < ApplicationController
     end
   end
 
-  # DELETE /tasks/1
-  # DELETE /tasks/1.json
-  def destroy
-    @task.destroy
-    respond_to do |format|
-      format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -78,6 +66,5 @@ class TasksController < ApplicationController
   def update_notice(task)
     task.completed ? 'Task was marked as complete.' : 'Task was marked as incomplete'
   end
-
   
 end

@@ -1,9 +1,11 @@
 %h1 List name &#8212; #{@list.name}
 
-= link_to('New Task', new_list_task_path(@list.id))
+= link_to 'Back to Lists', lists_path
+= link_to 'New Task', new_list_task_path(@list.id)
 
 %div
-  %h2= list_title(@show_completed)
+  %h2= list_title @show_completed
+  %div= link_to list_link_text(@show_completed), list_link_path(@show_completed, @list.id)
   -tasks_to_display(@show_completed, @list).each do |task|
     %div
       = task.name
