@@ -1,1 +1,8 @@
-asdfasdf
+%h1 Tasks
+
+%div
+  -@lists.each do |list|
+    =link_to(list_path(list.id)) do
+      %div
+        =list.name
+      

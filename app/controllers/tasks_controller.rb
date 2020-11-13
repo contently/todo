@@ -8,7 +8,7 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    @lists = current_user.lists.includes(:tasks)
   end
 
   # GET /tasks/1
