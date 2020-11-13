@@ -5,27 +5,19 @@ class TasksController < ApplicationController
   before_action :authenticate_user!
   before_action :redirect_user_without_list
 
-  # GET /tasks
-  # GET /tasks.json
   def index
     @lists = current_user.lists.includes(:tasks)
   end
 
-  # GET /tasks/1
-  # GET /tasks/1.json
   def show; end
 
-  # GET /tasks/new
   def new
     @list = List.find params[:list_id]
     @task = @list.tasks.build
   end
 
-  # GET /tasks/1/edit
   def edit; end
 
-  # POST /tasks
-  # POST /tasks.json
   def create
     @list = List.find params[:list_id]
     @task = @list.tasks.build(task_params)
@@ -42,15 +34,16 @@ class TasksController < ApplicationController
     end
   end
 
-  # PATCH/PUT /tasks/1
-  # PATCH/PUT /tasks/1.json
   def update
+
     respond_to do |format|
-      if @task.update(task_params)
-        format.html { redirect_to tasks_path, notice: 'Task was successfully updated.' }
+      if @task.toggle(:completed).save
+        # Ideally would capture the current query string and append it to the URL to maintain
+        # the user's current frame of reference
+        format.html { redirect_to list_path(@task.list_id), notice: update_notice(@task) }
         format.json { render :show, status: :ok, location: @task }
       else
-        format.html { render :edit }
+        format.html { redirect_back(fallback_location: root) }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
@@ -81,4 +74,10 @@ class TasksController < ApplicationController
   def redirect_user_without_list
     redirect_to new_list_path if current_user.lists.blank?
   end
+
+  def update_notice(task)
+    task.completed ? 'Task was marked as complete.' : 'Task was marked as incomplete'
+  end
+
+  
 end

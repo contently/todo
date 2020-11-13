@@ -3,7 +3,8 @@
 = link_to('New Task', new_list_task_path(@list.id))
 
 %div
-  %h2 
+  %h2= list_title(@show_completed)
   -tasks_to_display(@show_completed, @list).each do |task|
     %div
       = task.name
+      = link_to(mark_complete_or_incomplete_text(task), list_task_path(@list.id, task.id), method: :patch) 

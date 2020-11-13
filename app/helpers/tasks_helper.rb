@@ -6,4 +6,8 @@ module TasksHelper
     show_completed ? list.tasks.complete : list.tasks.incomplete 
   end
 
+  def mark_complete_or_incomplete_text(task)
+    task.completed ? "Mark incomplete" : "Mark complete"
+  end
+
 end
