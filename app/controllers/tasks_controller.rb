@@ -3,6 +3,7 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[show edit update destroy]
   before_action :authenticate_user!
+  before_action :redirect_user_without_list
 
   # GET /tasks
   # GET /tasks.json
@@ -73,5 +74,9 @@ class TasksController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def task_params
     params.require(:task).permit(:name, :completed)
+  end
+
+  def redirect_user_without_list
+    redirect_to new_list_path if current_user.lists
   end
 end
