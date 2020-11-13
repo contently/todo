@@ -5,8 +5,10 @@ class Task < ActiveRecord::Base
 
   has_many :lists
   has_many :users, through: :lists
+
+  belongs_to :list
   
-  scope :complete_tasks, -> { where(completed: true)}
-  scope :incomplete_tasks, -> { where(completed: false)}
+  scope :complete, -> { where(completed: true)}
+  scope :incomplete, -> { where(completed: false)}
   # Ex:- scope :active, -> {where(:active => true)}
 end

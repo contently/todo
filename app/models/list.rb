@@ -3,4 +3,6 @@ class List < ApplicationRecord
 
   belongs_to :user
   belongs_to :task, optional: true
+
+  has_many :tasks
 end

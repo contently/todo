@@ -25,6 +25,8 @@ class ListsController < ApplicationController
 
   def show
     @list = List.find params[:id]
+
+    @show_completed = request.params.fetch(:showcompleted, false)
   end
 
   private

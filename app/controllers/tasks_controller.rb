@@ -17,7 +17,8 @@ class TasksController < ApplicationController
 
   # GET /tasks/new
   def new
-    @task = Task.new
+    @list = List.find params[:list_id]
+    @task = @list.tasks.build
   end
 
   # GET /tasks/1/edit
@@ -26,11 +27,12 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
-    @task = Task.new(task_params)
+    @list = List.find params[:list_id]
+    @task = @list.tasks.build(task_params)
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to tasks_path, notice: 'Task was successfully created.' }
+        format.html { redirect_to list_path(@list.id), notice: 'Task was successfully created.' }
         format.json { render :show, status: :created, location: @task }
 
       else
