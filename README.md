@@ -1,5 +1,11 @@
 # Technical Assessment - Ruby on Rails
 
+## Implementation Summary
+
+There have been no major changes to the application is set up. Follow the steps in the 'Setup application' below. In order to begin using the application you need to create an account. Once you have created an account you will be redirect to create your first list. After you create a list you will see your dashboard which shows you all your task lists as well as the application audit of the various changes that have occured. In order to create a task, enter a list and click the new task button. Give the task a name and click save. In order to mark a task complete and trigger a task audit event, go to your list and click show. In order to filter your tasks by complete and in complete, go to your list and click the view complete or view incomplete button. In order to see an events history, go to a list and click view task.
+
+In full disclosure, this is my first time using the React library. My traditional stack is Rails and Vue. There are definitely some conceptual differences between the two which some getting used to. This being said, it was a pleasure learning a new library and I look forward to continuing to using React. Thank you for taking the time to review my code, I hope it is a good read. Cheers!
+
 ## Summary
 
 The purpose of this short assessment is to gain some initial insight in to your
