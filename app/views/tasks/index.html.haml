@@ -1,5 +1,7 @@
 %h1 Tasks
-
+%p 
+  %span Show comleted tasks
+  = check_box_tag "completed", 1, false, id: 'completedTasks'
 %table
   %thead
     %tr
@@ -11,7 +13,7 @@
 
   %tbody
     - @tasks.each do |task|
-      %tr
+      %tr{:class => ("completed" if task.completed?)}
         %td=task.name
         %td=task.completed
         %td=link_to 'Show', task
@@ -21,3 +23,23 @@
 %br
 
 =link_to 'Add a task', new_task_path
+
+:javascript
+  toggleCompleted()
+
+  document.getElementById("completedTasks").addEventListener("click", toggleCompleted);
+
+  function toggleCompleted() {
+    var checked = document.getElementById("completedTasks").checked;
+    var myClasses = document.querySelectorAll('.completed'),
+    i = 0,
+    l = myClasses.length;
+    
+    for (i; i < l; i++) {
+        if (checked) {
+          myClasses[i].style.display = 'contents';
+        } else {
+          myClasses[i].style.display = 'none';
+        }
+    }
+  }

@@ -2,4 +2,5 @@
 
 class Task < ActiveRecord::Base
   validates :name, presence: true
-  end
+  has_many :task_audits
+end

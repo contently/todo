@@ -10,13 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_26_152956) do
+ActiveRecord::Schema.define(version: 2020_11_25_172545) do
+
+  create_table "task_audits", force: :cascade do |t|
+    t.integer "task_id", null: false
+    t.string "audit_action"
+    t.string "from_value"
+    t.string "to_value"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["task_id"], name: "index_task_audits_on_task_id"
+  end
 
   create_table "tasks", force: :cascade do |t|
     t.string "name"
-    t.boolean "completed"
+    t.boolean "completed", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "task_audits", "tasks"
 end

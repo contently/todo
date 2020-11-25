@@ -10,3 +10,17 @@
 =link_to 'Edit', edit_task_path(@task)
 \|
 =link_to 'Back', tasks_path
+
+%h2 Audit Log
+%table
+  %thead
+    %th Edited On
+    %th
+    %th Values
+  %tbody
+    - @task.task_audits.each do |audit|
+      %tr
+        %td=audit.created_at
+        %td - 
+        %td=audit.to_value
+

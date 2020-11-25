@@ -6,6 +6,8 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
+    # A user's default view is filtered to show only incomplete tasks. 
+    # @tasks = Task.where(completed: false)
     @tasks = Task.all
   end
 
@@ -25,6 +27,7 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
     @task = Task.new(task_params)
+    TaskAudit.create(task: @task, audit_action: 'created', from_value: nil, to_value: nil)
 
     respond_to do |format|
       if @task.save
@@ -43,6 +46,7 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
+        TaskAudit.create(task: @task, audit_action: 'edited', to_value: task_params)
         format.html { redirect_to tasks_path, notice: 'Task was successfully updated.' }
         format.json { render :show, status: :ok, location: @task }
       else
