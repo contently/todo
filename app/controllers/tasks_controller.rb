@@ -8,7 +8,7 @@ class TasksController < ApplicationController
   def index
     # A user's default view is filtered to show only incomplete tasks. 
     # @tasks = Task.where(completed: false)
-    @tasks = Task.all
+    @tasks = current_user.tasks
   end
 
   # GET /tasks/1

@@ -23,6 +23,7 @@
 %br
 
 =link_to 'Add a task', new_task_path
+=link_to 'Logout', destroy_user_session_path, method: :delete
 
 :javascript
   toggleCompleted()
