@@ -9,6 +9,8 @@
   .field
     =f.label :name
     =f.text_field :name
+  .field
+    =f.hidden_field :task_list_id, value: (params[:task_list] || @task.task_list_id)
   -if params[:action] != 'new'
     .field
       =f.label :completed

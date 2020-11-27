@@ -32,7 +32,7 @@ class TasksController < ApplicationController
     respond_to do |format|
       if @task.save
         format.html { redirect_to task_list_path(@task.task_list), notice: 'Task was successfully created.' }
-        format.json { render :show, status: :created, location: @task.task_list }
+        format.json { render :index, status: :created, location: @task.task_list }
 
       else
         format.html { render :new }
@@ -61,7 +61,7 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     respond_to do |format|
-      format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
+      format.html { redirect_to task_list_path(@task.task_list), notice: 'Task was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -75,6 +75,6 @@ class TasksController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def task_params
-    params.require(:task).permit(:name, :completed)
+    params.require(:task).permit(:name, :completed, :task_list_id)
   end
 end
