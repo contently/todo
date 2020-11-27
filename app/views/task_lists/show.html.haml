@@ -1,0 +1,57 @@
+%p#notice= notice
+
+%p
+  %b List name:
+  = @task_list.list_name
+
+
+  %h1 Tasks
+%p 
+  %span Show comleted tasks
+  = check_box_tag "completed", 1, false, id: 'completedTasks'
+%table
+  %thead
+    %tr
+      %th Name
+      %th Completed
+      %th
+      %th
+      %th
+
+  %tbody
+    - @tasks.each do |task|
+      %tr{:class => ("completed" if task.completed?)}
+        %td=task.name
+        %td=task.completed
+        %td=link_to 'Show', task
+        %td=link_to 'Edit', edit_task_path(task)
+        %td=link_to 'Destroy', task, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+=link_to 'Add a task', new_task_path(task_list: @task_list.id)
+=link_to 'Logout', destroy_user_session_path, method: :delete
+
+:javascript
+  toggleCompleted()
+
+  document.getElementById("completedTasks").addEventListener("click", toggleCompleted);
+
+  function toggleCompleted() {
+    var checked = document.getElementById("completedTasks").checked;
+    var myClasses = document.querySelectorAll('.completed'),
+    i = 0,
+    l = myClasses.length;
+    
+    for (i; i < l; i++) {
+        if (checked) {
+          myClasses[i].style.display = 'contents';
+        } else {
+          myClasses[i].style.display = 'none';
+        }
+    }
+  }
+
+= link_to 'Edit', edit_task_list_path(@task_list)
+\|
+= link_to 'Back', task_lists_path

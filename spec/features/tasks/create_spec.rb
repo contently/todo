@@ -6,7 +6,7 @@ feature 'Creating a task' do
   scenario 'redirects to the tasks index page on success' do
     visit tasks_path
     click_on 'Add a task'
-    expect(page).to have_content('Create a task')
+    expect(page).to have_content('Add a task')
 
     fill_in 'Name', with: 'Test my app'
     click_button 'Save'

@@ -17,7 +17,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/new
   def new
-    @task = Task.new
+    @task = Task.new(task_list_id: params[:task_list])
   end
 
   # GET /tasks/1/edit
@@ -27,12 +27,12 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
     @task = Task.new(task_params)
-    TaskAudit.create(task: @task, audit_action: 'created', from_value: nil, to_value: nil)
-
+    @task.user_id = current_user.id
+    TaskAudit.create(task_id: @task.id, audit_action: 'created', from_value: nil, to_value: nil)
     respond_to do |format|
       if @task.save
-        format.html { redirect_to tasks_path, notice: 'Task was successfully created.' }
-        format.json { render :show, status: :created, location: @task }
+        format.html { redirect_to task_list_path(@task.task_list), notice: 'Task was successfully created.' }
+        format.json { render :show, status: :created, location: @task.task_list }
 
       else
         format.html { render :new }
@@ -47,8 +47,8 @@ class TasksController < ApplicationController
     respond_to do |format|
       if @task.update(task_params)
         TaskAudit.create(task: @task, audit_action: 'edited', to_value: task_params)
-        format.html { redirect_to tasks_path, notice: 'Task was successfully updated.' }
-        format.json { render :show, status: :ok, location: @task }
+        format.html { redirect_to task_list_path(@task.task_list), notice: 'Task was successfully updated.' }
+        format.json { render :show, status: :ok, location: @task.task_list }
       else
         format.html { render :edit }
         format.json { render json: @task.errors, status: :unprocessable_entity }

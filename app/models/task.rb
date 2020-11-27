@@ -3,5 +3,6 @@
 class Task < ActiveRecord::Base
   validates :name, presence: true
   has_many :task_audits
-  belongs_to :user
+  belongs_to :user, optional: true
+  belongs_to :task_list, optional: true
 end
