@@ -6,6 +6,8 @@ class Task < ActiveRecord::Base
   belongs_to :user
   belongs_to :list
 
+  audited
+
   validates :name, presence: true
 
   validate :persist_before_completion, if: proc { |k| k.new_record? }
