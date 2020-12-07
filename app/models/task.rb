@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# TODO: add list_id references db migration.
+
 class Task < ActiveRecord::Base
   belongs_to :user
 

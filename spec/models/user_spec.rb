@@ -17,6 +17,14 @@ RSpec.describe User, type: :model do
 
       expect(user.tasks).to match_array([task_1, task_2])
     end
+
+    it 'has many lists' do
+      user = create(:user)
+      list_1 = create(:list, user: user)
+      list_2 = create(:list, user: user)
+
+      expect(user.lists).to match_array([list_1, list_2])
+    end
   end
 
   describe 'destructive ActiveRecord callbacks' do
@@ -28,6 +36,17 @@ RSpec.describe User, type: :model do
 
       expect do
         task_1.reload
+      end.to raise_error(ActiveRecord::RecordNotFound)
+    end
+
+    it 'nukes all lists when the user is nuked' do
+      user = create(:user)
+      list_1 = create(:list, user: user)
+
+      user.destroy
+
+      expect do
+        list_1.reload
       end.to raise_error(ActiveRecord::RecordNotFound)
     end
   end

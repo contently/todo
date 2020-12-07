@@ -1,0 +1,17 @@
+%h1= "List '#{@list.name}'"
+
+%table.table.table-striped.table-condensed
+  %tr
+    %th Name
+    %td= @list.name
+  %tr
+    %th Created At
+    %td= @list.created_at
+  %tr
+    %th Updated At
+    %td= @list.updated_at
+
+
+=link_to 'Edit', edit_list_path(@list)
+\|
+=link_to 'Back', lists_path
