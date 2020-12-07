@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Task < ActiveRecord::Base
+  belongs_to :user
+
   validates :name, presence: true
 
   validate :persist_before_completion, if: proc { |k| k.new_record? }

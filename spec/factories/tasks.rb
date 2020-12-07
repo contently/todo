@@ -4,5 +4,6 @@ FactoryBot.define do
   factory :task do
     name { 'MyString' }
     completed { false }
+    user
   end
 end

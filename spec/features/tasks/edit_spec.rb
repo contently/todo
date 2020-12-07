@@ -3,7 +3,12 @@
 require 'rails_helper'
 
 feature 'Editing a task' do
-  let!(:task) { Task.create(name: 'Test my app', completed: false) }
+  before(:each) do
+    @user = create(:user)
+    login_as(@user, scope: :user)
+  end
+
+  let!(:task) { Task.create(name: 'Test my app', completed: false, user: @user) }
 
   scenario 'redirects to the tasks index page on success' do
     visit tasks_path

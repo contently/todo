@@ -5,6 +5,9 @@
   %h1 Pending Tasks
   %span= link_to "(show all)", tasks_url(filter: "all")
 
+- if current_user
+  %p Showing tasks for #{current_user.email}
+
 %table.table.table-striped
   %thead
     %tr

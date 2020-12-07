@@ -7,9 +7,9 @@ class TasksController < ApplicationController
   # GET /tasks.json
   def index
     @tasks = if params.fetch(:filter, nil).present?
-               Task.all
+               current_user.tasks
              else
-               Task.pending
+               current_user.tasks.pending
              end
   end
 
@@ -19,7 +19,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/new
   def new
-    @task = Task.new
+    @task = current_user.tasks.new
   end
 
   # GET /tasks/1/edit
@@ -28,7 +28,7 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.new(task_params)
 
     respond_to do |format|
       if @task.save
@@ -70,7 +70,7 @@ class TasksController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_task
-    @task = Task.find(params[:id])
+    @task = current_user.tasks.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

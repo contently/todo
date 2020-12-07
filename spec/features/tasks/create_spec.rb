@@ -3,6 +3,11 @@
 require 'rails_helper'
 
 feature 'Creating a task' do
+  before(:each) do
+    @user = create(:user)
+    login_as(@user, scope: :user)
+  end
+
   scenario 'redirects to the tasks index page on success' do
     visit tasks_path
     click_on 'Add a task'
