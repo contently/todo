@@ -1,0 +1,37 @@
+%h1 Audit Trail (Completed Tasks)
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th Name
+      %th Audits
+
+  %tbody
+    - @tasks.each_with_index do |task, index|
+      %tr
+        %td= task.name
+        %td
+          #accordionExample.accordion
+            .accordion-item
+              %h2#headingOne.accordion-header
+                %button.accordion-button{"aria-expanded" => "false", "data-bs-target" => "#collapse#{index}", "data-bs-toggle" => "collapse", :type => "button"}
+                  Audit Trail
+              %div.accordion-collapse.collapse.show{"id" => "collapse#{index}", "aria-labelledby" => "headingOne", "data-bs-parent" => "#accordionExample"}
+                .accordion-body
+                  .card
+                    .card-body
+                      %h5.card-title Audit Log (asc)
+                      %table.table.table-striped.table-condensed
+                        %thead
+                          %th User with ID:
+                          %th Performed
+                          %th With changes
+                          %th At time:
+                        %tbody
+                          - task.audits.each do |audit|
+                            %tr
+                              %td= audit.user_id
+                              %td= audit.action
+                              %td
+                                %pre= JSON.pretty_generate(audit.audited_changes)
+                              %td= audit.created_at
