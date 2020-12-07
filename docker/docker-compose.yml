@@ -1,0 +1,21 @@
+version: '3.3'
+services:
+  todo:
+    image: todo
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+      args:
+        - RAILS_ENV=development
+    env_file:
+      - .env
+    volumes:
+      - ../:/app/src
+      - ~/.ssh:/root/.ssh
+      - todo_bundle_cache:/bundle
+    ports:
+      - "3000:3000"
+
+volumes:
+  todo_bundle_cache:
+  maria_db_volume:
