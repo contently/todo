@@ -1,9 +1,9 @@
 - if params.fetch(:filter, nil).present?
-  %h1 All Tasks
-  %span= link_to "(clear)", tasks_url(filter: nil)
+  %h1 All Tasks for List: [#{@list.name}]
+  %span= link_to "(clear)", list_tasks_url(@list, filter: nil)
 - else
-  %h1 Pending Tasks
-  %span= link_to "(show all)", tasks_url(filter: "all")
+  %h1 Pending Tasks for List: [#{@list.name}]
+  %span= link_to "(show all)", list_tasks_url(@list, filter: "all")
 
 - if current_user
   %p Showing tasks for #{current_user.email}
@@ -13,21 +13,27 @@
     %tr
       %th Name
       %th Completed
+      %th List
       %th
       %th
 
   %tbody
     - @tasks.each do |task|
       %tr
-        %td= link_to task.name, task
+        %td= link_to task.name, list_task_path(task.list, task)
         %td
           - if task.completed?
             %span.badge.bg-success Yes
           - else
             %span.badge.bg-danger No
-        %td=link_to 'Edit', edit_task_path(task)
-        %td=link_to 'Delete', task, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td
+          - if task.list
+            = link_to task.list.name, list_task_path(task.list, task)
+          - else
+            N/A
+        %td=link_to 'Edit', edit_list_task_path(task.list, task)
+        %td=link_to 'Delete', list_task_path(task.list, task), :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 
-=link_to 'Add a task', new_task_path, class: 'btn btn-primary btn-sm'
+=link_to 'Add a task', new_list_task_path(@list), class: 'btn btn-primary btn-sm'

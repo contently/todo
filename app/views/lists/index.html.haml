@@ -9,11 +9,13 @@
       %th Name
       %th
       %th
+      %th
 
   %tbody
     - @lists.each do |list|
       %tr
         %td= link_to list.name, list
+        %td= link_to 'Show tasks', list_tasks_path(list)
         %td=link_to 'Edit', edit_list_path(list)
         %td=link_to 'Delete', list, :method => :delete, :data => { :confirm => 'Are you sure?' }
 

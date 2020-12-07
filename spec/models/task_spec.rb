@@ -56,4 +56,12 @@ describe Task, type: :model do
       expect(Task.pending).to match_array([@task_2])
     end
   end
+
+  describe 'relations' do
+    it 'belongs to a list' do
+      list = create(:list)
+      task = create(:task, name: 'belong to a list', list: list)
+      expect(task.list).to eql(list)
+    end
+  end
 end

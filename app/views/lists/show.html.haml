@@ -1,5 +1,7 @@
 %h1= "List '#{@list.name}'"
 
+= link_to 'Show tasks', list_tasks_path(@list), class: 'btn btn-info'
+
 %table.table.table-striped.table-condensed
   %tr
     %th Name

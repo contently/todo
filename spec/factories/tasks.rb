@@ -5,5 +5,6 @@ FactoryBot.define do
     name { 'MyString' }
     completed { false }
     user
+    list { |k| create(:list, user: k.user) }
   end
 end

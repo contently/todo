@@ -13,7 +13,14 @@
       = render 'layouts/navbar'
     #flash-display
       - flash.each do |type, msg|
-        %p{class: "alert alert-#{type}"}= msg
+        - if type == 'notice'
+          %div{class: "alert alert-success"}
+            =msg
+            %button.btn-close{"aria-label" => "Close", type: "button"}
+        - else
+          %div{class: "alert alert-#{type}"}
+            = msg
+            %button.btn-close{"aria-label" => "Close", type: "button"}
 
 
     .container=yield

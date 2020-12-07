@@ -11,6 +11,14 @@
         %span.badge.bg-success Yes
       - else
         %span.badge.bg-danger No
+
+  %tr
+    %th List
+    %td
+      - if @task.list
+        = link_to @task.list.name, list_tasks_path(@task.list)
+      - else
+        N/A
   %tr
     %th Created At
     %td= @task.created_at
@@ -19,6 +27,6 @@
     %td= @task.updated_at
 
 
-=link_to 'Edit', edit_task_path(@task)
+=link_to 'Edit', edit_list_task_path(@task.list, @task)
 \|
-=link_to 'Back', tasks_path
+=link_to 'Back', list_tasks_path(@task.list)

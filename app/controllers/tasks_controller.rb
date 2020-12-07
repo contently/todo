@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class TasksController < ApplicationController
+  before_action :load_list
   before_action :set_task, only: %i[show edit update destroy]
 
   # GET /tasks
@@ -20,6 +21,7 @@ class TasksController < ApplicationController
   # GET /tasks/new
   def new
     @task = current_user.tasks.new
+    @task.list = @list
   end
 
   # GET /tasks/1/edit
@@ -29,10 +31,11 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
     @task = current_user.tasks.new(task_params)
+    @task.list = @list
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to tasks_path, notice: 'Task was successfully created.' }
+        format.html { redirect_to list_tasks_path(@task.list), notice: 'Task was successfully created.' }
         format.json { render :show, status: :created, location: @task }
 
       else
@@ -47,7 +50,7 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to tasks_path, notice: 'Task was successfully updated.' }
+        format.html { redirect_to list_tasks_path(@task.list), notice: 'Task was successfully updated.' }
         format.json { render :show, status: :ok, location: @task }
       else
         format.html { render :edit }
@@ -67,6 +70,11 @@ class TasksController < ApplicationController
   end
 
   private
+
+  def load_list
+    # .find_by doesn't throw an exception
+    @list = current_user.lists.find_by(id: params[:list_id])
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_task
