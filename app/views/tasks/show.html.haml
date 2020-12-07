@@ -1,11 +1,25 @@
+%h1= "Task '#{@task.name}'"
+
 %p#notice=notice
 
-%p
-  %b Name:
-  =@task.name
-%p
-  %b Completed:
-  =@task.completed
+%table.table.table-striped.table-condensed
+  %tr
+    %th Name
+    %td= @task.name
+  %tr
+    %th Completed
+    %td
+      - if @task.completed?
+        %span.badge.bg-success Yes
+      - else
+        %span.badge.bg-danger No
+  %tr
+    %th Created At
+    %td= @task.created_at
+  %tr
+    %th Updated At
+    %td= @task.updated_at
+
 
 =link_to 'Edit', edit_task_path(@task)
 \|

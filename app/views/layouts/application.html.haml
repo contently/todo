@@ -1,12 +1,17 @@
-%html
+!!!
+%html{lang: "en"}
   %head
-    %title Todo
-    =stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
-    =javascript_include_tag 'application', 'data-turbolinks-track' => true
-    =csrf_meta_tags
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+    %meta{charset: "utf-8"}
+    %meta{content: "width=device-width, initial-scale=1", name: "viewport"}
+    %link{crossorigin: "anonymous", href: "https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css", integrity: "sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1", rel: "stylesheet"}
+    %title TODO
   %body
     #flash-display
     - flash.each do |type, msg|
-      %div
+      %div{class: "alert alert-#{type}"}
         = msg
-    =yield
+    .container=yield
+    %script{crossorigin: "anonymous", integrity: "sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW", src: "https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"}

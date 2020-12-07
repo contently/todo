@@ -31,6 +31,6 @@ feature 'Editing a task' do
     click_button 'Save'
 
     visit task_path(task)
-    expect(page).to have_content('true')
+    expect(page).to have_content('Yes')
   end
 end

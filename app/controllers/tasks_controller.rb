@@ -6,7 +6,11 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    @tasks = if params.fetch(:filter, nil).present?
+               Task.all
+             else
+               Task.pending
+             end
   end
 
   # GET /tasks/1
