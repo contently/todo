@@ -2,6 +2,7 @@
 
 FactoryBot.define do
   factory :task do
+    association :user
     name { 'MyString' }
     completed { false }
   end

@@ -3,7 +3,15 @@
 require 'rails_helper'
 
 feature 'Creating a task' do
+
+  let(:user) { create(:user) }
+
+  before(:each) do
+    login_as(user)
+  end
+
   scenario 'redirects to the tasks index page on success' do
+
     visit tasks_path
     click_on 'Add a task'
     expect(page).to have_content('Create a task')

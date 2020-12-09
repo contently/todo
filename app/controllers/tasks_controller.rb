@@ -1,12 +1,15 @@
 # frozen_string_literal: true
 
 class TasksController < ApplicationController
-  before_action :set_task, only: %i[show edit update destroy]
+  before_action :authenticate_user!
+  before_action :set_task, only: %i[show edit update destroy complete]
 
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    @completed_filter = params.fetch(:completed, 'false')
+    @list_filter = params.fetch(:list_id, nil)
+    @tasks = current_user.tasks.includes(:list, :versions).filter_by_completed(@completed_filter).filter_by_list(@list_filter)
   end
 
   # GET /tasks/1
@@ -15,7 +18,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/new
   def new
-    @task = Task.new
+    @task = current_user.tasks.new
   end
 
   # GET /tasks/1/edit
@@ -24,8 +27,7 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
-    @task = Task.new(task_params)
-
+    @task = current_user.tasks.new(task_params)
     respond_to do |format|
       if @task.save
         format.html { redirect_to tasks_path, notice: 'Task was successfully created.' }
@@ -62,15 +64,26 @@ class TasksController < ApplicationController
     end
   end
 
+  # POST /tasks/1/complete
+  # POST /tasks/1/complete.json
+  def complete
+    @task.update(completed: true)
+    respond_to do |format|
+      format.html { redirect_to tasks_path, notice: 'Task was completed.' }
+      format.json { render :show, status: :ok, location: @task }
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_task
-    @task = Task.find(params[:id])
+    id = params[:id] || params[:task_id]
+    @task = current_user.tasks.includes(:list).find(id)
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def task_params
-    params.require(:task).permit(:name, :completed)
+    params.require(:task).permit(:name, :list_id, :completed)
   end
 end

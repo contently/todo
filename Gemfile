@@ -38,6 +38,11 @@ gem 'haml-rails'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '~> 1.4', '>= 1.4.6'
 
+# User Login
+gem 'devise'
+# Version Tasks
+gem 'paper_trail'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
@@ -58,7 +63,8 @@ group :test do
   gem 'capybara', '~> 3.32', '>= 3.32.2'
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'chromedriver-helper'
+  # gem 'chromedriver-helper'
+  gem 'webdrivers'
   gem 'database_cleaner'
   gem 'factory_bot_rails'
 end

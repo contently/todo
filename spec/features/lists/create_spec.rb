@@ -2,29 +2,30 @@
 
 require 'rails_helper'
 
-feature 'Editing a task' do
+feature 'Creating a List' do
 
   let(:user) { create :user }
-  let!(:task) { Task.create(name: 'Test my app', completed: false, user: user) }
 
   before(:each) do
     login_as user
   end
 
-  scenario 'redirects to the tasks index page on success' do
-    visit tasks_path
-    click_on 'Edit'
-    expect(page).to have_content('Editing task')
 
-    fill_in 'Name', with: 'Test my app (updated)'
+  scenario 'redirects to the list index page on success' do
+
+    visit tasks_path
+    click_on 'Create List'
+    expect(page).to have_content('Create a list')
+
+    fill_in 'Name', with: 'My New List Name'
     click_button 'Save'
 
     expect(page).to have_content('Tasks')
-    expect(page).to have_content('Test my app (updated)')
+    expect(page).to have_content('My New List Name')
   end
 
   scenario 'displays an error when no name is provided' do
-    visit edit_task_path(task)
+    visit new_list_path
     fill_in 'Name', with: ''
     click_button 'Save'
 

@@ -1,10 +1,24 @@
+
+%h2 Filters
+%div
+  Status:
+  =@completed_filter == 'false' ? link_to( 'Completed', tasks_path(completed: true)) : "Completed"
+  |
+  =@completed_filter == 'true' ? link_to( 'Incomplete', tasks_path(completed: false)) : "Incomplete"
+%div
+  List:
+  - current_user.lists.each do |list|
+    =@list_filter.to_i==list.id ? list.name : link_to( list.name, tasks_path(list_id: list.id))
+%hr
 %h1 Tasks
 
 %table
   %thead
     %tr
       %th Name
-      %th Completed
+      %th List
+      %th Versions
+      %th Complete
       %th
       %th
       %th
@@ -13,11 +27,15 @@
     - @tasks.each do |task|
       %tr
         %td=task.name
-        %td=task.completed
+        %td=task.list ? task.list.name : 'none'
+        %td=task.versions.length
+        %td=task.completed ? "Completed" : link_to( 'Complete', task_complete_path(task), method: :post, :data => { :confirm => 'Are you sure it is completed?' })
         %td=link_to 'Show', task
         %td=link_to 'Edit', edit_task_path(task)
         %td=link_to 'Destroy', task, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
-%br
+%hr
 
 =link_to 'Add a task', new_task_path
+%br
+=link_to 'Create List', new_list_path

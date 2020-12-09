@@ -1,11 +1,39 @@
 %p#notice=notice
 
-%p
+%h2
   %b Name:
   =@task.name
+
+%p
+  %b List:
+  = @task.list.nil? ? 'None' : @task.list.name
+
 %p
   %b Completed:
   =@task.completed
+
+%hr
+
+%h3
+  Versions
+
+  %table
+    %thead
+      %tr
+        %th Event
+        %th Edited
+        %th Name
+        %th Completed
+
+    %tbody
+      - @task.versions.each do |v|
+        %tr
+          %td=v.event
+          %td=v.created_at
+          %td=v.object ? v.object_deserialized["name"] : ""
+          %td=v.object ? v.object_deserialized["completed"] : ""
+
+%hr
 
 =link_to 'Edit', edit_task_path(@task)
 \|

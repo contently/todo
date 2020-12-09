@@ -10,7 +10,7 @@
     =f.label :name
     =f.text_field :name
   .field
-    =f.label :completed
-    =f.check_box :completed
+    =f.label :select_list
+    =f.select :list_id, current_user.lists.collect{|l| [l.name, l.id] }, { include_blank: true }
   .actions
     =f.submit 'Save'
