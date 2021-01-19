@@ -47,6 +47,7 @@ work.
 - If your repository is private, give the following users access:
     - [ ] [@briandangerflynn](https://github.com/briandangerflynn)
     - [ ] [@jamesconant](https://github.com/jamesconant/)
+    - [ ] [@jlaurelli](https://github.com/jlaurelli)
     - [ ] [@nethanelkohen](https://github.com/nethanelkohen)
 - Create a pull request in your repository:
     - [ ] Must target your master branch from your feature branch.
