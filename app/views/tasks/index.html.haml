@@ -1,31 +1,11 @@
 %h1 Tasks
 
-= form_with url: tasks_url, method: :get do |form|
-  = form.select :completed,
-                options_for_select(%w[completed incomplete], params[:completed]),
-                { prompt: "Filter tasks" },
-                onchange: "this.form.submit()"
+.card
+  = form_with url: tasks_url, method: :get, class: "tasks-filter" do |form|
+    = form.select :completed,
+                  options_for_select(%w[completed incomplete], params[:completed]),
+                  { prompt: "Filter tasks" },
+                  onchange: "this.form.submit()"
+  = render @tasks
 
-%table
-  %thead
-    %tr
-      %th Name
-      %th List
-      %th Completed
-      %th
-      %th
-      %th
-
-  %tbody
-    - @tasks.each do |task|
-      %tr
-        %td=task.name
-        %td=task.list&.name
-        %td=task.completed
-        %td=link_to 'Show', task
-        %td=link_to 'Edit', edit_task_path(task)
-        %td=link_to 'Destroy', task, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-=link_to 'Add a task', new_task_path
+= link_to 'Add a task', new_task_path, class: "btn"

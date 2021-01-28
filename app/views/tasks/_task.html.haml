@@ -1,4 +1,9 @@
-.card
-  = task.name
-  = task.completed
-  = link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }
+.task.space-between
+  .task-details
+    .bi{ class: "bi-#{task.completed? ? 'check-circle' : 'circle'}" }
+    = task.name
+  .task-actions
+    = link_to edit_task_path(task) do
+      %i.bi.bi-pencil
+    = link_to task, :method => :delete, :data => { :confirm => 'Are you sure?' } do
+      %i.bi.bi-trash

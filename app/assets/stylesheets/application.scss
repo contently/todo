@@ -13,3 +13,199 @@
  *= require_tree .
  *= require_self
  */
+
+$primary: #005b96;
+$primary-dark: #03396c;
+$primary-light: #b3cde0;
+$danger: #c42f2f;
+$text-color: #011f4b;
+$light-gray: #eee;
+$white: #fff;
+
+nav {
+  align-items: center;
+  background-color: $primary;
+  color: $white;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+
+  a {
+    color: $white;
+
+    &:hover,
+    &:visited {
+      color: $white;
+      opacity: 0.8;
+    }
+  }
+
+  h1 {
+    margin: 0;
+  }
+
+  .actions {
+    a:not(:last-child) {
+      margin-right: 1rem;
+    }
+  }
+}
+
+body {
+  background-color: $light-gray;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1rem;
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Poppins", sans-serif;
+}
+
+a {
+  color: $primary;
+  text-decoration: none;
+
+  &:hover,
+  &:visited {
+    color: $primary-dark;
+  }
+}
+
+.main {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+.card {
+  background-color: $white;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  width: 100%;
+
+  .card-header {
+    align-items: center;
+    border-bottom: 1px solid $light-gray;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+
+    h2 {
+      color: $primary;
+      margin: 0;
+      text-align: center;
+    }
+
+    .card-actions {
+      a:not(:last-child) {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+}
+
+.task {
+  align-items: center;
+  border-bottom: 1px dotted $light-gray;
+  display: flex;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+
+  .task-details {
+    align-items: center;
+    display: flex;
+  }
+
+  .bi {
+    margin-right: 1rem;
+    text-align: center;
+  }
+}
+
+.space-between {
+  justify-content: space-between !important;
+}
+
+.bi-trash:hover {
+  color: $danger;
+}
+
+.tasks-filter {
+  text-align: right;
+  padding: 0;
+
+  select {
+    margin-bottom: 0;
+  }
+}
+
+.checkbox {
+  width: 100%;
+}
+
+.audits {
+  background-color: $white;
+  padding: 1rem;
+
+  .audit-item {
+    border-bottom: 1px dotted $light-gray;
+    padding: 0.5rem;
+  }
+}
+
+form {
+  align-items: center;
+  background-color: $white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+
+  input:not([type="checkbox"]) {
+    height: 40px;
+    min-width: 400px;
+    margin-bottom: 1rem;
+  }
+
+  [type="checkbox"] {
+    margin-bottom: 1rem;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  select {
+    margin-bottom: 1rem;
+  }
+}
+
+[type="submit"],
+.btn {
+  background: $primary;
+  border: 0;
+  color: $white;
+  display: block;
+  font-size: 1rem;
+  padding: 0.5rem 0.75rem;
+
+  &:visited {
+    color: $white;
+  }
+
+  &:hover {
+    background-color: $primary-dark;
+  }
+}
