@@ -22,4 +22,13 @@ feature 'Creating a task' do
 
     expect(page).to have_content("Name can't be blank")
   end
+
+  scenario 'displays an error when completed is true' do
+    visit new_task_path
+    fill_in 'Name', with: 'Take Kacey to school'
+    check 'task[completed]'
+    click_button 'Save'
+
+    expect(page).to have_content("Complete can't be true")
+  end
 end

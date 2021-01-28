@@ -26,7 +26,7 @@ work.
   - [x] `$ bundle exec rake db:setup`
   - [x] `$ bundle exec rails s`
 - Solve for several or more of the following problems:
-  - [ ] A user should not be able to complete a task when creating it.
+  - [x] A user should not be able to complete a task when creating it.
   - [ ] A user can filter their view by complete or incomplete tasks.
   - [ ] A user's default view is filtered to show only incomplete tasks.
   - [ ] A user should be able to keep multiple lists.
