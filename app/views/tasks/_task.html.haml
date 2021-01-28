@@ -3,7 +3,7 @@
     .bi{ class: "bi-#{task.completed? ? 'check-circle' : 'circle'}" }
     = task.name
   .task-actions
-    = link_to edit_task_path(task) do
+    = link_to edit_task_path(task), class: "link-edit" do
       %i.bi.bi-pencil
-    = link_to task, :method => :delete, :data => { :confirm => 'Are you sure?' } do
+    = link_to task, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: "link-delete" do
       %i.bi.bi-trash

@@ -11,7 +11,7 @@ feature 'Editing a task' do
 
     scenario 'redirects to the tasks index page on success' do
       visit tasks_path
-      click_on 'Edit'
+      find(:css, '.link-edit').click
       expect(page).to have_content('Editing task')
 
       fill_in 'Name', with: 'Test my app (updated)'

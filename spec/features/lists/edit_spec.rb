@@ -4,7 +4,7 @@ require 'rails_helper'
 
 feature 'Editing a list' do
   let(:user) { create(:user) }
-  let(:updated_name) { 'Leiyani\'s Supplies' } 
+  let(:updated_name) { 'Leiyani\'s Supplies' }
   let!(:list) { create(:list, user: user, name: 'Random List') }
 
   context 'when logged in' do
@@ -12,7 +12,7 @@ feature 'Editing a list' do
 
     scenario 'redirects to the lists index page on success' do
       visit lists_path
-      click_on 'Edit'
+      find(:css, '.link-edit').click
       expect(page).to have_content('Editing list')
 
       fill_in 'Name', with: updated_name

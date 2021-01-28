@@ -13,7 +13,7 @@ feature 'Displaying lists' do
     end
 
     scenario 'by default' do
-      expect(page).to have_selector('.list-item', count: 3)
+      expect(page).to have_selector('.card', count: 3)
     end
   end
 
