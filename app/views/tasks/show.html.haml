@@ -7,6 +7,12 @@
   %b Completed:
   =@task.completed
 
+%h2 History
+- if @task.audits.any?
+  %ul.audits
+    = render @task.audits
+
+
 =link_to 'Edit', edit_task_path(@task)
 \|
 =link_to 'Back', tasks_path
