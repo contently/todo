@@ -28,7 +28,7 @@ work.
 - Solve for several or more of the following problems:
   - [x] A user should not be able to complete a task when creating it.
   - [x] A user can filter their view by complete or incomplete tasks.
-  - [ ] A user's default view is filtered to show only incomplete tasks.
+  - [x] A user's default view is filtered to show only incomplete tasks.
   - [ ] A user should be able to keep multiple lists.
   - [ ] A user should have access to only their tasks. (may require devise or
         a creative, lightweight auth system)
