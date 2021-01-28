@@ -2,6 +2,7 @@
 
 FactoryBot.define do
   factory :task do
+    user
     name { Faker::Lorem.sentence }
 
     trait :incomplete do

@@ -5,6 +5,8 @@ require 'rails_helper'
 describe Task, type: :model do
   let(:task) { build(:task) }
 
+  it { expect(task).to respond_to(:user) }
+
   context 'with no name' do
     let(:task) { build(:task, name: nil) }
 

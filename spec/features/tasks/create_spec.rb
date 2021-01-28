@@ -3,23 +3,36 @@
 require 'rails_helper'
 
 feature 'Creating a task' do
-  scenario 'redirects to the tasks index page on success' do
-    visit tasks_path
-    click_on 'Add a task'
-    expect(page).to have_content('Create a task')
+  let(:user) { create(:user) }
 
-    fill_in 'Name', with: 'Test my app'
-    click_button 'Save'
+  context 'when authenticated' do
+    before { login_as user }
 
-    expect(page).to have_content('Tasks')
-    expect(page).to have_content('Test my app')
+    scenario 'redirects to the tasks index page on success' do
+      visit tasks_path
+      click_on 'Add a task'
+      expect(page).to have_content('Create a task')
+
+      fill_in 'Name', with: 'Test my app'
+      click_button 'Save'
+
+      expect(page).to have_content('Tasks')
+      expect(page).to have_content('Test my app')
+    end
+
+    scenario 'displays an error when no name is provided' do
+      visit new_task_path
+      fill_in 'Name', with: ''
+      click_button 'Save'
+
+      expect(page).to have_content("Name can't be blank")
+    end
   end
 
-  scenario 'displays an error when no name is provided' do
-    visit new_task_path
-    fill_in 'Name', with: ''
-    click_button 'Save'
-
-    expect(page).to have_content("Name can't be blank")
+  context 'when unauthenticated' do
+    scenario 'redirects to login page' do
+      visit new_task_path
+      expect(page).to have_content('You need to sign in or sign up before continuing.')
+    end
   end
 end
