@@ -1,5 +1,11 @@
 %h1 Tasks
 
+= form_with url: tasks_url, method: :get do |form|
+  = form.select :completed,
+                options_for_select(%w[completed incomplete], params[:completed]),
+                { prompt: "Filter tasks" },
+                onchange: "this.form.submit()"
+
 %table
   %thead
     %tr

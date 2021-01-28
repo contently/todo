@@ -6,7 +6,7 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    @tasks = params[:completed] ? Task.send(params[:completed]) : Task.all
   end
 
   # GET /tasks/1

@@ -4,6 +4,9 @@ class Task < ApplicationRecord
   validates :name, presence: true
   validate :incomplete, on: :create
 
+  scope :completed, -> { where(completed: true) }
+  scope :incomplete, -> { where.not(completed: true) }
+
   def completed?
     completed == true
   end

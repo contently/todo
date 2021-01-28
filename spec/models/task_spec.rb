@@ -20,4 +20,18 @@ describe Task, type: :model do
       expect(task).to_not be_valid
     end
   end
+
+  describe '.completed' do
+    let!(:completed_task) { create(:task, :completed) }
+    let!(:incomplete_task) { create(:task, :incomplete) }
+
+    it { expect(Task.completed).to eq([completed_task]) }
+  end
+
+  describe '.incomplete' do
+    let!(:completed_task) { create(:task, :completed) }
+    let!(:incomplete_task) { create(:task, :incomplete) }
+
+    it { expect(Task.incomplete).to eq([incomplete_task]) }
+  end
 end
