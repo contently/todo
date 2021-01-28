@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'tasks#index'
   resources :tasks
+  resources :audits, path: 'activity_log', only: :index
 end
