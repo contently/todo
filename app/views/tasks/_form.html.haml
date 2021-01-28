@@ -10,6 +10,10 @@
     =f.label :name
     =f.text_field :name
 
+  .field
+    =f.label :list
+    =f.select :list_id, List.all.collect { |list| [ list.name, list.id ] }, prompt: "Add to a list"
+
   - if @task.persisted?
     .field
       =f.label :completed

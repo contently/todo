@@ -2,6 +2,7 @@
 
 class Task < ApplicationRecord
   belongs_to :user
+  belongs_to :list, optional: true
 
   validates :name, presence: true
   validate :incomplete, on: :create

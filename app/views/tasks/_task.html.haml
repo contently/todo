@@ -1,0 +1,4 @@
+.card
+  = task.name
+  = task.completed
+  = link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }

@@ -1,0 +1,11 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @list.name
+  .tasks
+    = render @list.tasks
+
+= link_to 'Edit', edit_list_path(@list)
+\|
+= link_to 'Back', lists_path
