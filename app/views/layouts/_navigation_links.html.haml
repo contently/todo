@@ -1,0 +1,12 @@
+%nav
+  %h1
+    = link_to 'Todo', root_path
+  .actions
+    - if current_user
+      = link_to 'Lists', lists_path
+      = link_to 'Tasks', tasks_path
+      = link_to 'History', audits_path
+      = link_to 'Sign out', destroy_user_session_path, method: :delete
+    - else
+      = link_to 'Sign in', new_user_session_path
+      = link_to 'Sign up', new_user_registration_path

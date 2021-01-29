@@ -6,7 +6,7 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    @tasks = params[:completed] ? current_user.tasks.send(params[:completed]) : current_user.tasks.incomplete
   end
 
   # GET /tasks/1
@@ -15,7 +15,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/new
   def new
-    @task = Task.new
+    @task = current_user.tasks.new
   end
 
   # GET /tasks/1/edit
@@ -24,7 +24,7 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
 
     respond_to do |format|
       if @task.save
@@ -45,6 +45,7 @@ class TasksController < ApplicationController
       if @task.update(task_params)
         format.html { redirect_to tasks_path, notice: 'Task was successfully updated.' }
         format.json { render :show, status: :ok, location: @task }
+        format.js
       else
         format.html { render :edit }
         format.json { render json: @task.errors, status: :unprocessable_entity }
@@ -66,11 +67,11 @@ class TasksController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_task
-    @task = Task.find(params[:id])
+    @task = current_user.tasks.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def task_params
-    params.require(:task).permit(:name, :completed)
+    params.require(:task).permit(:name, :list_id, :completed)
   end
 end

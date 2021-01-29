@@ -2,26 +2,27 @@
 
 require 'rails_helper'
 
-feature 'Creating a task' do
+feature 'Creating a list' do
+  let(:name) { 'Khalia\'s Home Work' }
   let(:user) { create(:user) }
 
   context 'when authenticated' do
     before { login_as user }
 
-    scenario 'redirects to the tasks index page on success' do
-      visit tasks_path
-      click_on 'Add a task'
-      expect(page).to have_content('Create a task')
+    scenario 'redirects to the list page on success' do
+      visit lists_path
+      click_on 'New List'
+      expect(page).to have_content('New list')
 
-      fill_in 'Name', with: 'Test my app'
+      fill_in 'Name', with: name
       click_button 'Save'
 
       expect(page).to have_content('Tasks')
-      expect(page).to have_content('Test my app')
+      expect(page).to have_content(name)
     end
 
     scenario 'displays an error when no name is provided' do
-      visit new_task_path
+      visit new_list_path
       fill_in 'Name', with: ''
       click_button 'Save'
 
@@ -31,7 +32,7 @@ feature 'Creating a task' do
 
   context 'when unauthenticated' do
     scenario 'redirects to login page' do
-      visit new_task_path
+      visit new_list_path
       expect(page).to have_content('You need to sign in or sign up before continuing.')
     end
   end
